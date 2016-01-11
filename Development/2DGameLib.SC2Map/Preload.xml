@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Actor id="PipesShort" Variations="2"/>
+<Actor id="KorhalFlag" Variations="0"/>
+<Actor id="VikingSky_Doodad"/>
+<Actor id="FakeStaticCollision4x4"/>
+<Actor id="Game2DGravity"/>
+<Actor id="HeroDeathFlare"/>
+<Behavior id="KineticGroupBehavior"/>
+<Behavior id="ObjectHealthGlobeRegen"/>
+<Behavior id="UnitStateDying"/>
+<Behavior id="UnitStateJumpingAnimation"/>
+<Behavior id="UnitStateWalkingAnimation"/>
+<Behavior id="UnitStateFallingAnimation"/>
+<Effect id="HeroStompHurtboxArea"/>
+<Effect id="GenericEnemyDamage"/>
+<Effect id="GenericEnemyAttackHook"/>
+<Effect id="DebugPointVariable"/>
+<Effect id="DebugRectangleVariable"/>
+<Effect id="DebugPoint"/>
+<Sound id="GameQuestionBlockSpawnObjectSound"/>
+<Sound id="UIHealthGlobeCollect"/>
+<Sound id="UICoinCollect"/>
+<Sound id="UIOffscreenDeathFlare"/>
+<Terrain id="KorhalCityEx2"/>
+<Unit id="Zergling"/>
+<Unit id="Mutalisk"/>
+<Unit id="BlockObjectAddCoins1"/>
+<Unit id="ObjectCoin"/>
+<Unit id="BlockObjectAddHealthGlobe"/>
+<Unit id="GameQuestionBlock1x1"/>
+<Unit id="GameBreakableBlock1x1"/>
+<Unit id="GameStaticCollision1x1"/>
+<Unit id="GameStaticCollisionDot5xDot5"/>
+<Unit id="GameStaticCollision2x2"/>
+<Unit id="GameStaticCollisionOneWay2"/>
+<Unit id="GameStaticCollision4x4"/>
+<Unit id="GameStaticCollisionOneWay1"/>
+<Unit id="BlockObjectAddCoins8"/>
+<Unit id="Hero"/>
+<Unit id="ObjectHealthGlobe"/>
+<Unit id="Patroller"/>
+<Unit id="HeroHitboxUnit"/>
+<Unit id="Rover"/>
+<Unit id="PatrollerHitboxHeadUnit"/>
+<Unit id="PatrollerHitboxUnit"/>
+<User id="StaticCollisionUnits"/>
+</Preload>

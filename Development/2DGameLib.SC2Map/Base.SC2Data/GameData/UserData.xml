@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CUser id="StaticCollisionUnits">
+        <Fields Id="Unit" Type="Unit" EditorColumn="1"/>
+        <Fields Id="Width" Type="Fixed" EditorColumn="2"/>
+        <Fields Id="Height" Type="Fixed" EditorColumn="3"/>
+        <Fields Id="One Way State" Type="Int" EditorColumn="4"/>
+        <Instances Id="[Default]">
+            <Fixed Fixed="1">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Height"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollision1x1">
+            <Fixed Fixed="1">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Width"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="GameStaticCollision2x2">
+            <Fixed Fixed="2">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="Width"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision2x2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollision4x4">
+            <Fixed Fixed="4">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="Height"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision4x4">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWayDot5">
+            <Fixed Fixed="0.5">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWayDot5">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticColllsionOneWay1">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWay2">
+            <Fixed Fixed="2">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWay4">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="Width"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay4">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameBreakableBlock1x1">
+            <Unit Unit="GameBreakableBlock1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameQuestionBlock1x1">
+            <Unit Unit="GameQuestionBlock1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionDot5xDot5">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Width"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollisionDot5xDot5">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+    </CUser>
+</Catalog>

@@ -1,0 +1,4 @@
+UI/CoinIcon=Assets\Textures\UI\storm_ui_ingame_icons_doubloon.dds
+UI/HeroStatusHealthBar=Assets\Textures\UI\hud_bar_nameplate_generic_straight.dds
+UI/HeroStatusBorder=Assets\Textures\UI\hud_nameplate_bg_nomana.dds
+

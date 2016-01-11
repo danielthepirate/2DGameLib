@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CUpgrade id="DebugStaticCollisionAreaOn">
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1x1,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2x2,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4x4,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchAreaDot5xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4xDot5,DebugTrace" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="DebugStaticCollisionAreaOff">
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1x1,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2x2,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4x4,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchAreaDot5xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4xDot5,DebugTrace" Value="0"/>
+    </CUpgrade>
+</Catalog>

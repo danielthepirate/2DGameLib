@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CTerrain id="KorhalCityEx2">
+        <Lighting value="SideScrollerLighting"/>
+        <Gravity value="0.000000"/>
+        <WindAngleHorizontal value="0.000000"/>
+        <WindSpeed value="0.000000"/>
+        <WindTurbulencePower value="0.000000"/>
+        <WindTurbulenceSpeed value="0.000000"/>
+    </CTerrain>
+</Catalog>

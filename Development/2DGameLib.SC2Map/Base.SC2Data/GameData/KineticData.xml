@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CKineticFollow id="KineticAttach"/>
+    <CKineticTranslate id="VelocityDown01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.9"/>
+    </CKineticTranslate>
+</Catalog>

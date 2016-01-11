@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CModel id="GameQuestionBlock1x1" parent="Doodad">
+        <Model value="Assets\UI\Feedback\SMX2_RandomDice\SMX2_RandomDice.m3"/>
+        <ScaleMax value="1.770000,1.770000,1.770000"/>
+        <ScaleMin value="1.770000,1.770000,1.770000"/>
+    </CModel>
+    <CModel id="HeroDeathFlare">
+        <Model value="Assets\Effects\Storm_Effect_HeroDeath.m3"/>
+        <ScaleMax value="2.000000,2.000000,1.200000"/>
+        <ScaleMin value="2.000000,2.000000,1.200000"/>
+    </CModel>
+    <CModel id="GameBreakableBlock1x1" parent="Doodad">
+        <Model value="Assets\Units\Objects\Storm_Doodad_LuxCrypt_StoneBlocks_05.m3"/>
+        <ScaleMax value="1.010000,0.640000,0.840000"/>
+        <ScaleMin value="1.010000,0.640000,0.840000"/>
+    </CModel>
+    <CModel id="GenericDamageImpact" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_Effect_MeleeHero_Weapon_Impact.m3"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+    </CModel>
+    <CModel id="GameBreakableBlockDeath" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Other\PhysicsImpactRockMed\PhysicsImpactRockMed.m3"/>
+        <ScaleMax value="1.600000,1.600000,1.600000"/>
+        <ScaleMin value="1.600000,1.600000,1.600000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatformDot5xDot52" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,30.000000"/>
+        <ScaleMin value="0.062500,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="ObjectHealthGlobeHeal" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_Effect_GenericHeal_Regen_Impact.m3"/>
+    </CModel>
+    <CModel id="HeroJumpLaunch" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_FX_LostVikings_Base_PressA.m3"/>
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="HeroJumpImpact" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_FX_LostVikings_Base_Mount_TA_Buff.m3"/>
+    </CModel>
+    <CModel id="HeroSuddenMovement" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_FX_LostVikings_Base_PressA.m3"/>
+        <ScaleMax value="0.600000,0.700000,0.500000"/>
+        <ScaleMin value="0.600000,0.700000,0.500000"/>
+    </CModel>
+    <CModel id="HeroSuddenMovementTrail" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Storm_FX_LostVikings_Base_Mount_Buff.m3"/>
+        <ScaleMax value="0.500000,0.500000,0.500000"/>
+        <ScaleMin value="0.500000,0.500000,0.500000"/>
+    </CModel>
+    <CModel id="HitboxUnit" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,1.000000"/>
+        <ScaleMin value="0.062500,0.062500,1.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform2xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.250000,0.062500,30.000000"/>
+        <ScaleMin value="0.250000,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform4xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.500000,0.062500,30.000000"/>
+        <ScaleMin value="0.500000,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform2x2" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.250000,0.250000,30.000000"/>
+        <ScaleMin value="0.250000,0.250000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform4x4">
+        <ScaleMax value="0.500000,0.500000,30.000000"/>
+        <ScaleMin value="0.500000,0.500000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatformDot5xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,30.000000"/>
+        <ScaleMin value="0.062500,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform1x1" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.125000,0.125000,30.000000"/>
+        <ScaleMin value="0.125000,0.125000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform1xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.125000,0.062500,30.000000"/>
+        <ScaleMin value="0.125000,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="ObjectCoin">
+        <Model value="Assets\Units\Objects\Storm_Effect_GoldDoubloons_Pickup.m3"/>
+        <Radius value="0.375000"/>
+        <SelectionRadius value="0.375000"/>
+        <ShadowRadius value="0.375000"/>
+    </CModel>
+    <CModel id="ObjectHealthGlobe">
+        <Model value="Assets\Units\Objects\Storm_Effect_HealthOrb.m3"/>
+        <Radius value="0.375000"/>
+        <SelectionRadius value="0.375000"/>
+        <ShadowRadius value="0.375000"/>
+    </CModel>
+    <CModel id="PatrollerDeathRagdoll">
+        <Model value="Assets\Units\Zerg\RavagerDeathRagdoll\RavagerDeathRagdoll.m3"/>
+        <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
+    </CModel>
+    <CModel id="Patroller">
+        <Model value="Assets\Units\Zerg\Ravager\Ravager.m3"/>
+        <SelectionOffset value="0.000000,0.000000,500.000000"/>
+        <SelectionRadius value="0.000000"/>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="0.160000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="0.430000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="0.830000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="1.030000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="1.260000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk"/>
+            <Name value="PatrollerFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="1.660000"/>
+            <Payload value="PatrollerFootsteps"/>
+        </Events>
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+    </CModel>
+    <CModel id="HeroDeathRagdoll">
+        <Model value="Assets\Units\Characters\Storm_Hero_D3BarbarianF_Super_DeathRagdoll.m3"/>
+        <RequiredAnims value="Assets\Units\Characters\Storm_Effect_DeathRagdollDissipate.m3a"/>
+        <Flags index="ParticipatesInRagdollOnRagdollCollisions" value="1"/>
+    </CModel>
+    <CModel id="StormSuperSonya">
+        <Model value="Assets\Units\Characters\Storm_Hero_D3BarbarianF_Super.m3"/>
+        <RequiredAnims value="Assets\Units\Characters\Storm_Hero_D3BarbarianF_RequiredAnims.m3a"/>
+        <SelectionOffset value="0.000000,0.000000,500.000000"/>
+        <SelectionRadius value="0.000000"/>
+        <Events>
+            <Anim value="Walk,A"/>
+            <Name value="HeroFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="0.080000"/>
+            <Payload value="HeroFootsteps"/>
+        </Events>
+        <Events>
+            <Anim value="Walk,A"/>
+            <Name value="HeroFootsteps"/>
+            <Type value="Sound"/>
+            <Time value="0.450000"/>
+            <Payload value="HeroFootsteps"/>
+        </Events>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+</Catalog>

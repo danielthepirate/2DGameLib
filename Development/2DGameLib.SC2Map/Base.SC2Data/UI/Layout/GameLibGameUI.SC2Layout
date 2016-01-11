@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <Frame type="Frame" name="GameUI/UIContainer/ConsoleUIContainer" file="GameUI">
+        <Frame type="Frame" name="2DGameUI">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+
+            <Frame type="Frame" name="PlayerHUD">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="40"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="25"/>
+                <Width val="176.000000"/>
+                <Height val="400.000000"/>
+
+                <Frame type="UnitStatusFrame" name="HeroStatus">
+                    <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+                    <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+                    <Width val="176.000000"/>
+                    <Height val="64.000000"/>
+
+                    <Frame type="Image" name="LifeBarBorder">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                        <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                        <Height val="64.000000"/>
+                        <Width val="176.000000"/>
+                        <Texture val="@UI/HeroStatusBorder"/>
+                    </Frame>
+
+                    <Frame type="UnitStatusHealthBar" name="LifeBar">
+                        <Anchor side="Top" relative="$parent" pos="Min" offset="12"/>
+                        <Anchor side="Left" relative="$parent/LifeBarBorder" pos="Min" offset="7"/>
+                        <Height val="20.000000"/>
+                        <Width val="161.000000"/>
+                        <RenderPriority val="525"/>
+                        <Texture val="@UI/HeroStatusHealthBar"/>
+                        <Segmented val="true"/>
+                        <SegmentValue val="10.000000"/>
+                        <OwnerColor val="0,255,0" index="0"/>
+                        <ReductionColor val="255,72,72" index="0"/>
+                        <ReductionShown val="true" index="0"/>
+                        <IncreaseDuration val="800" index="0"/>
+                        <DecreaseDuration val="800" index="0"/>
+                    </Frame>
+                </Frame>
+
+                <Frame type="Image" name="CoinIcon">
+                    <Anchor side="Top" relative="$parent/HeroStatus" pos="Max" offset="-12"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                    <Width val="37.000000"/>
+                    <Height val="39.000000"/>
+                    <Texture val="@UI/CoinIcon"/>
+                </Frame>
+
+                <Frame type="Label" name="CoinMultiplier">
+                    <Anchor side="Top" relative="$parent/HeroStatus" pos="Max" offset="-18"/>
+                    <Anchor side="Left" relative="$parent/CoinIcon" pos="Max" offset="0"/>
+                    <Height val="60.000000"/>
+                    <Style val="PlayerHUD_Coins"/>
+                    <Text val="x"/>
+                </Frame>
+
+                <Frame type="Label" name="CoinTotal">
+                    <Anchor side="Top" relative="$parent/CoinMultiplier" pos="Min" offset="0"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                    <Height val="60.000000"/>
+                    <Style val="PlayerHUD_Coins"/>
+                    <Text val="099"/>
+                </Frame>
+
+                <Frame type="Label" name="PointTotal">
+                    <Anchor side="Top" relative="$parent/CoinIcon" pos="Max" offset="2"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                    <Style val="PlayerHUD_Score"/>
+                    <Text val="--00000--"/>
+                </Frame>
+            </Frame>
+        </Frame>
+    </Frame>
+</Desc>

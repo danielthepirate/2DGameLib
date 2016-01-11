@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wizardfile>
+    <wizard id="KineticCreation">
+        <name>VelocityKineticCreation Import</name>
+        <description>Creates a velocity type kinetic</description>
+        <category>Kinetics</category>
+        <objecttypes create="Effect;Kinetic"/>
+        <instructions>
+            Generates a kinetic and all related effects (Apply/Remove the kinetic, option for a create persistent to apply multiples of it)
+        </instructions>
+        <condition id="IsTranslateKinetic" input="KineticType" value="CKineticTranslate"/>
+        <condition id="IsRotateKinetic" input="KineticType" value="CKineticRotate"/>
+        <condition id="IsFollowKinetic" input="KineticType" value="CKineticFollow"/>
+        <input id="Name" type="CString">
+            <name>Name</name>
+            <tooltip>Name of the Kinetic</tooltip>
+            <layout/>
+        </input>
+        <input id="KineticType" type="WizardMenu">
+            <item value="CKineticTranslate" text="Translate"/>
+            <item value="CKineticRotate" text="Rotate"/>
+            <item value="CKineticFollow" text="Follow"/>
+            <name>Type of Kinetic</name>
+            <tooltip>Select the type of kinetic to create</tooltip>
+            <layout/>
+        </input>
+        <input id="RotateAroundType" type="WizardRadio">
+            <item value="Unit" text="Unit"/>
+            <item value="Point" text="Point"/>
+            <item value="UnitOrPoint" text="Unit or Point"/>
+            <name>Rotate Around Location Type</name>
+            <layout column="2"/>
+            <condition id="IsRotateKinetic"/>
+        </input>
+        <input id="RotateAround" type="WizardRadio">
+            <item value="Caster" text="Caster"/>
+            <item value="Source" text="Source"/>
+            <item value="Origin" text="Origin"/>
+            <item value="Target" text="Target"/>
+            <name>Rotate Around Location</name>
+            <layout column="2"/>
+            <condition id="IsRotateKinetic"/>
+        </input>
+        <input id="RotationYaw" type="CFangle">
+            <name>Yaw</name>
+            <layout/>
+            <condition id="IsRotateKinetic"/>
+        </input>
+        <input id="RotationPitch" type="CFangle">
+            <name>Pitch</name>
+            <layout/>
+            <condition id="IsRotateKinetic"/>
+        </input>
+        <input id="RotationRoll" type="CFangle">
+            <name>Roll</name>
+            <layout/>
+            <condition id="IsRotateKinetic"/>
+        </input>
+        <input id="TranslateX" type="CVariatorGameFixed">
+            <name>X distance</name>
+            <layout/>
+            <condition id="IsTranslateKinetic"/>
+        </input>
+        <input id="TranslateY" type="CVariatorGameFixed">
+            <name>Y distance</name>
+            <layout/>
+            <condition id="IsTranslateKinetic"/>
+        </input>
+        <input id="TranslateZ" type="CVariatorGameFixed">
+            <name>Z distance</name>
+            <layout/>
+            <condition id="IsTranslateKinetic"/>
+        </input>
+        <input id="FollowType" type="WizardRadio">
+            <item value="Unit" text="Unit"/>
+            <item value="Point" text="Point"/>
+            <item value="UnitOrPoint" text="Unit or Point"/>
+            <name>Follow Location Type</name>
+            <layout column="2"/>
+            <condition id="IsFollowKinetic"/>
+        </input>
+        <input id="Follow" type="WizardRadio">
+            <item value="Caster" text="Caster"/>
+            <item value="Source" text="Source"/>
+            <item value="Origin" text="Origin"/>
+            <item value="Target" text="Target"/>
+            <name>Follow Location</name>
+            <layout column="2"/>
+            <condition id="IsFollowKinetic"/>
+        </input>
+        <input id="FollowTracking" type="WizardRadio">
+            <item value="Bearings" text="Position and Direction"/>
+            <item value="Position" text="Position Only"/>
+            <name>Follow Tracking</name>
+            <layout column="2"/>
+            <condition id="IsFollowKinetic"/>
+        </input>
+        <macro id="IdentficationSpaces" replaceSrc=" ">^Name^</macro>
+        <entry catalog="Effect" type="CEffectApplyKinetic">
+            <id>VelocityApply^IdentficationSpaces^</id>
+            <field id="Name">
+                <value>Velocity Apply ^Name^</value>
+            </field>
+            <field id="Kinetic">
+                <value>Velocity^IdentficationSpaces^</value>
+            </field>
+        </entry>
+        <entry catalog="Effect" type="CEffectRemoveKinetic">
+            <id>VelocityRemove^IdentficationSpaces^</id>
+            <field id="Name">
+                <value>Velocity Remove ^Name^</value>
+            </field>
+            <field id="KineticLink">
+                <value>Velocity^IdentficationSpaces^</value>
+            </field>
+        </entry>
+        <entry catalog="Effect" type="CEffectCreatePersistent">
+            <id>VelocityRemoveAll^IdentficationSpaces^</id>
+            <field id="Name">
+                <value>Velocity Remove All ^Name^</value>
+            </field>
+            <field id="PeriodicEffectArray">
+                <value>VelocityRemove^IdentficationSpaces^</value>
+            </field>
+            <field id="PeriodCount">
+                <value>9</value>
+            </field>
+            <field id="WhichLocation">
+                <value>:TargetUnit</value>
+            </field>
+        </entry>
+        <entry catalog="Kinetic" type="^KineticType^">
+            <id>Velocity^IdentficationSpaces^</id>
+            <field id="Name">
+                <value>Velocity^IdentficationSpaces^</value>
+            </field>
+            <field id="Duration">
+                <value>0.0625</value>
+            </field>
+            <field id="Cycles">
+                <value>1</value>
+            </field>
+            <field id="Yaw">
+                <value>^RotationYaw^</value>
+                <condition id="IsRotateKinetic"/>
+            </field>
+            <field id="Pitch">
+                <value>^RotationPitch^</value>
+                <condition id="IsRotateKinetic"/>
+            </field>
+            <field id="Roll">
+                <value>^RotationRoll^</value>
+                <condition id="IsRotateKinetic"/>
+            </field>
+            <field id="Around_Value">
+                <value>^RotateAround^^RotateAroundType^</value>
+                <condition id="IsRotateKinetic"/>
+            </field>
+            <field id="XOffset">
+                <value>^TranslateX^</value>
+                <condition id="IsTranslateKinetic"/>
+            </field>
+            <field id="YOffset">
+                <value>^TranslateY^</value>
+                <condition id="IsTranslateKinetic"/>
+            </field>
+            <field id="ZOffset">
+                <value>^TranslateZ^</value>
+                <condition id="IsTranslateKinetic"/>
+            </field>
+            <field id="Where">
+                <value>^Follow^^FollowType^</value>
+                <condition id="IsFollowKinetic"/>
+            </field>
+            <field id="Follow">
+                <value>^FollowTracking^</value>
+                <condition id="IsFollowKinetic"/>
+            </field>
+        </entry>
+    </wizard>
+</wizardfile>
