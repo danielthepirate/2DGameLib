@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="UnitStateWalkingAnimation"/>
+<Behavior id="KineticGroupBehavior"/>
+<Behavior id="UnitStateDying"/>
+<Behavior id="ObjectHealthGlobeRegen"/>
+<Effect id="GenericEnemyDamage"/>
+<Effect id="GenericEnemyAttackHook"/>
+<Sound id="GameQuestionBlockSpawnObjectSound"/>
+<Sound id="ObjectHealthGlobeCollect"/>
+<Sound id="ObjectCoinCollected"/>
+<Unit id="ObjectCoin"/>
+<Unit id="ObjectHealthGlobe"/>
+<Unit id="HeroHitboxUnit"/>
+<Unit id="PatrollerHitboxHeadUnit"/>
+<Unit id="PatrollerHitboxUnit"/>
+</Preload>

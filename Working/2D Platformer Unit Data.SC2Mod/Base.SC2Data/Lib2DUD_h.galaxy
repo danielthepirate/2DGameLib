@@ -1,0 +1,43 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 2D Platformer Unit Data
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+unitfilter lib2DUD_gv_entity;
+unitfilter lib2DUD_gv_entityHero;
+unitfilter lib2DUD_gv_entityNonHero;
+unitfilter lib2DUD_gv_entityHitbox;
+unitfilter lib2DUD_gv_collisionUnit;
+
+// Function Declarations
+void lib2DUD_gf_HeroSetHurtboxArea (unit lp_unit);
+void lib2DUD_gf_BounceUnit (unit lp_hero);
+void lib2DUD_gf_BlockUnitSpawnCarriedObejct (unit lp_collisionUnit);
+void lib2DUD_gf_BlockUnitBounceUnitsOnBlock (unit lp_collisionUnit);
+void lib2DUD_gf_InitializeUnitData (unit lp_unit);
+void lib2DUD_gf_RemoveCollisionUnitData (unit lp_collisionUnit);
+void lib2DUD_gf_RedrawGameCollisionRegion ();
+void lib2DUD_gf_PatrollerAIController (unit lp_aIUnit);
+void lib2DUD_gf_RoverAIController (unit lp_aIUnit);
+void lib2DUD_gf_UnitIssueWalkOrder (unit lp_unit, fixed lp_orderTargetOffset);
+
+// Trigger Declarations
+trigger lib2DUD_gt_HeroEntersMap;
+trigger lib2DUD_gt_HeroMovementTrailAnimation;
+trigger lib2DUD_gt_HeroTranslated;
+trigger lib2DUD_gt_RoverEntersMap;
+trigger lib2DUD_gt_PatrollerEntersMap;
+trigger lib2DUD_gt_PatrollerHitsHero;
+trigger lib2DUD_gt_PatrollerGetsStomped;
+trigger lib2DUD_gt_CoinEntersMap;
+trigger lib2DUD_gt_HeroCoinPickup;
+trigger lib2DUD_gt_HealthGlobeEntersMap;
+trigger lib2DUD_gt_HeroHealthPickup;
+trigger lib2DUD_gt_HeroHitsBreakableBlock;
+trigger lib2DUD_gt_HeroHitsQuestionBlock;
+trigger lib2DUD_gt_UnitDies;
+
+// Library Initialization
+void lib2DUD_InitVariables ();
+

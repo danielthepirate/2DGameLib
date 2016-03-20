@@ -1,0 +1,196 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 2D Platformer Game Mechanics
+//--------------------------------------------------------------------------------------------------
+// Preset Declarations
+const int lib2DGM_ge_UnitCollisionTestPoint_Top = 0;
+const int lib2DGM_ge_UnitCollisionTestPoint_TopLeft = 1;
+const int lib2DGM_ge_UnitCollisionTestPoint_TopRight = 2;
+const int lib2DGM_ge_UnitCollisionTestPoint_LeftHigh = 3;
+const int lib2DGM_ge_UnitCollisionTestPoint_LeftMid = 4;
+const int lib2DGM_ge_UnitCollisionTestPoint_LeftLow = 5;
+const int lib2DGM_ge_UnitCollisionTestPoint_RightHigh = 6;
+const int lib2DGM_ge_UnitCollisionTestPoint_RightMid = 7;
+const int lib2DGM_ge_UnitCollisionTestPoint_RightLow = 8;
+const int lib2DGM_ge_UnitCollisionTestPoint_Origin = 9;
+const int lib2DGM_ge_UnitCollisionTestPoint_OriginLeft = 10;
+const int lib2DGM_ge_UnitCollisionTestPoint_OriginRight = 11;
+const int lib2DGM_ge_UnitCollisionTestPoint_Center = 12;
+const int lib2DGM_ge__2DUnitFacing_Right = 0;
+const int lib2DGM_ge__2DUnitFacing_Left = 1;
+const int lib2DGM_ge_KineticArrayDirections_Up = 0;
+const int lib2DGM_ge_KineticArrayDirections_Down = 1;
+const int lib2DGM_ge_KineticArrayDirections_Left = 2;
+const int lib2DGM_ge_KineticArrayDirections_Right = 3;
+const int lib2DGM_ge_GenericEvent_None = 0;
+const int lib2DGM_ge_GenericEvent_StaticCollisionBottom = 1;
+const int lib2DGM_ge_GenericEvent_UnitTranslated = 2;
+const int lib2DGM_ge_GenericEventParameter_TriggeringUnit = 0;
+const int lib2DGM_ge_GenericEventParameter_CollidingUnit = 1;
+const int lib2DGM_ge_DebugPanelConfigurations_UnitPhysics = 0;
+
+// Constants
+const fixed lib2DGM_gv_terminalVelocity = 9.99;
+const fixed lib2DGM_gv_trivialVelocity = 0.01;
+const fixed lib2DGM_gv_speculativeStepIncrement = 0.25;
+const fixed lib2DGM_gv_hitTestLowFactor = 0.2;
+const fixed lib2DGM_gv_hitTestHighFactor = 0.8;
+const fixed lib2DGM_gv_hitTestWidthFactor = 0.15;
+
+// Structures
+struct lib2DGM_gs_GameData {
+    int lv_maxPlayers;
+    fixed lv_friction;
+    fixed lv_airResistance;
+    fixed lv_gravity;
+};
+
+struct lib2DGM_gs_PlayerArray {
+    unit lv_hero;
+    int lv_index;
+    int lv_coins;
+    int lv_points;
+    point lv_respawnPoint;
+    bool lv_input_KeyW_isPressed;
+    bool lv_input_KeyW_isHeld;
+    bool lv_input_KeyA_isPressed;
+    bool lv_input_KeyS_isPressed;
+    bool lv_input_KeyS_isHeld;
+    bool lv_input_KeyD_isPressed;
+    bool lv_input_Jump_isLimited;
+    timer lv_controlLoss;
+};
+
+struct lib2DGM_gs_StaticCollisionArray {
+    region lv_region;
+    unit lv_unit;
+    int lv_index;
+    bool lv_oneWayState;
+};
+
+struct lib2DGM_gs_ActiveCollisionArray {
+    region lv_region;
+    unit lv_unit;
+    int lv_index;
+};
+
+struct lib2DGM_gs_UIObjects {
+    int lv_heroStatus;
+    int lv_coinsCollected;
+    int lv_pointsCollected;
+};
+
+// Variable Declarations
+lib2DGM_gs_UIObjects lib2DGM_gv_uI;
+lib2DGM_gs_PlayerArray[17] lib2DGM_gv_player;
+lib2DGM_gs_GameData lib2DGM_gv_game;
+lib2DGM_gs_StaticCollisionArray[2049] lib2DGM_gv_staticCollision;
+int lib2DGM_gv_staticCollisionArrayCount;
+string[4][10] lib2DGM_gv_kineticTranslateDotHundred;
+string[4][10] lib2DGM_gv_kineticTranslateDotTen;
+string[4][10] lib2DGM_gv_kineticTranslateOne;
+string[4][10] lib2DGM_gv_kineticRemoveDotHundred;
+string[4][10] lib2DGM_gv_kineticRemoveDotTen;
+string[4][10] lib2DGM_gv_kineticRemoveOne;
+unitgroup lib2DGM_gv_activePhysicsUnits;
+unitgroup lib2DGM_gv_staticCollisionUnits;
+region lib2DGM_gv_gameCollisionRegion;
+region lib2DGM_gv_gameCollisionRegionOneWay;
+int lib2DGM_gv_totalTranslateKinetics;
+int lib2DGM_gv_totalFollowKinetics;
+fixed lib2DGM_gv_maximumCollisionRadius;
+fixed lib2DGM_gv_minimumCollisionLength;
+fixed lib2DGM_gv_minimumHorizontalTest;
+fixed lib2DGM_gv_maximumHorizontalTest;
+fixed lib2DGM_gv_midHeightTest;
+fixed lib2DGM_gv_maxHeightTest;
+
+// Function Declarations
+void lib2DGM_gf_SetUnitVerticalVelocity (unit lp_unit, fixed lp_velocityTarget);
+void lib2DGM_gf_SetUnitHorizontalVelocity (unit lp_unit, fixed lp_velocityTarget);
+void lib2DGM_gf_AddVerticalVelocity (unit lp_unit, fixed lp_velocityAddition);
+void lib2DGM_gf_AddHorizontalVelocity (unit lp_unit, fixed lp_velocityAddition);
+void lib2DGM_gf_UnitRemoveHorizontalKinetics (unit lp_unit);
+void lib2DGM_gf_UnitRemoveVerticalKinetics (unit lp_unit);
+fixed lib2DGM_gf_PresetCustomValue (unit lp_unit);
+fixed lib2DGM_gf_PresetCustomValue2 (unit lp_unit);
+fixed lib2DGM_gf_UnitCalculatedLandingHorizontalVelocity (unit lp_unit);
+bool lib2DGM_gf_UnitIsInMotion (unit lp_unit);
+unit lib2DGM_gf_GetCollisionUnitFromPoint (point lp_testPoint);
+void lib2DGM_gf_TranslateUnit5 (unit lp_unit, fixed lp_verticalImpulse);
+void lib2DGM_gf_TranslateUnit4 (unit lp_unit, fixed lp_horizontalImpulse);
+point lib2DGM_gf_UnitGetCollisionTestPoint2 (unit lp_unit, int lp_hitTestPointType);
+point lib2DGM_gf_UnitGetPresetPointNext (unit lp_unit, int lp_hitTestPointType);
+unit lib2DGM_gf_UnitGetParent (unit lp_unit);
+bool lib2DGM_gf_HitboxIndexExists (string lp_hitboxIndex);
+string lib2DGM_gf_UnitGetHitboxGroupCode (unit lp_unit);
+void lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly (unit lp_unit, point lp_point);
+void lib2DGM_gf_RemoveKineticFromUnitAndHitboxUnits (unit lp_unit, string lp_effect);
+void lib2DGM_gf_UnitRemoveHitboxGroup (unit lp_unit);
+string lib2DGM_gf_UnitGetHitboxGroupCode2 (unit lp_attacker, unit lp_target);
+bool lib2DGM_gf_UnitHasAttackImmunityFrames (unit lp_targetUnit, string lp_attackIndex);
+void lib2DGM_gf_UnitAddAttackImmunityFrames (unit lp_targetUnit, string lp_attackIndex, fixed lp_duration);
+fixed lib2DGM_gf_XOfUnitLeft (unit lp_unit);
+fixed lib2DGM_gf_XOfUnitRight (unit lp_unit);
+fixed lib2DGM_gf_YOfUnitTop (unit lp_unit);
+fixed lib2DGM_gf_YOfUnitBottom (unit lp_unit);
+bool lib2DGM_gf_CollisionDirectionIsDown (point lp_targetPoint, unit lp_collisionUnit);
+bool lib2DGM_gf_CollisionDirectionIsDown2 (point lp_targetPoint, unit lp_collisionUnit);
+bool lib2DGM_gf_CollisionDirectionIsDown3 (point lp_targetPoint, unit lp_collisionUnit);
+bool lib2DGM_gf_CollisionDirectionIsDown4 (point lp_targetPoint, unit lp_collisionUnit);
+void lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer (unit lp_unit, fixed lp_delay);
+void lib2DGM_gf_UnitSet2DFacing (unit lp_unit, int lp_facing);
+void lib2DGM_gf_SeparateTargetUnitFromKnockbackUnit (unit lp_targetUnit, unit lp_collisionUnit, fixed lp_hitDirection);
+void lib2DGM_gf_KnockbackXOverTime (unit lp_unit, fixed lp_power, fixed lp_duration);
+void lib2DGM_gf_KnockbackYOverTime (unit lp_unit, fixed lp_power, fixed lp_duration);
+void lib2DGM_gf_HeroSetFacingFromInput (unit lp_targetUnit);
+void lib2DGM_gf_HeroRespawnForPlayer (point lp_point, int lp_p);
+void lib2DGM_gf_PlayerAddPoints (int lp_p, int lp_addedPoints);
+text lib2DGM_gf_FormatPoints (int lp_points);
+void lib2DGM_gf_Initialize2DGameLib ();
+void lib2DGM_gf_InitializeGameUI ();
+void lib2DGM_gf_InitializeGameData ();
+void lib2DGM_gf_InitializeEnvironment ();
+void lib2DGM_gf_InitializePlayerSettings ();
+void lib2DGM_gf_InitializeDebugSettings ();
+void lib2DGM_gf_InitializeGravity ();
+void lib2DGM_gf_InitializeGroundRegion ();
+void lib2DGM_gf_SetCollisionVariablesFromInstance (string lp_staticCollisionData, string lp_staticCollisionInstance);
+void lib2DGM_gf_CalculateCollisionVariables ();
+void lib2DGM_gf_InitializeKineticArray ();
+void lib2DGM_gf_PlayerResolveInput (int lp_p);
+void lib2DGM_gf_UnitApplyFrictionAirResistance (unit lp_unit);
+void lib2DGM_gf_UnitResolveSpeculativeContact (unit lp_unit);
+void lib2DGM_gf_UnitResolveHorizontalCollision (unit lp_unit);
+void lib2DGM_gf_UnitResolveVerticalCollision (unit lp_unit);
+void lib2DGM_gf_ResolveGravityForUnit2 (unit lp_unit);
+void lib2DGM_gf_ResolveRestitutionForUnit (unit lp_unit);
+void lib2DGM_gf_TranslateUnit (unit lp_unit);
+void lib2DGM_gf_TranslateUnit2 (unit lp_unit);
+void lib2DGM_gf_TranslateUnit3 (unit lp_unit);
+string lib2DGM_gf_PresetGenericEvent (int lp_event);
+string lib2DGM_gf_PresetGenericEvent2 (int lp_event, int lp_parameter);
+void lib2DGM_gf_SendGenericEventPreset (int lp_event);
+void lib2DGM_gf_SetStaticCollisionVisibility (bool lp_show);
+void lib2DGM_gf_DebugUnitCollisionTestsNext (unit lp_unit);
+void lib2DGM_gf_DebugUnitCollisionTests (unit lp_unit);
+void lib2DGM_gf_ConfigureDebugPanelforUnitPhysics (unit lp_unit, playergroup lp_targetPlayers);
+void lib2DGM_gf_ConfigureDebugPanelforUnitPhysics2 (unit lp_unit, playergroup lp_targetPlayers);
+string lib2DGM_gf_ConvertUnitVelocityToString (unit lp_unit);
+string lib2DGM_gf_ConvertUnitPhysicsStateToString (unit lp_unit);
+string lib2DGM_gf_ConvertUnitGroundedStateToString (unit lp_unit);
+void lib2DGM_gf_ModifyUnitCustomValue (unit lp_unit, int lp_customValuePreset, fixed lp_customValueModification);
+void lib2DGM_gf_ModifyUnitCustomValue3 (unit lp_unit, int lp_customValuePreset, fixed lp_customValueNew);
+void lib2DGM_gf_ModifyUnitCustomValue4 (unit lp_unit, int lp_customValuePreset, bool lp_customValueNew);
+fixed lib2DGM_gf_PresetCustomValue4 (unit lp_unit, int lp_customValuePreset);
+bool lib2DGM_gf_PresetCustomValue5 (unit lp_unit, int lp_customValuePreset);
+
+// Trigger Declarations
+trigger lib2DGM_gt_EachGameTick;
+trigger lib2DGM_gt_PlayerInputKeyDown;
+trigger lib2DGM_gt_PlayerInputKeyUp;
+
+// Library Initialization
+void lib2DGM_InitVariables ();
+

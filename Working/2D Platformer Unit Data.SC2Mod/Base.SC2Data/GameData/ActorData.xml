@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CActorSimple id="HEROSTOMPDEBUG">
+        <EditorCategories value=""/>
+        <On Terms="Effect.HeroStompHurtboxArea" Send="Create"/>
+    </CActorSimple>
+</Catalog>

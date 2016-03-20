@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Actor id="Game2DGravity"/>
+<Behavior id="UnitStateWalkingAnimation"/>
+<Behavior id="UnitStateJumpingAnimation"/>
+<Behavior id="UnitStateFallingAnimation"/>
+<Effect id="DebugPointCircle"/>
+<Effect id="DebugPointRectangle"/>
+<Effect id="DebugPoint"/>
+<Unit id="Zergling"/>
+<Unit id="Mutalisk"/>
+<User id="StaticCollisionUnitData"/>
+</Preload>

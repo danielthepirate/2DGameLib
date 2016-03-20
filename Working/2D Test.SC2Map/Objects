@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PlacedObjects Version="27">
+    <ObjectUnit Id="244" Position="16.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1"/>
+    <ObjectUnit Id="245" Position="23.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="246" Position="22.5,41.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="251" Position="94.5,41.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="252" Position="101.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="253" Position="106.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="254" Position="109.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="255" Position="112.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="257" Position="128.5,41.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="258" Position="129.5,41.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins1" Player="10"/>
+    <ObjectUnit Id="249" Position="64.5,38.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins8"/>
+    <ObjectUnit Id="250" Position="94.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins8" Player="10"/>
+    <ObjectUnit Id="259" Position="169.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddCoins8" Player="10"/>
+    <ObjectUnit Id="247" Position="21.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddHealthGlobe" Player="10"/>
+    <ObjectUnit Id="248" Position="78.5,37.5,0" Scale="1,1,1" UnitType="BlockObjectAddHealthGlobe" Player="10"/>
+    <ObjectUnit Id="256" Position="109.5,41.5,0" Scale="1,1,1" UnitType="BlockObjectAddHealthGlobe" Player="10"/>
+    <ObjectUnit Id="76" Position="20.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="77" Position="22.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="78" Position="24.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="94" Position="77.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="95" Position="79.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="97" Position="80.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="98" Position="81.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="99" Position="82.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="100" Position="83.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="101" Position="84.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="102" Position="85.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="103" Position="86.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="104" Position="87.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="110" Position="65.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="111" Position="91.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="112" Position="92.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="113" Position="93.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="116" Position="100.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="122" Position="118.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="123" Position="120.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="124" Position="121.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="125" Position="122.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="126" Position="127.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="127" Position="130.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="130" Position="128.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="131" Position="129.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="132" Position="133.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="133" Position="134.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="134" Position="134.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="135" Position="135.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="136" Position="135.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="137" Position="135.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="138" Position="136.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="139" Position="136.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="140" Position="136.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="141" Position="136.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="142" Position="139.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="143" Position="139.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="144" Position="139.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="145" Position="139.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="146" Position="140.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="147" Position="140.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="148" Position="140.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="149" Position="141.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="150" Position="141.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="151" Position="142.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="152" Position="147.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="153" Position="148.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="154" Position="148.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="155" Position="149.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="156" Position="149.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="157" Position="149.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="158" Position="150.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="159" Position="150.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="160" Position="150.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="161" Position="150.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="162" Position="154.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="163" Position="154.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="164" Position="154.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="165" Position="154.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="166" Position="155.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="167" Position="155.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="168" Position="155.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="169" Position="156.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="170" Position="156.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="171" Position="157.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="176" Position="151.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="177" Position="151.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="183" Position="167.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="184" Position="168.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="185" Position="170.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="188" Position="180.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="189" Position="181.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="190" Position="181.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="191" Position="182.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="192" Position="182.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="193" Position="182.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="194" Position="183.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="195" Position="183.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="196" Position="183.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="197" Position="183.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="198" Position="184.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="199" Position="184.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="200" Position="184.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="201" Position="184.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="202" Position="184.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="203" Position="185.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="204" Position="185.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="205" Position="185.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="206" Position="185.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="207" Position="185.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="208" Position="185.5,39.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="209" Position="186.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="210" Position="186.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="211" Position="186.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="212" Position="186.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="213" Position="186.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="214" Position="186.5,39.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="215" Position="186.5,40.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="216" Position="187.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="217" Position="187.5,40.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="218" Position="188.5,41.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="219" Position="188.5,40.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="220" Position="187.5,39.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="221" Position="187.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="222" Position="187.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="223" Position="187.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="224" Position="187.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="225" Position="187.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="226" Position="188.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="227" Position="188.5,35.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="228" Position="188.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="229" Position="188.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="230" Position="188.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="231" Position="188.5,39.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="232" Position="198.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="234" Position="208.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="236" Position="208.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="237" Position="209.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="238" Position="211.5,38.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="239" Position="212.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="240" Position="212.5,34.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="242" Position="64.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="243" Position="63.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="261" Position="62.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="262" Position="61.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="263" Position="60.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="264" Position="59.5,18.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="265" Position="65.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="266" Position="64.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="267" Position="63.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="268" Position="62.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="269" Position="61.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="270" Position="60.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="271" Position="59.5,19.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="272" Position="65.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="273" Position="64.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="274" Position="63.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="275" Position="62.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="276" Position="61.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="277" Position="60.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="278" Position="59.5,20.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="286" Position="65.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="287" Position="64.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="288" Position="63.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="289" Position="62.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="290" Position="61.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="291" Position="60.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="292" Position="59.5,28.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="337" Position="151.5,36.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="338" Position="151.5,37.5,0" Scale="1,1,1" UnitType="GameBreakableBlock1x1"/>
+    <ObjectUnit Id="72" Position="16.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="73" Position="21.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="74" Position="23.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="75" Position="22.5,41.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="86" Position="64.5,38.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="96" Position="78.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="114" Position="94.5,41.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="115" Position="94.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="117" Position="101.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="118" Position="106.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="119" Position="109.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="120" Position="112.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="121" Position="109.5,41.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="128" Position="128.5,41.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="129" Position="129.5,41.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="186" Position="169.5,37.5,0" Scale="1,1,1" UnitType="GameQuestionBlock1x1"/>
+    <ObjectUnit Id="80" Position="38.505,36.503,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="81" Position="39.5,36.5,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="178" Position="154.5,30.5,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="179" Position="154.5,31.5,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="180" Position="154.5,32.5,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="181" Position="154.5,33.5,0" Scale="1,1,1" UnitType="GameStaticCollision1x1"/>
+    <ObjectUnit Id="14" Position="163,35,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="17" Position="68,33,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="41" Position="91,31,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="42" Position="91,33,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="66" Position="56,33,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="67" Position="56,31,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="68" Position="56,29,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="70" Position="56,27,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="71" Position="29,35,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="79" Position="39,35,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="82" Position="47,35,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="83" Position="47,37,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="87" Position="56,25,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="88" Position="56,23,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="89" Position="56,21,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="172" Position="156,33,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="173" Position="156,31,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="187" Position="179,35,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="241" Position="56,19,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="300" Position="68,31,0" Scale="1,1,1" UnitType="GameStaticCollision2x2"/>
+    <ObjectUnit Id="2" Position="73,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="5" Position="94,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="6" Position="150,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="7" Position="146,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="8" Position="142,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="9" Position="1,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="10" Position="5,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="11" Position="138,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="12" Position="53,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="13" Position="61,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="15" Position="77,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="16" Position="81,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="18" Position="134,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="19" Position="130,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="20" Position="126,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="21" Position="122,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="22" Position="118,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="23" Position="114,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="24" Position="110,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="25" Position="106,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="26" Position="102,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="27" Position="98,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="28" Position="9,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="29" Position="49,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="30" Position="45,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="31" Position="13,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="32" Position="17,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="34" Position="65,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="35" Position="21,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="36" Position="25,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="37" Position="29,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="38" Position="33,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="39" Position="37,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="40" Position="41,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="43" Position="163,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="44" Position="191,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="45" Position="195,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="46" Position="187,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="47" Position="183,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="48" Position="207,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="49" Position="167,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="50" Position="159,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="52" Position="171,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="53" Position="175,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="54" Position="179,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="55" Position="219,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="56" Position="217,40,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="57" Position="215,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="58" Position="211,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="59" Position="217,44,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="60" Position="217,48,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="61" Position="217,52,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="62" Position="199,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="63" Position="203,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="64" Position="217,56,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="84" Position="73,20,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="90" Position="85,32,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="91" Position="57,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="92" Position="61,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="93" Position="65,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="105" Position="69,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="106" Position="73,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="109" Position="77,16,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="174" Position="77,20,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="175" Position="77,24,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="182" Position="77,28,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="260" Position="217,36,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="295" Position="73,28,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="296" Position="73,24,0" Scale="1,1,1" UnitType="GameStaticCollision4x4">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="320" Position="57.25,34.25,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="321" Position="57.25,34.75,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="322" Position="57.25,35.247,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="323" Position="57.25,35.747,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="324" Position="57.25,36.247,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="325" Position="57.25,36.75,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="326" Position="57.25,37.25,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="327" Position="57.25,37.75,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="329" Position="58.75,34.25,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="330" Position="58.75,34.75,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="331" Position="58.75,35.25,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="332" Position="58.75,35.75,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="333" Position="58.75,36.25,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="334" Position="58.75,36.755,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="335" Position="58.75,37.255,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="336" Position="58.75,37.755,0" Scale="1,1,1" UnitType="GameStaticCollisionDot5xDot5"/>
+    <ObjectUnit Id="85" Position="58,37.75,0" Scale="1,1,1" UnitType="GameStaticCollisionOneWay1"/>
+    <ObjectUnit Id="107" Position="70,19.75,0" Scale="1,1,1" UnitType="GameStaticCollisionOneWay2"/>
+    <ObjectUnit Id="1" Position="12,34,0" Scale="1,1,1" UnitType="Hero" Player="1">
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectUnit>
+    <ObjectUnit Id="301" Position="60.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="302" Position="59.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="303" Position="61.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="304" Position="62.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="305" Position="63.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="306" Position="64.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="307" Position="65.5,21.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="308" Position="61.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="309" Position="60.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="310" Position="59.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="311" Position="62.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="312" Position="63.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="313" Position="64.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="314" Position="65.5,23.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="315" Position="61.5,25.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="316" Position="60.5,25.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="317" Position="62.5,25.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="318" Position="63.5,25.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="319" Position="64.5,25.5,0" Scale="1,1,1" UnitType="ObjectCoin"/>
+    <ObjectUnit Id="299" Position="107,34,0" Rotation="0.0563" Scale="1,1,1" UnitType="Patroller"/>
+    <ObjectUnit Id="235" Position="25.5,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="279" Position="41,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="280" Position="53,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="281" Position="56,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="282" Position="81.0205,42,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="283" Position="78.5,38,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="284" Position="92.5,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="285" Position="95,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="293" Position="129,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="294" Position="131.5,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="297" Position="124,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="298" Position="126.5,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="328" Position="170.5,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectUnit Id="339" Position="173,34,0" Scale="1,1,1" UnitType="Rover"/>
+    <ObjectDoodad Id="65" Position="57,32,7.9975" Rotation="3.1408" Scale="1,1,1" Type="FakeStaticCollision4x4">
+        <Flag Index="HeightAbsolute" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="108" Position="64.5,22,2.9975" Rotation="3.1408" Scale="5,5,0.1098" Type="FakeStaticCollision4x4" TintColor="0,0,0">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="233" Position="198.5,35,7.9975" Scale="1,1,2" Type="KorhalFlag" Pitch="1.5705" Roll="3.1413">
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+        <Flag Index="NoDoodadFootprint" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="69" Variation="2" Position="73.5,19,4.9975" Rotation="3.1413" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="345" Variation="2" Position="39,32.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="347" Variation="2" Position="29,31.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="348" Variation="2" Position="47,33.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="349" Variation="2" Position="58,33.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="350" Variation="2" Position="163,31.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectDoodad Id="351" Variation="2" Position="179,31.5,4.9975" Rotation="1.5705" Scale="4.5,4.5,4.5" Type="PipesShort">
+        <Flag Index="HeightOffset" Value="1"/>
+        <Flag Index="HeightAbsolute" Value="1"/>
+        <Flag Index="ForcePlacement" Value="1"/>
+    </ObjectDoodad>
+    <ObjectPoint Id="51" Position="163,34,0" Scale="1,1,1" Type="Normal" Name="Pipe Exit Point" Color="0,0,0,0"/>
+    <ObjectCamera Id="3" Position="14.292,38.3112,0" Rotation="3.1401" Scale="1,1,1" Name="Top Down Camera (MID)" Color="0,0,0,0" CameraTarget="14.292,38.3112">
+        <CameraValue Index="FieldOfView" Value="27.7995"/>
+        <CameraValue Index="NearClip" Value="0.0998"/>
+        <CameraValue Index="FarClip" Value="600"/>
+        <CameraValue Index="ShadowClip" Value="200"/>
+        <CameraValue Index="Distance" Value="42"/>
+        <CameraValue Index="Pitch" Value="90"/>
+        <CameraValue Index="Yaw" Value="179.93"/>
+        <CameraValue Index="FocalDepth" Value="0.0002"/>
+        <CameraValue Index="FalloffStart" Value="100"/>
+        <CameraValue Index="FalloffEnd" Value="110"/>
+        <CameraValue Index="FalloffStartNear" Value="0.0002"/>
+        <CameraValue Index="FalloffEndNear" Value="0.0002"/>
+        <CameraValue Index="BokehFStop" Value="0.0175"/>
+        <CameraValue Index="BokehMaxCoC" Value="1"/>
+    </ObjectCamera>
+    <ObjectCamera Id="33" Position="110,38,0" Rotation="3.1357" Scale="1,1,1" Name="Top Down Camera (FAR" Color="0,0,0,0" CameraTarget="110,38">
+        <CameraValue Index="FieldOfView" Value="27.7995"/>
+        <CameraValue Index="NearClip" Value="0.0998"/>
+        <CameraValue Index="FarClip" Value="600"/>
+        <CameraValue Index="ShadowClip" Value="200"/>
+        <CameraValue Index="Distance" Value="90"/>
+        <CameraValue Index="Pitch" Value="90"/>
+        <CameraValue Index="Yaw" Value="179.6647"/>
+        <CameraValue Index="HeightOffset" Value="3"/>
+        <CameraValue Index="FocalDepth" Value="0.0002"/>
+        <CameraValue Index="FalloffStart" Value="100"/>
+        <CameraValue Index="FalloffEnd" Value="110"/>
+        <CameraValue Index="FalloffStartNear" Value="0.0002"/>
+        <CameraValue Index="FalloffEndNear" Value="0.0002"/>
+        <CameraValue Index="BokehFStop" Value="0.0175"/>
+        <CameraValue Index="BokehMaxCoC" Value="1"/>
+    </ObjectCamera>
+</PlacedObjects>

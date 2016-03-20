@@ -1,0 +1,60 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Pirated Lib
+//--------------------------------------------------------------------------------------------------
+// Preset Declarations
+const int libPIRL_ge_DebugCategory_Global = 0;
+const int libPIRL_ge_DebugCategory_Internal = 1;
+const int libPIRL_ge_DebugCategory_MovementSystem = 2;
+const int libPIRL_ge_DebugCategory_Actor = 3;
+const int libPIRL_ge_DebugCategory_Physics = 4;
+
+// Structures
+struct libPIRL_gs_SupportPanelRecord {
+    int lv_main;
+    int lv_header;
+    int[21] lv_entry;
+    int[21] lv_field;
+    int[21] lv_value;
+    int lv_maxEntryCount;
+};
+
+// Variable Declarations
+string libPIRL_gv_debugStringOpenMessage;
+string libPIRL_gv_debugStringOpenMessagePrefix;
+string libPIRL_gv_debugStringOpenMessageAppender;
+libPIRL_gs_SupportPanelRecord libPIRL_gv_supportPanel;
+
+// Function Declarations
+string libPIRL_gf_Capitalize (string lp_input);
+bool libPIRL_gf_StringIsValid (string lp_string);
+string libPIRL_gf_ConvertPointXYtoString (point lp_point, int lp_precision);
+bool libPIRL_gf_AngleIsBetweenBounds (fixed lp_angle, fixed lp_minBound, fixed lp_maxBound);
+bool libPIRL_gf_StringIsValid2 (int lp_integer);
+int libPIRL_gf_SignInteger (int lp_inputInteger);
+fixed libPIRL_gf_SignReal (fixed lp_inputReal);
+void libPIRL_gf_HideAllUIFramesForPlayers (playergroup lp_playerGroup);
+bool libPIRL_gf_UnitHasBehaviorWithBehaviorFlag (unit lp_unit, int lp_behaviorFlag);
+void libPIRL_gf_AddTimeToTimer (timer lp_timer, fixed lp_additionalTime);
+fixed libPIRL_gf_ConvertBooleanToReal (bool lp_boolean);
+void libPIRL_gf_ShakeCameraForPlayer (int lp_p, string lp_cameraSetting);
+void libPIRL_gf_DebugFlashUnit (unit lp_unit);
+void libPIRL_gf_DebugPoint (point lp_point);
+void libPIRL_gf_DebugPoint2 (point lp_point, fixed lp_radius);
+void libPIRL_gf_DebugPoint3 (point lp_point, fixed lp_width, fixed lp_height);
+void libPIRL_gf_DebugPoint4 (point lp_point, fixed lp_duration);
+void libPIRL_gf_DebugPoint5 (point lp_point, fixed lp_duration);
+void libPIRL_gf_EnableDebugCategory (int lp_debugCategory);
+bool libPIRL_gf_PrintCategoryIsEnabled (int lp_debugCategory);
+void libPIRL_gf_DebugString (string lp_message);
+void libPIRL_gf_DebugString2 (string lp_message, int lp_debugCategory);
+void libPIRL_gf_DebugString4 (string lp_prefix);
+void libPIRL_gf_DebugString3 (string lp_nextMessage);
+void libPIRL_gf_DebugString6 (string lp_nextMessage);
+void libPIRL_gf_DebugString5 (int lp_debugCategory);
+void libPIRL_gf_HookupSupportPanel ();
+
+// Library Initialization
+void libPIRL_InitVariables ();
+

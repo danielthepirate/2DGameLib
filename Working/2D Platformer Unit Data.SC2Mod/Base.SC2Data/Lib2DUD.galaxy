@@ -1,0 +1,1035 @@
+include "TriggerLibs/NativeLib"
+include "LibPIRL"
+include "Lib2DGM"
+
+include "Lib2DUD_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 2D Platformer Unit Data
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib2DUD_InitLibraries () {
+    libNtve_InitVariables();
+    libPIRL_InitVariables();
+    lib2DGM_InitVariables();
+}
+
+// Variable Initialization
+bool lib2DUD_InitVariables_completed = false;
+
+void lib2DUD_InitVariables () {
+    if (lib2DUD_InitVariables_completed) {
+        return;
+    }
+
+    lib2DUD_InitVariables_completed = true;
+
+    lib2DUD_gv_entity = UnitFilter(0, (1 << (c_targetFilterMapBoss - 32)), (1 << c_targetFilterUser1) | (1 << c_targetFilterWorker), 0);
+    lib2DUD_gv_entityHero = UnitFilter((1 << c_targetFilterHeroic), (1 << (c_targetFilterMapBoss - 32)), (1 << c_targetFilterUser1) | (1 << c_targetFilterWorker), 0);
+    lib2DUD_gv_entityNonHero = UnitFilter(0, (1 << (c_targetFilterMapBoss - 32)), (1 << c_targetFilterHeroic) | (1 << c_targetFilterUser1) | (1 << c_targetFilterWorker), 0);
+    lib2DUD_gv_entityHitbox = UnitFilter((1 << c_targetFilterUser1), 0, (1 << c_targetFilterWorker), (1 << (c_targetFilterMapBoss - 32)));
+    lib2DUD_gv_collisionUnit = UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterUser1), (1 << (c_targetFilterMapBoss - 32)));
+}
+
+// Functions
+void lib2DUD_gf_HeroSetHurtboxArea (unit lp_unit) {
+    // Variable Declarations
+    int lv_p;
+    fixed lv_velocityY;
+    fixed lv_hurtboxOffsetMinimum;
+    fixed lv_hurtboxHeightMinimum;
+    fixed lv_hurtboxHeight;
+    fixed lv_hurtboxWidth;
+    fixed lv_hurtboxOffset;
+    point lv_hurtboxTestpoint;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_p = UnitGetOwner(lp_unit);
+    lv_velocityY = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    lv_hurtboxOffsetMinimum = -0.25;
+    lv_hurtboxHeightMinimum = StringToFixed(CatalogFieldValueGet(c_gameCatalogEffect, "HeroStompHurtboxArea", "AreaArray[" + IntToString(0) + "].RectangleHeight", c_playerAny));
+    if ((lv_velocityY < 0.0) && (AbsF(lv_velocityY) > lv_hurtboxHeightMinimum)) {
+        lv_hurtboxHeight = AbsF(lv_velocityY);
+        lv_hurtboxOffset = (-0.5 * lv_hurtboxHeight);
+        CatalogReferenceSet("Effect,HeroStompHurtboxArea,AreaArray[0].RectangleHeight", lv_p, FixedToString(lv_hurtboxHeight, c_fixedPrecisionAny));
+        CatalogReferenceSet("Effect,HeroStompHurtboxArea,AreaRelativeOffset", lv_p, ("0," + FixedToString(lv_hurtboxOffset, c_fixedPrecisionAny) + ",0"));
+    }
+    if ((lv_velocityY == 0.0)) {
+        lv_hurtboxHeight = lv_hurtboxHeightMinimum;
+        lv_hurtboxOffset = lv_hurtboxOffsetMinimum;
+        CatalogReferenceSet("Effect,HeroStompHurtboxArea,AreaArray[0].RectangleHeight", lv_p, FixedToString(lv_hurtboxHeight, c_fixedPrecisionAny));
+        CatalogReferenceSet("Effect,HeroStompHurtboxArea,AreaRelativeOffset", lv_p, ("0," + FixedToString(lv_hurtboxOffset, c_fixedPrecisionAny) + ",0"));
+    }
+}
+
+void lib2DUD_gf_BounceUnit (unit lp_hero) {
+    // Variable Declarations
+    unit lv_patroller;
+    unit lv_attackingUnit;
+    fixed lv_newVelocity;
+    fixed lv_minimumBounceHeight;
+    fixed lv_bounceFactor;
+    int lv_p;
+
+    // Variable Initialization
+
+}
+
+void lib2DUD_gf_BlockUnitSpawnCarriedObejct (unit lp_collisionUnit) {
+    // Variable Declarations
+    unit lv_spawnedObject;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((UnitHasBehavior2(lp_collisionUnit, "BlockCarriesCoins") == true)) {
+        SoundPlayAtPointForPlayer(SoundLink("GameQuestionBlockSpawnObjectSound", -1), c_maxPlayers, PlayerGroupAll(), UnitGetPosition(lp_collisionUnit), 0.0, 100.0, 0.0);
+        UnitBehaviorRemove(lp_collisionUnit, "BlockCarriesCoins", 1);
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "ObjectCoin", c_unitCreateIgnorePlacement, 0, UnitGetPosition(lp_collisionUnit));
+        lv_spawnedObject = UnitLastCreated();
+        lib2DGM_gf_AddVerticalVelocity(lv_spawnedObject, 0.6);
+        lib2DGM_gf_AddHorizontalVelocity(lv_spawnedObject, RandomFixed(-0.2, 0.2));
+    }
+    if ((UnitHasBehavior2(lp_collisionUnit, "BlockCarriesHealthGlobe") == true)) {
+        SoundPlayAtPointForPlayer(SoundLink("GameQuestionBlockSpawnObjectSound", -1), c_maxPlayers, PlayerGroupAll(), UnitGetPosition(lp_collisionUnit), 0.0, 100.0, 0.0);
+        UnitBehaviorRemove(lp_collisionUnit, "BlockCarriesHealthGlobe", 1);
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "ObjectHealthGlobe", c_unitCreateIgnorePlacement, 0, UnitGetPosition(lp_collisionUnit));
+        lv_spawnedObject = UnitLastCreated();
+        lib2DGM_gf_AddVerticalVelocity(lv_spawnedObject, 0.6);
+        lib2DGM_gf_AddHorizontalVelocity(lv_spawnedObject, RandomFixed(-0.2, 0.2));
+    }
+}
+
+void lib2DUD_gf_BlockUnitBounceUnitsOnBlock (unit lp_collisionUnit) {
+    // Variable Declarations
+    region lv_bounceRegion;
+    fixed lv_bounceRegionHeight;
+    fixed lv_minX;
+    fixed lv_maxX;
+    fixed lv_minY;
+    fixed lv_maxY;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_bounceRegionHeight = 1.0;
+    lv_minX = lib2DGM_gf_XOfUnitLeft(lp_collisionUnit);
+    lv_maxX = lib2DGM_gf_XOfUnitRight(lp_collisionUnit);
+    lv_minY = (lib2DGM_gf_YOfUnitTop(lp_collisionUnit) - lv_bounceRegionHeight);
+    lv_maxY = (lib2DGM_gf_YOfUnitTop(lp_collisionUnit) + (lv_bounceRegionHeight * 0.5));
+    lv_bounceRegion = RegionRect(lv_minX, lv_minY, lv_maxX, lv_maxY);
+    UnitGroupLoopBegin(UnitGroup(null, c_playerAny, lv_bounceRegion, lib2DUD_gv_entity, 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        lib2DGM_gf_AddVerticalVelocity(UnitGroupLoopCurrent(), 0.6);
+        lib2DGM_gf_AddHorizontalVelocity(UnitGroupLoopCurrent(), RandomFixed(-0.2, 0.2));
+    }
+    UnitGroupLoopEnd();
+}
+
+void lib2DUD_gf_InitializeUnitData (unit lp_unit) {
+    // Variable Declarations
+    string lv_unitData;
+    string lv_unitDataInstance;
+    string lv_unitDataInstanceParent;
+    int lv_unitDataInstanceCount;
+    string lv_unitType;
+    int lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_unitType = UnitGetType(lp_unit);
+    lv_unitData = "GameUnitData";
+    lv_unitDataInstanceCount = UserDataInstanceCount(lv_unitData);
+    lv_unitDataInstance = lv_unitType;
+    lv_unitDataInstanceParent = UserDataGetUserInstance(lv_unitData, lv_unitDataInstance, "Parent", 1);
+    if ((lv_unitDataInstanceParent != "[Default]")) {
+        lv_unitDataInstance = lv_unitDataInstanceParent;
+    }
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 3, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Height", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 4, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Width", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 16, (lib2DGM_gf_PresetCustomValue4(lp_unit, 3) * 0.5));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 18, (lib2DGM_gf_PresetCustomValue4(lp_unit, 3) * lib2DGM_gv_hitTestHighFactor));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 17, (lib2DGM_gf_PresetCustomValue4(lp_unit, 3) * lib2DGM_gv_hitTestLowFactor));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 15, (lib2DGM_gf_PresetCustomValue4(lp_unit, 4) * 0.5));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 5, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Ground Speed", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 6, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Air Speed", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 7, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Jump Force", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 8, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Jump Force Secondary", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 11, UserDataGetFixed(lv_unitData, lv_unitDataInstance, "Restitution", 1));
+    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 9, IntToFixed(UserDataGetInt(lv_unitData, lv_unitDataInstance, "Jump Charges Max", 1)));
+    if ((UserDataGetInt(lv_unitData, lv_unitDataInstance, "Default Active", 1) == BoolToInt(true))) {
+        UnitGroupAdd(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+    if ((UserDataGetInt(lv_unitData, lv_unitDataInstance, "Ignore Air Resistance", 1) == BoolToInt(true))) {
+        lib2DGM_gf_ModifyUnitCustomValue4(lp_unit, 35, true);
+    }
+    if ((UserDataGetInt(lv_unitData, lv_unitDataInstance, "Ignore Friction", 1) == BoolToInt(true))) {
+        lib2DGM_gf_ModifyUnitCustomValue4(lp_unit, 34, true);
+    }
+}
+
+void lib2DUD_gf_RemoveCollisionUnitData (unit lp_collisionUnit) {
+    int auto87940083_ae;
+    int auto87940083_ai;
+
+    // Variable Declarations
+    int lv_collisionIndexRemoved;
+    int lv_collisionIndex;
+    int lv_collisionIndexNext;
+
+    // Variable Initialization
+
+    // Implementation
+    UnitGroupRemove(lib2DGM_gv_staticCollisionUnits, lp_collisionUnit);
+    lv_collisionIndexRemoved = FixedToInt(lib2DGM_gf_PresetCustomValue4(lp_collisionUnit, 40));
+    auto87940083_ae = lib2DGM_gv_staticCollisionArrayCount;
+    auto87940083_ai = 1;
+    lv_collisionIndex = lv_collisionIndexRemoved;
+    for ( ; ( (auto87940083_ai >= 0 && lv_collisionIndex <= auto87940083_ae) || (auto87940083_ai <= 0 && lv_collisionIndex >= auto87940083_ae) ) ; lv_collisionIndex += auto87940083_ai ) {
+        lv_collisionIndexNext = (lv_collisionIndex + 1);
+        lib2DGM_gv_staticCollision[lv_collisionIndex].lv_unit = lib2DGM_gv_staticCollision[lv_collisionIndexNext].lv_unit;
+        lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region = lib2DGM_gv_staticCollision[lv_collisionIndexNext].lv_region;
+        lib2DGM_gv_staticCollision[lv_collisionIndex].lv_oneWayState = lib2DGM_gv_staticCollision[lv_collisionIndexNext].lv_oneWayState;
+        lib2DGM_gf_ModifyUnitCustomValue3(lib2DGM_gv_staticCollision[lv_collisionIndex].lv_unit, 40, IntToFixed(lv_collisionIndex));
+    }
+    lib2DGM_gv_staticCollisionArrayCount -= 1;
+    lib2DUD_gf_RedrawGameCollisionRegion();
+}
+
+void lib2DUD_gf_RedrawGameCollisionRegion () {
+    int auto76B8DDD1_ae;
+    int auto76B8DDD1_ai;
+
+    // Variable Declarations
+    int lv_collisionIndex;
+
+    // Variable Initialization
+
+    // Implementation
+    lib2DGM_gv_gameCollisionRegion = RegionCircle(Point(0.0, 0.0), 0.1);
+    lib2DGM_gv_gameCollisionRegionOneWay = RegionCircle(Point(0.0, 0.0), 0.1);
+    auto76B8DDD1_ae = lib2DGM_gv_staticCollisionArrayCount;
+    auto76B8DDD1_ai = 1;
+    lv_collisionIndex = 1;
+    for ( ; ( (auto76B8DDD1_ai >= 0 && lv_collisionIndex <= auto76B8DDD1_ae) || (auto76B8DDD1_ai <= 0 && lv_collisionIndex >= auto76B8DDD1_ae) ) ; lv_collisionIndex += auto76B8DDD1_ai ) {
+        if ((lib2DGM_gv_staticCollision[lv_collisionIndex].lv_oneWayState == true)) {
+            RegionAddRegion(lib2DGM_gv_gameCollisionRegionOneWay, lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region);
+        }
+        else {
+            RegionAddRegion(lib2DGM_gv_gameCollisionRegion, lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region);
+        }
+    }
+}
+
+trigger auto_lib2DUD_gf_PatrollerAIController_Trigger = null;
+unit auto_lib2DUD_gf_PatrollerAIController_lp_aIUnit;
+
+void lib2DUD_gf_PatrollerAIController (unit lp_aIUnit) {
+    auto_lib2DUD_gf_PatrollerAIController_lp_aIUnit = lp_aIUnit;
+
+    if (auto_lib2DUD_gf_PatrollerAIController_Trigger == null) {
+        auto_lib2DUD_gf_PatrollerAIController_Trigger = TriggerCreate("auto_lib2DUD_gf_PatrollerAIController_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DUD_gf_PatrollerAIController_Trigger, false, false);
+}
+
+bool auto_lib2DUD_gf_PatrollerAIController_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_aIUnit = auto_lib2DUD_gf_PatrollerAIController_lp_aIUnit;
+
+    // Variable Declarations
+    fixed lv_patrollingPauseDuration;
+    fixed lv_patrollingDistance;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_patrollingPauseDuration = 0.375;
+    lv_patrollingDistance = 12.0;
+    while ((UnitIsAlive(lp_aIUnit) == true)) {
+        lib2DGM_gf_UnitSet2DFacing(lp_aIUnit, lib2DGM_ge__2DUnitFacing_Left);
+        lib2DUD_gf_UnitIssueWalkOrder(lp_aIUnit, (-1.0 * lv_patrollingDistance));
+        Wait(lv_patrollingPauseDuration, c_timeGame);
+        lib2DGM_gf_UnitSet2DFacing(lp_aIUnit, lib2DGM_ge__2DUnitFacing_Right);
+        lib2DUD_gf_UnitIssueWalkOrder(lp_aIUnit, lv_patrollingDistance);
+        Wait(lv_patrollingPauseDuration, c_timeGame);
+    }
+    return true;
+}
+
+trigger auto_lib2DUD_gf_RoverAIController_Trigger = null;
+unit auto_lib2DUD_gf_RoverAIController_lp_aIUnit;
+
+void lib2DUD_gf_RoverAIController (unit lp_aIUnit) {
+    auto_lib2DUD_gf_RoverAIController_lp_aIUnit = lp_aIUnit;
+
+    if (auto_lib2DUD_gf_RoverAIController_Trigger == null) {
+        auto_lib2DUD_gf_RoverAIController_Trigger = TriggerCreate("auto_lib2DUD_gf_RoverAIController_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DUD_gf_RoverAIController_Trigger, false, false);
+}
+
+bool auto_lib2DUD_gf_RoverAIController_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_aIUnit = auto_lib2DUD_gf_RoverAIController_lp_aIUnit;
+
+    // Variable Declarations
+    fixed lv_rovingPauseDuration;
+    fixed lv_rovingDistance;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_rovingPauseDuration = 0.125;
+    lv_rovingDistance = 256.0;
+    while ((UnitIsAlive(lp_aIUnit) == true)) {
+        lib2DGM_gf_UnitSet2DFacing(lp_aIUnit, lib2DGM_ge__2DUnitFacing_Left);
+        lib2DUD_gf_UnitIssueWalkOrder(lp_aIUnit, (-1.0 * lv_rovingDistance));
+        Wait(lv_rovingPauseDuration, c_timeGame);
+        lib2DGM_gf_UnitSet2DFacing(lp_aIUnit, lib2DGM_ge__2DUnitFacing_Right);
+        lib2DUD_gf_UnitIssueWalkOrder(lp_aIUnit, lv_rovingDistance);
+        Wait(lv_rovingPauseDuration, c_timeGame);
+    }
+    return true;
+}
+
+void lib2DUD_gf_UnitIssueWalkOrder (unit lp_unit, fixed lp_orderTargetOffset) {
+    fixed autoC6736C70_ae;
+    fixed autoC6736C70_ai;
+
+    // Variable Declarations
+    fixed lv_i;
+    fixed lv_walkSpeedIncrement;
+    fixed lv_targetSign;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_walkSpeedIncrement = lib2DGM_gf_PresetCustomValue4(lp_unit, 5);
+    lv_targetSign = libPIRL_gf_SignReal(lp_orderTargetOffset);
+    autoC6736C70_ae = AbsF(lp_orderTargetOffset);
+    autoC6736C70_ai = lv_walkSpeedIncrement;
+    lv_i = 0.0;
+    for ( ; ( (autoC6736C70_ai >= 0 && lv_i <= autoC6736C70_ae) || (autoC6736C70_ai <= 0 && lv_i >= autoC6736C70_ae) ) ; lv_i += autoC6736C70_ai ) {
+        if ((lv_targetSign == -1.0) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftLow)) == true)) {
+            break;
+        }
+        if ((lv_targetSign == 1.0) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightLow)) == true)) {
+            break;
+        }
+        if ((RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, Point((PointGetX(UnitGetPosition(lp_unit)) + (4.0 * lib2DGM_gf_PresetCustomValue(lp_unit))), PointGetY(UnitGetPosition(lp_unit)))) == false)) {
+            break;
+        }
+        if ((UnitIsAlive(lp_unit) == true)) {
+            UnitBehaviorAdd(lp_unit, "UnitStateWalkingAnimation", lp_unit, 1);
+            if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == true)) {
+                lib2DGM_gf_AddHorizontalVelocity(lp_unit, (lv_targetSign * lib2DGM_gf_PresetCustomValue4(lp_unit, 5)));
+            }
+            else {
+                lib2DGM_gf_AddHorizontalVelocity(lp_unit, (lv_targetSign * lib2DGM_gf_PresetCustomValue4(lp_unit, 6)));
+            }
+            Wait(0.0625, c_timeGame);
+        }
+        else {
+            break;
+        }
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Enters Map
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroEntersMap_Func (bool testConds, bool runActions) {
+    fixed auto7E32400E_ae;
+    fixed auto7E32400E_ai;
+
+    // Variable Declarations
+    unit lv_hero;
+    int lv_p;
+    fixed lv_hitboxHeightOffset;
+    fixed lv_hitboxRadius;
+    fixed lv_unitHeight;
+    unitgroup lv_hitboxUnits;
+
+    // Variable Initialization
+    lv_hitboxUnits = UnitGroupEmpty();
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "Hero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_hero = EventUnit();
+    lv_p = UnitGetOwner(lv_hero);
+    lib2DUD_gf_InitializeUnitData(lv_hero);
+    lib2DGM_gf_ModifyUnitCustomValue3(lv_hero, 14, (lib2DGM_ge__2DUnitFacing_Right));
+    CameraFollowUnitGroup(lv_p, libNtve_gf_ConvertUnitToUnitGroup(lv_hero), true, false);
+    PlayerOptionOverride(lv_p, "camerafollow", "1");
+    lv_hitboxRadius = StringToFixed(CatalogFieldValueGet(c_gameCatalogUnit, "HeroHitboxUnit", "Radius", lv_p));
+    lv_unitHeight = lib2DGM_gf_PresetCustomValue4(lv_hero, 3);
+    auto7E32400E_ae = (lv_unitHeight - lv_hitboxRadius);
+    auto7E32400E_ai = lv_hitboxRadius;
+    lv_hitboxHeightOffset = lv_hitboxRadius;
+    for ( ; ( (auto7E32400E_ai >= 0 && lv_hitboxHeightOffset <= auto7E32400E_ae) || (auto7E32400E_ai <= 0 && lv_hitboxHeightOffset >= auto7E32400E_ae) ) ; lv_hitboxHeightOffset += auto7E32400E_ai ) {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "HeroHitboxUnit", 0, lv_p, Point(PointGetX(UnitGetPosition(lv_hero)), (PointGetY(UnitGetPosition(lv_hero)) + lv_hitboxHeightOffset)));
+        UnitBehaviorAdd(UnitLastCreated(), "KineticGroupBehavior", lv_hero, 1);
+        lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 41, lv_hitboxHeightOffset);
+        UnitGroupAdd(lv_hitboxUnits, UnitLastCreated());
+        lib2DGM_gv_totalFollowKinetics += 1;
+    }
+    DataTableSetUnitGroup(true, lib2DGM_gf_UnitGetHitboxGroupCode(lv_hero), lv_hitboxUnits);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroEntersMap_Init () {
+    lib2DUD_gt_HeroEntersMap = TriggerCreate("lib2DUD_gt_HeroEntersMap_Func");
+    TriggerAddEventUnitRegion(lib2DUD_gt_HeroEntersMap, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Movement Trail Animation
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroMovementTrailAnimation_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_targetUnit;
+    fixed lv_targetUnitHorizontalVelocity;
+    fixed lv_minimumTrailVelocity;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "Hero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_targetUnit = EventUnit();
+    lv_targetUnitHorizontalVelocity = lib2DGM_gf_PresetCustomValue(lv_targetUnit);
+    lv_minimumTrailVelocity = 0.2;
+    if (((lv_targetUnitHorizontalVelocity > lv_minimumTrailVelocity) || (lv_targetUnitHorizontalVelocity < (-1.0 * lv_minimumTrailVelocity)))) {
+        libNtve_gf_SendActorMessageToUnit(lv_targetUnit, "Create HeroSuddenMovementTrail");
+    }
+    else {
+        Wait(0.0625, c_timeGame);
+        libNtve_gf_SendActorMessageToUnit(lv_targetUnit, "Create HeroSuddenMovementDown");
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroMovementTrailAnimation_Init () {
+    lib2DUD_gt_HeroMovementTrailAnimation = TriggerCreate("lib2DUD_gt_HeroMovementTrailAnimation_Func");
+    TriggerAddEventUnitBehaviorChange(lib2DUD_gt_HeroMovementTrailAnimation, null, "UnitStateFallingAnimation", c_unitBehaviorChangeDestroy);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Translated
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroTranslated_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_targetUnit;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_UnitTranslated, lib2DGM_ge_GenericEventParameter_TriggeringUnit))) == "Hero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_targetUnit = DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_UnitTranslated, lib2DGM_ge_GenericEventParameter_TriggeringUnit));
+    lib2DUD_gf_HeroSetHurtboxArea(lv_targetUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroTranslated_Init () {
+    lib2DUD_gt_HeroTranslated = TriggerCreate("lib2DUD_gt_HeroTranslated_Func");
+    TriggerAddEventGeneric(lib2DUD_gt_HeroTranslated, lib2DGM_gf_PresetGenericEvent(lib2DGM_ge_GenericEvent_UnitTranslated));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Rover Enters Map
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_RoverEntersMap_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_enemy;
+    fixed lv_i;
+    int lv_p;
+    unitgroup lv_hitboxUnits;
+
+    // Variable Initialization
+    lv_hitboxUnits = UnitGroupEmpty();
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "Rover"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_enemy = EventUnit();
+    lv_p = UnitGetOwner(lv_enemy);
+    lib2DUD_gf_InitializeUnitData(lv_enemy);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PatrollerHitboxUnit", 0, lv_p, Point((PointGetX(UnitGetPosition(lv_enemy)) - 0.1), (PointGetY(UnitGetPosition(lv_enemy)) + 0.4375)));
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 40, -0.1);
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 41, 0.4375);
+    UnitBehaviorAdd(UnitLastCreated(), "KineticGroupBehavior", lv_enemy, 1);
+    UnitGroupAdd(lv_hitboxUnits, UnitLastCreated());
+    lib2DGM_gv_totalFollowKinetics += 1;
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PatrollerHitboxHeadUnit", 0, lv_p, Point((PointGetX(UnitGetPosition(lv_enemy)) - 0.1), (PointGetY(UnitGetPosition(lv_enemy)) + 0.4375)));
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 40, -0.1);
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 41, 0.4375);
+    UnitBehaviorAdd(UnitLastCreated(), "KineticGroupBehavior", lv_enemy, 1);
+    UnitGroupAdd(lv_hitboxUnits, UnitLastCreated());
+    lib2DGM_gv_totalFollowKinetics += 1;
+    DataTableSetUnitGroup(true, lib2DGM_gf_UnitGetHitboxGroupCode(lv_enemy), lv_hitboxUnits);
+    lib2DUD_gf_RoverAIController(lv_enemy);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_RoverEntersMap_Init () {
+    lib2DUD_gt_RoverEntersMap = TriggerCreate("lib2DUD_gt_RoverEntersMap_Func");
+    TriggerAddEventUnitRegion(lib2DUD_gt_RoverEntersMap, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Patroller Enters Map
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_PatrollerEntersMap_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_enemy;
+    fixed lv_i;
+    int lv_p;
+    unitgroup lv_hitboxUnits;
+
+    // Variable Initialization
+    lv_hitboxUnits = UnitGroupEmpty();
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "Patroller"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_enemy = EventUnit();
+    lv_p = UnitGetOwner(lv_enemy);
+    lib2DUD_gf_InitializeUnitData(lv_enemy);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PatrollerHitboxUnit", 0, lv_p, Point((PointGetX(UnitGetPosition(lv_enemy)) - 0.1), (PointGetY(UnitGetPosition(lv_enemy)) + 0.4375)));
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 40, -0.1);
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 41, 0.4375);
+    UnitBehaviorAdd(UnitLastCreated(), "KineticGroupBehavior", lv_enemy, 1);
+    UnitGroupAdd(lv_hitboxUnits, UnitLastCreated());
+    lib2DGM_gv_totalFollowKinetics += 1;
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PatrollerHitboxHeadUnit", 0, lv_p, Point((PointGetX(UnitGetPosition(lv_enemy)) - 0.1), (PointGetY(UnitGetPosition(lv_enemy)) + 0.4375)));
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 40, -0.1);
+    lib2DGM_gf_ModifyUnitCustomValue3(UnitLastCreated(), 41, 0.4375);
+    UnitBehaviorAdd(UnitLastCreated(), "KineticGroupBehavior", lv_enemy, 1);
+    UnitGroupAdd(lv_hitboxUnits, UnitLastCreated());
+    lib2DGM_gv_totalFollowKinetics += 1;
+    DataTableSetUnitGroup(true, lib2DGM_gf_UnitGetHitboxGroupCode(lv_enemy), lv_hitboxUnits);
+    lib2DUD_gf_PatrollerAIController(lv_enemy);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_PatrollerEntersMap_Init () {
+    lib2DUD_gt_PatrollerEntersMap = TriggerCreate("lib2DUD_gt_PatrollerEntersMap_Func");
+    TriggerAddEventUnitRegion(lib2DUD_gt_PatrollerEntersMap, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Patroller Hits Hero
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_PatrollerHitsHero_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_patroller;
+    string lv_attackIndex;
+    unit lv_targetUnit;
+    int lv_targetIndex;
+    fixed lv_hitDirection;
+    fixed lv_hitImmunityDuration;
+    fixed lv_hitDamage;
+
+    // Variable Initialization
+    lv_attackIndex = "";
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_patroller = UnitBehaviorEffectUnit(EventUnitDamageSourceUnit(), "KineticGroupBehavior", c_effectUnitCaster, 0);
+    lv_targetUnit = UnitBehaviorEffectUnit(EventUnit(), "KineticGroupBehavior", c_effectUnitCaster, 0);
+    lv_targetIndex = UnitGetOwner(lv_targetUnit);
+    lv_attackIndex = ("Unit" + IntToString(UnitGetTag(lv_patroller)) + "AttackIndex" + IntToString(UnitGetTag(lv_targetUnit)));
+    Wait(0.0, c_timeGame);
+    if ((UnitIsAlive(lv_patroller) == false)) {
+        return true;
+    }
+    if ((lib2DGM_gf_UnitHasAttackImmunityFrames(lv_targetUnit, lv_attackIndex) == false)) {
+        lv_hitDirection = libPIRL_gf_SignReal(((PointGetX(UnitGetPosition(lv_targetUnit)) - lib2DGM_gf_PresetCustomValue(lv_targetUnit)) - (PointGetX(UnitGetPosition(lv_patroller)) - lib2DGM_gf_PresetCustomValue(lv_patroller))));
+        lv_hitImmunityDuration = 0.375;
+        lv_hitDamage = 10.0;
+        libPIRL_gf_DebugFlashUnit(lv_targetUnit);
+        lib2DGM_gf_SeparateTargetUnitFromKnockbackUnit(lv_targetUnit, lv_patroller, lv_hitDirection);
+        lib2DGM_gf_KnockbackYOverTime(lv_targetUnit, 0.2, 0.0);
+        lib2DGM_gf_KnockbackXOverTime(lv_targetUnit, (lv_hitDirection * 0.9), 0.1875);
+        libPIRL_gf_AddTimeToTimer(lib2DGM_gv_player[lv_targetIndex].lv_controlLoss, 0.5);
+        lib2DGM_gf_UnitAddAttackImmunityFrames(lv_targetUnit, lv_attackIndex, lv_hitImmunityDuration);
+        libPIRL_gf_ShakeCameraForPlayer(UnitGetOwner(lv_targetUnit), "Medium");
+        UnitDamage(lv_patroller, "GenericEnemyAttackHook", lv_targetUnit, 0.0);
+        if ((UnitGetPropertyFixed(lv_targetUnit, c_unitPropLife, c_unitPropCurrent) <= lv_hitDamage)) {
+            UnitBehaviorAdd(lv_targetUnit, "UnitStateDying", lv_patroller, 1);
+            UnitSetPropertyFixed(lv_targetUnit, c_unitPropLife, 0.01);
+            Wait(lv_hitImmunityDuration, c_timeGame);
+            Wait(0.0, c_timeGame);
+        }
+        UnitDamage(lv_patroller, "GenericEnemyDamage", lv_targetUnit, lv_hitDamage);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_PatrollerHitsHero_Init () {
+    lib2DUD_gt_PatrollerHitsHero = TriggerCreate("lib2DUD_gt_PatrollerHitsHero_Func");
+    TriggerAddEventUnitDamaged(lib2DUD_gt_PatrollerHitsHero, null, c_unitDamageTypeAny, c_unitDamageEither, "PatrollerBodyHurtboxHook");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Patroller Gets Stomped
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_PatrollerGetsStomped_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_patroller;
+    unit lv_attackingUnit;
+    fixed lv_newVelocity;
+    fixed lv_minimumBounceHeight;
+    fixed lv_bounceFactor;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((UnitGetType(EventUnit()) == "PatrollerHitboxHeadUnit") || (UnitGetType(EventUnit()) == "PatrollerHitboxUnit")))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_patroller = UnitBehaviorEffectUnit(EventUnit(), "KineticGroupBehavior", c_effectUnitCaster, 0);
+    lv_attackingUnit = EventUnitDamageSourceUnit();
+    lv_p = UnitGetOwner(lv_attackingUnit);
+    lv_minimumBounceHeight = 0.8;
+    lv_bounceFactor = 0.8;
+    if ((UnitIsAlive(lv_patroller) == true)) {
+        UnitKill(lv_patroller);
+        lib2DGM_gf_PlayerAddPoints(lv_p, 10);
+        if ((lib2DGM_gf_PresetCustomValue4(lv_attackingUnit, 13) == 0.0)) {
+            lv_newVelocity = MaxF(lv_minimumBounceHeight, ((-1.0 * lv_bounceFactor) * lib2DGM_gf_PresetCustomValue4(lv_attackingUnit, 2)));
+        }
+        else {
+            lv_newVelocity = MaxF(lv_minimumBounceHeight, ((-1.0 * lv_bounceFactor) * lib2DGM_gf_PresetCustomValue4(lv_attackingUnit, 13)));
+        }
+        lib2DGM_gf_SetUnitVerticalVelocity(lv_attackingUnit, 0.0);
+        lib2DGM_gf_AddVerticalVelocity(lv_attackingUnit, lv_newVelocity);
+        lib2DGM_gf_ModifyUnitCustomValue3(lv_attackingUnit, 10, 0.0);
+        libNtve_gf_SendActorMessageToUnit(lv_attackingUnit, "Create HeroSuddenMovementTrail");
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_PatrollerGetsStomped_Init () {
+    lib2DUD_gt_PatrollerGetsStomped = TriggerCreate("lib2DUD_gt_PatrollerGetsStomped_Func");
+    TriggerAddEventUnitDamaged(lib2DUD_gt_PatrollerGetsStomped, null, c_unitDamageTypeAny, c_unitDamageEither, "HeroStompHurtboxHook");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Coin Enters Map
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_CoinEntersMap_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_object;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "ObjectCoin"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_object = EventUnit();
+    lib2DUD_gf_InitializeUnitData(lv_object);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_CoinEntersMap_Init () {
+    lib2DUD_gt_CoinEntersMap = TriggerCreate("lib2DUD_gt_CoinEntersMap_Func");
+    TriggerAddEventUnitRegion(lib2DUD_gt_CoinEntersMap, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Coin Pickup
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroCoinPickup_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_coinUnit;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventPlayerEffectUsedUnit(c_effectUnitCaster)) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitTarget)) == "HeroHitboxUnit"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_coinUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_p = UnitGetOwner(EventPlayerEffectUsedUnit(c_effectUnitTarget));
+    UnitSetPosition(lv_coinUnit, EventPlayerEffectUsedPoint(c_effectLocationSourcePoint), true);
+    lib2DGM_gv_player[lv_p].lv_coins += 1;
+    libNtve_gf_SetDialogItemText(lib2DGM_gv_uI.lv_coinsCollected, IntToText(lib2DGM_gv_player[lv_p].lv_coins), PlayerGroupSingle(lv_p));
+    lib2DGM_gf_PlayerAddPoints(lv_p, 20);
+    SoundPlayAtPointForPlayer(SoundLink("ObjectCoinCollected", -1), c_maxPlayers, PlayerGroupSingle(lv_p), UnitGetPosition(EventPlayerEffectUsedUnit(c_effectUnitCaster)), 0.0, 100.0, 0.0);
+    lib2DGM_gf_SetUnitVerticalVelocity(lv_coinUnit, 0.0);
+    lib2DGM_gf_SetUnitHorizontalVelocity(lv_coinUnit, 0.0);
+    lib2DGM_gf_ModifyUnitCustomValue4(lv_coinUnit, 30, true);
+    UnitKill(lv_coinUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroCoinPickup_Init () {
+    lib2DUD_gt_HeroCoinPickup = TriggerCreate("lib2DUD_gt_HeroCoinPickup_Func");
+    TriggerAddEventPlayerEffectUsed(lib2DUD_gt_HeroCoinPickup, c_playerAny, "ObjectCoinSearchHook");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Health Globe Enters Map
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HealthGlobeEntersMap_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_object;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventUnit()) == "ObjectHealthGlobe"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_object = EventUnit();
+    lib2DUD_gf_InitializeUnitData(lv_object);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HealthGlobeEntersMap_Init () {
+    lib2DUD_gt_HealthGlobeEntersMap = TriggerCreate("lib2DUD_gt_HealthGlobeEntersMap_Func");
+    TriggerAddEventUnitRegion(lib2DUD_gt_HealthGlobeEntersMap, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Health Pickup
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroHealthPickup_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_healthGlobeUnit;
+    unit lv_targetUnit;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventPlayerEffectUsedUnit(c_effectUnitCaster)) == true))) {
+            return false;
+        }
+
+        if (!((UnitGetType(EventPlayerEffectUsedUnit(c_effectUnitTarget)) == "HeroHitboxUnit"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_healthGlobeUnit = EventPlayerEffectUsedUnit(c_effectUnitCaster);
+    lv_targetUnit = lib2DGM_gf_UnitGetParent(EventPlayerEffectUsedUnit(c_effectUnitTarget));
+    lv_p = UnitGetOwner(lv_targetUnit);
+    UnitSetPosition(lv_healthGlobeUnit, EventPlayerEffectUsedPoint(c_effectLocationSourcePoint), true);
+    lib2DGM_gf_PlayerAddPoints(lv_p, 100);
+    SoundPlayAtPointForPlayer(SoundLink("ObjectHealthGlobeCollect", -1), c_maxPlayers, PlayerGroupSingle(lv_p), UnitGetPosition(EventPlayerEffectUsedUnit(c_effectUnitCaster)), 0.0, 100.0, 0.0);
+    libNtve_gf_SendActorMessageToUnit(lv_targetUnit, "Create ObjectHealthGlobeHeal");
+    lib2DGM_gf_SetUnitVerticalVelocity(lv_healthGlobeUnit, 0.0);
+    lib2DGM_gf_SetUnitHorizontalVelocity(lv_healthGlobeUnit, 0.0);
+    lib2DGM_gf_ModifyUnitCustomValue4(lv_healthGlobeUnit, 30, true);
+    UnitBehaviorAdd(lv_targetUnit, "ObjectHealthGlobeRegen", lv_healthGlobeUnit, 1);
+    UnitKill(lv_healthGlobeUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroHealthPickup_Init () {
+    lib2DUD_gt_HeroHealthPickup = TriggerCreate("lib2DUD_gt_HeroHealthPickup_Func");
+    TriggerAddEventPlayerEffectUsed(lib2DUD_gt_HeroHealthPickup, c_playerAny, "ObjectHealthGlobeSearchHook");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Hits Breakable Block
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroHitsBreakableBlock_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_targetUnit;
+    unit lv_collisionUnit;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_TriggeringUnit))) == "Hero"))) {
+            return false;
+        }
+
+        if (!((UnitGetType(DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_CollidingUnit))) == "GameBreakableBlock1x1"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_collisionUnit = DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_CollidingUnit));
+    lv_targetUnit = DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_TriggeringUnit));
+    lib2DUD_gf_BlockUnitBounceUnitsOnBlock(lv_collisionUnit);
+    Wait(0.125, c_timeGame);
+    lib2DUD_gf_RemoveCollisionUnitData(lv_collisionUnit);
+    UnitKill(lv_collisionUnit);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroHitsBreakableBlock_Init () {
+    lib2DUD_gt_HeroHitsBreakableBlock = TriggerCreate("lib2DUD_gt_HeroHitsBreakableBlock_Func");
+    TriggerAddEventGeneric(lib2DUD_gt_HeroHitsBreakableBlock, lib2DGM_gf_PresetGenericEvent(lib2DGM_ge_GenericEvent_StaticCollisionBottom));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Hits Question Block
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_HeroHitsQuestionBlock_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_targetUnit;
+    unit lv_collisionUnit;
+    unit lv_spawnedObject;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_TriggeringUnit))) == "Hero"))) {
+            return false;
+        }
+
+        if (!((UnitGetType(DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_CollidingUnit))) == "GameQuestionBlock1x1"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_collisionUnit = DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_CollidingUnit));
+    lv_targetUnit = DataTableGetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_TriggeringUnit));
+    lib2DUD_gf_BlockUnitBounceUnitsOnBlock(lv_collisionUnit);
+    Wait(0.125, c_timeGame);
+    lib2DGM_gf_TranslateUnit5(lv_collisionUnit, 0.6);
+    libNtve_gf_SendActorMessageToUnit(lv_collisionUnit, "Signal Impact");
+    Wait(0.0625, c_timeGame);
+    lib2DUD_gf_BlockUnitSpawnCarriedObejct(lv_collisionUnit);
+    Wait(0.0625, c_timeGame);
+    lib2DGM_gf_TranslateUnit5(lv_collisionUnit, -0.6);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_HeroHitsQuestionBlock_Init () {
+    lib2DUD_gt_HeroHitsQuestionBlock = TriggerCreate("lib2DUD_gt_HeroHitsQuestionBlock_Func");
+    TriggerAddEventGeneric(lib2DUD_gt_HeroHitsQuestionBlock, lib2DGM_gf_PresetGenericEvent(lib2DGM_ge_GenericEvent_StaticCollisionBottom));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Unit Dies
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_gt_UnitDies_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_dyingUnit;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitFilterMatch(EventUnit(), 0, UnitFilter(0, (1 << (c_targetFilterMapBoss - 32)), (1 << c_targetFilterUser1), 0)) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_dyingUnit = EventUnit();
+    lv_p = UnitGetOwner(lv_dyingUnit);
+    if ((DataTableValueExists(true, lib2DGM_gf_UnitGetHitboxGroupCode(lv_dyingUnit)) == true)) {
+        lib2DGM_gf_UnitRemoveHitboxGroup(lv_dyingUnit);
+    }
+    if ((UnitGetType(lv_dyingUnit) == "Hero")) {
+        PlayerOptionOverride(lv_p, "camerafollow", "1");
+        Wait(2.0, c_timeGame);
+        lib2DGM_gf_HeroRespawnForPlayer(lib2DGM_gv_player[lv_p].lv_respawnPoint, lv_p);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DUD_gt_UnitDies_Init () {
+    lib2DUD_gt_UnitDies = TriggerCreate("lib2DUD_gt_UnitDies_Func");
+    TriggerAddEventUnitDied(lib2DUD_gt_UnitDies, null);
+    TriggerAddEventUnitRemoved(lib2DUD_gt_UnitDies, null);
+}
+
+void lib2DUD_InitTriggers () {
+    lib2DUD_gt_HeroEntersMap_Init();
+    lib2DUD_gt_HeroMovementTrailAnimation_Init();
+    lib2DUD_gt_HeroTranslated_Init();
+    lib2DUD_gt_RoverEntersMap_Init();
+    lib2DUD_gt_PatrollerEntersMap_Init();
+    lib2DUD_gt_PatrollerHitsHero_Init();
+    lib2DUD_gt_PatrollerGetsStomped_Init();
+    lib2DUD_gt_CoinEntersMap_Init();
+    lib2DUD_gt_HeroCoinPickup_Init();
+    lib2DUD_gt_HealthGlobeEntersMap_Init();
+    lib2DUD_gt_HeroHealthPickup_Init();
+    lib2DUD_gt_HeroHitsBreakableBlock_Init();
+    lib2DUD_gt_HeroHitsQuestionBlock_Init();
+    lib2DUD_gt_UnitDies_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib2DUD_InitLib_completed = false;
+
+void lib2DUD_InitLib () {
+    if (lib2DUD_InitLib_completed) {
+        return;
+    }
+
+    lib2DUD_InitLib_completed = true;
+
+    lib2DUD_InitLibraries();
+    lib2DUD_InitVariables();
+    lib2DUD_InitTriggers();
+}
+

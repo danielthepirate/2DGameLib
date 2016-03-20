@@ -1,0 +1,2486 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CSound default="1" id="2D_Unit_Movement" parent="WORLD">
+        <Flags index="Download" value="0"/>
+        <Flags index="Purgable" value="1"/>
+        <Category value="Foley"/>
+        <CategoryLocal value="Foley"/>
+        <ResourcePriority value="100"/>
+        <VolumeRolloffPoints Distance="1.000000"/>
+        <VolumeRolloffPoints Distance="25.000000" Volume="-96.000000"/>
+        <Select value="Random"/>
+    </CSound>
+    <CSound id="UIOffscreenDeathFlare" parent="WORLD">
+        <AssetArray File="Assets\Sounds\Gen_HeroDeath_Flare01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Gen_HeroDeath_Flare02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Gen_HeroDeath_Flare03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Gen_HeroDeath_Flare04.wav" FacialGroup=""/>
+        <Flags index="Ignorable" value="1"/>
+        <Category value="Mission"/>
+        <DupeHistoryCount value="3"/>
+        <FogFadeIn Volume="-96.000000"/>
+        <FogFadeIn Time="100"/>
+        <Mode value="2D"/>
+        <MuteFadeIn Volume="-96.000000"/>
+        <MuteFadeIn Time="100" Volume="-0.040000"/>
+        <SpeakerMix index="Center" value="0.000000"/>
+        <SpeakerMix index="BackLeft" value="0.000000"/>
+        <SpeakerMix index="BackRight" value="0.000000"/>
+        <SpeakerMix index="SideLeft" value="0.000000"/>
+        <SpeakerMix index="SideRight" value="0.000000"/>
+        <SustainFade index="1" Time="250" Volume="-96.000000"/>
+        <Volume value="-6.000000,-6.000000"/>
+        <VolumeRolloffFadeIn Volume="-96.000000"/>
+        <VolumeRolloffFadeIn Time="40"/>
+        <VolumeRolloffPoints Distance="20.000000"/>
+        <VolumeRolloffPoints Distance="38.000000" Volume="-96.000000"/>
+    </CSound>
+    <CModel id="InvisibleWalkablePlatformDot5xDot52" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,30.000000"/>
+        <ScaleMin value="0.062500,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="HitboxUnit" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,1.000000"/>
+        <ScaleMin value="0.062500,0.062500,1.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform2xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.250000,0.062500,30.000000"/>
+        <ScaleMin value="0.250000,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform4xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.500000,0.062500,30.000000"/>
+        <ScaleMin value="0.500000,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform2x2" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.250000,0.250000,30.000000"/>
+        <ScaleMin value="0.250000,0.250000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform4x4">
+        <ScaleMax value="0.500000,0.500000,30.000000"/>
+        <ScaleMin value="0.500000,0.500000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatformDot5xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.062500,0.062500,30.000000"/>
+        <ScaleMin value="0.062500,0.062500,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform1x1" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.125000,0.125000,30.000000"/>
+        <ScaleMin value="0.125000,0.125000,30.000000"/>
+    </CModel>
+    <CModel id="InvisibleWalkablePlatform1xDot5" parent="Doodad">
+        <Model value="Assets\Doodads\InvisibleWalkablePlatform\InvisibleWalkablePlatform.m3"/>
+        <ScaleMax value="0.125000,0.062500,30.000000"/>
+        <ScaleMin value="0.125000,0.062500,30.000000"/>
+    </CModel>
+    <CUnit default="1" id="2DUnitStandard">
+        <Name value="Unit/Name/2DUnitStandard"/>
+        <Description value="Button/Tooltip/2DUnitStandard"/>
+        <DeathTime value="2"/>
+        <DeathRevealRadius value="0"/>
+        <DeathRevealDuration value="0"/>
+        <ReviveType value="2DUnitStandard"/>
+        <FlagArray index="Uncommandable" value="1"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Uncursorable" value="1"/>
+        <FlagArray index="Hero" value="1"/>
+        <DefaultAcquireLevel value="None"/>
+        <Response value="Nothing"/>
+        <Attributes index="MapBoss" value="1"/>
+        <LifeStart value="10"/>
+        <LifeMax value="10"/>
+        <Speed value="160"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="1000"/>
+        <AbilArray Link="move"/>
+        <AbilArray Link="stop"/>
+        <Radius value="0.125"/>
+        <TacticalAI value="2DUnitStandard"/>
+        <LeaderAlias value="2DUnitStandard"/>
+        <HotkeyAlias value="2DUnitStandard"/>
+        <SelectAlias value="2DUnitStandard"/>
+        <SubgroupAlias value="2DUnitStandard"/>
+        <AIEvaluateAlias value="2DUnitStandard"/>
+        <ReviveInfoBase>
+            <Charge Link="2DUnitStandard/Revive"/>
+            <Cooldown Link="2DUnitStandard/Revive"/>
+        </ReviveInfoBase>
+    </CUnit>
+    <CUnit default="1" id="2DCollisionUnitStandard" parent="Shape">
+        <Name value="Unit/Name/2DCollisionUnitStandard"/>
+        <Description value="Button/Tooltip/2DCollisionUnitStandard"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Worker" value="1"/>
+        <BehaviorArray Link="DebugCollisonSearchArea1x1"/>
+    </CUnit>
+    <CUnit default="1" id="2DHitboxStandard" parent="Shape">
+        <Name value="Unit/Name/2DHitboxStandard"/>
+        <Description value="Button/Tooltip/2DHitboxStandard"/>
+        <FlagArray index="NoDraw" value="1"/>
+        <Attributes index="User1" value="1"/>
+        <Radius value="0.375"/>
+    </CUnit>
+    <CUpgrade id="DebugStaticCollisionAreaOn">
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1x1,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2x2,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4x4,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchAreaDot5xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2xDot5,DebugTrace" Value="1"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4xDot5,DebugTrace" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="DebugStaticCollisionAreaOff">
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1x1,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2x2,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4x4,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchAreaDot5xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea1xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea2xDot5,DebugTrace" Value="0"/>
+        <EffectArray Operation="Set" Reference="Effect,DebugCollisionSearchArea4xDot5,DebugTrace" Value="0"/>
+    </CUpgrade>
+    <CActorUnit default="1" id="2DUnitStandard" parent="GenericUnitMinimal">
+        <?token id="deathActor" value="Bogus"?>
+        <Macros value="DeadAnimationMacro"/>
+        <Macros value="Unit2DAnimationMacro"/>
+        <EditorCategories value=""/>
+        <On Terms="UnitDeathCustomize" Send="DeathCustomize RagdollBasic"/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOp2DFacing"/>
+        <DeathArray index="Normal" AnimProps="Death" ModelLink="##id##"/>
+        <DeathArray index="Eat" AnimProps="Death,Eat"/>
+        <DeathArray index="Eviscerate" AnimProps="Death,Eviscerate"/>
+        <DeathArray index="Fire" AnimProps="Death,Fire"/>
+        <DeathArray index="Silentkill" AnimProps="Death,Silentkill"/>
+        <DeathArray index="Squish" AnimProps="Death,Squish"/>
+        <DeathArray index="UnderConstruction" AnimProps="Death"/>
+        <DeathCustoms ActorModel="##deathActor##" ModelLink="##deathActor##" Name="RagdollBasic">
+            <BodySquibs Name="None"/>
+        </DeathCustoms>
+        <DeathCustomData Name="RagdollBasic"/>
+        <DeathActorModel value="UnitDeathModel2D"/>
+        <DeathActorModelLow value="UnitDeathModel2D"/>
+        <PhysicsMatchKeysOrdered value="Basic"/>
+        <VarianceWindowStandIntro value="0.330000"/>
+        <VarianceWindowStand value="1.000000"/>
+        <VarianceWindowWalkIntro value="0.330000"/>
+        <VarianceWindowWalk value="1.000000"/>
+        <VarianceWindowWalkOutro value="0.330000"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit default="1" id="2DCollisionUnitStandard" parent="GenericUnitMinimal">
+        <Macros value="DeadAnimationMacro"/>
+        <On index="0" Terms="UnitBirth.##unitName##" Send="Create"/>
+        <On index="1" Terms="UnitRevive.##unitName##" Send="Create"/>
+        <On index="2" Terms="UnitRevive.##unitName##" Send="RefSet ::HostTurretBody _Selectable"/>
+        <On index="3" Terms="UnitConstruction.##unitName##.Start" Send="Create"/>
+        <On index="4" Terms="UnitConstruction.##unitName##.Finish" Send="AnimPlay ConstructionDeath Stand,Birth,Death FullMatch"/>
+        <On index="5" Terms="AnimDone.*.Missing; AnimName ConstructionDeath" Send="Destroy"/>
+        <On index="6" removed="1"/>
+        <On index="7" removed="1"/>
+        <On index="8" removed="1"/>
+        <HostSiteOps Ops="SOp2DBaseDepth"/>
+        <Model value="InvisibleWalkablePlatform2x2"/>
+        <BuildModel value="InvisibleWalkablePlatform2x2"/>
+        <PlacementModel value="InvisibleWalkablePlatform2x2"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+    </CActorUnit>
+    <CActorUnit default="1" id="2DHitboxUnitStandard" parent="GenericUnitMinimal">
+        <On index="0" Terms="UnitBirth.##unitName##" Send="Create"/>
+        <On index="1" Terms="UnitRevive.##unitName##" Send="Create"/>
+        <On index="2" Terms="UnitRevive.##unitName##" Send="RefSet ::HostTurretBody _Selectable"/>
+        <On index="3" Terms="UnitConstruction.##unitName##.Start" Send="Create"/>
+        <On index="4" Terms="UnitConstruction.##unitName##.Finish" Send="AnimPlay ConstructionDeath Stand,Birth,Death FullMatch"/>
+        <On index="5" Terms="AnimDone.*.Missing; AnimName ConstructionDeath" Send="Destroy"/>
+        <On index="6" removed="1"/>
+        <On index="7" removed="1"/>
+        <On index="8" removed="1"/>
+        <HostSiteOps Ops="SOp2DBaseDepth"/>
+        <Model value="HitboxUnit"/>
+        <BuildModel value="HitboxUnit"/>
+        <PlacementModel value="HitboxUnit"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+    </CActorUnit>
+    <CActorModel default="1" id="2DUnitStandardDeathRagdoll">
+        <Aliases value="_Main"/>
+        <Aliases value="_Unit"/>
+        <Aliases value="_DeathModel"/>
+        <Macros value="DeadAnimationMacro"/>
+        <Macros value="DeadAnimationRemoveMacro"/>
+        <Macros value="UnitDeathRagdollTerminateExtrasMacro"/>
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="CastShadows" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <AcceptedHostedPropTransfers index="TimeScale" value="0"/>
+        <On Terms="ActorCreation" Send="RefClear ::Host"/>
+        <On Terms="ActorCreation" Target="ModelPretargetGround" Send="Destroy"/>
+        <On Terms="ActorCreation" Target="GroundPreSelection" Send="Destroy"/>
+        <On Terms="Signal.*.ClearDeathModel" Send="Destroy"/>
+        <On Terms="TimerExpired; TimerName TerminateExtras" Send="Signal TerminateExtras"/>
+        <On Terms="Signal.*.TerminateExtras" Send="PhysicsImpactsEnable"/>
+        <On Terms="Signal.*.TerminateExtras" Target="_BodySquib" Send="Signal Terminate"/>
+        <On Terms="ActorCreation" Target="::ScopeContents" Send="Signal DeathModelCreated"/>
+        <On Terms="TimerExpired; TimerName TerminateExtras" Send="Signal TerminateExtras"/>
+        <On Terms="Signal.*.TerminateExtras" Send="PhysicsImpactsEnable"/>
+        <On Terms="Signal.*.TerminateExtras" Target="_BodySquib" Send="Signal Terminate"/>
+        <On Terms="AnimDone; AnimName Death" Send="TimerSet 5.000000 Dissipate"/>
+        <On Terms="AnimDone; AnimName Death" Send="AnimPlay Dead Dead PlayForever"/>
+        <On Terms="AnimDone.*.Missing; AnimName Dead" Send="PhysicsTerminate"/>
+        <On Terms="AnimDone.*.Missing; AnimName Dead" Send="Destroy"/>
+        <On Terms="Signal.*.Dissipate" Send="AnimPlay Dissipate Dissipate"/>
+        <On Terms="TimerExpired; TimerName Dissipate" Send="AnimPlay Dissipate Dissipate"/>
+        <On Terms="AnimDone.*.Missing; AnimName Dissipate" Send="PhysicsTerminate"/>
+        <On Terms="AnimDone.*.Missing; AnimName Dissipate" Send="Destroy"/>
+        <On Terms="AnimDone; AnimName Dissipate" Send="PhysicsTerminate"/>
+        <On Terms="AnimDone; AnimName Dissipate" Send="Destroy"/>
+        <Host Subject="::Creator"/>
+        <ModelFlags index="UpdateVisibility" value="0"/>
+        <ModelFlags index="UseSyncSeed" value="1"/>
+        <PhysicsImpactDefault ActorModel="PhysicsImpactHarness" ActorSound="PhysicsImpactSound" OccuranceThrottlingDistance="0.500000,0.500000"/>
+    </CActorModel>
+    <CActorDoodad id="FakeStaticCollision4x4">
+        <EditorCategories value=""/>
+        <Model value="InvisibleWalkablePlatform4x4"/>
+    </CActorDoodad>
+    <CActorForceBox id="Game2DGravity">
+        <EditorCategories value=""/>
+        <Duration value="-1.000000"/>
+        <Magnitude value="9.800000"/>
+        <ForceFlags index="FallOff" value="0"/>
+        <ForceFlags index="Stacks" value="1"/>
+        <Height value="12.000000"/>
+        <Length value="12.000000"/>
+        <Width value="12.000000"/>
+        <Origin value="AtCenter"/>
+    </CActorForceBox>
+    <CActorUnit id="GameStaticCollisionDot5xDot5" parent="2DCollisionUnitStandard" unitName="GameStaticCollisionDot5xDot5">
+        <Model value="InvisibleWalkablePlatformDot5xDot52"/>
+        <BuildModel value="InvisibleWalkablePlatformDot5xDot52"/>
+        <PlacementModel value="InvisibleWalkablePlatformDot5xDot52"/>
+    </CActorUnit>
+    <CActorUnit id="GameStaticCollisionOneWay1" parent="2DCollisionUnitStandard" unitName="GameStaticCollisionOneWay1">
+        <On Terms="ActorCreation; IsInEditor" Target="" Send="SetScale 1.000000,0.900000,0.900000"/>
+        <On Terms="ActorCreation" Target="" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOpSubZ0Dot10"/>
+        <Model value="InvisibleWalkablePlatform1xDot5"/>
+        <BuildModel value="InvisibleWalkablePlatform1xDot5"/>
+        <PlacementModel value="InvisibleWalkablePlatform1xDot5"/>
+    </CActorUnit>
+    <CActorUnit id="GameStaticCollisionOneWay2" parent="2DCollisionUnitStandard" unitName="GameStaticCollisionOneWay2">
+        <On Terms="ActorCreation; IsInEditor" Target="" Send="SetScale 1.000000,0.900000,0.900000"/>
+        <On Terms="ActorCreation" Target="" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOpSubZ0Dot10"/>
+        <Model value="InvisibleWalkablePlatform2xDot5"/>
+        <BuildModel value="InvisibleWalkablePlatform2xDot5"/>
+        <PlacementModel value="InvisibleWalkablePlatform2xDot5"/>
+    </CActorUnit>
+    <CActorModel id="GameStaticCollisionOneWay1Topper" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="UnitBirth.GameStaticCollisionOneWay1" Send="Create"/>
+        <On Terms="ActorCreation; IsInEditor" Send="SetTintColor 128,128,128"/>
+        <HostSiteOps Ops="SOpAddY0Dot125"/>
+        <Model value="InvisibleWalkablePlatform1xDot5"/>
+        <Scale value="1.000000,0.500000,1.000000"/>
+    </CActorModel>
+    <CActorUnit id="GameStaticCollisionOneWay4" parent="2DCollisionUnitStandard" unitName="GameStaticCollisionOneWay4">
+        <On Terms="ActorCreation; IsInEditor" Target="" Send="SetScale 1.000000,0.900000,0.900000"/>
+        <On Terms="ActorCreation" Target="" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOpSubZ0Dot10"/>
+        <Model value="InvisibleWalkablePlatform4xDot5"/>
+        <BuildModel value="InvisibleWalkablePlatform4xDot5"/>
+        <PlacementModel value="InvisibleWalkablePlatform4xDot5"/>
+    </CActorUnit>
+    <CActorModel id="GameStaticCollisionOneWay2Topper" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="UnitBirth.GameStaticCollisionOneWay2" Send="Create"/>
+        <On Terms="ActorCreation; IsInEditor" Send="SetTintColor 128,128,128"/>
+        <HostSiteOps Ops="SOpAddY0Dot125"/>
+        <Model value="InvisibleWalkablePlatform2xDot5"/>
+        <Scale value="1.000000,0.500000,1.000000"/>
+    </CActorModel>
+    <CActorModel id="GameStaticCollisionOneWay4Topper" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="UnitBirth.GameStaticCollisionOneWay4" Send="Create"/>
+        <On Terms="ActorCreation; IsInEditor" Send="SetTintColor 128,128,128"/>
+        <HostSiteOps Ops="SOpAddY0Dot125"/>
+        <Model value="InvisibleWalkablePlatform4xDot5"/>
+        <Scale value="1.000000,0.500000,1.000000"/>
+    </CActorModel>
+    <CActorSiteOpLocalOffset id="SOpAddX0Dot75">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.750000,0.000000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpAddZ0Dot75">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,0.750000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpRotationExplicit id="SOpQuestionBlockRotate5">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,-1.000000,0.000000"/>
+        <Up value="1.000000,0.000000,-0.090000"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpLocalOffset id="SOpSubX0Dot75">
+        <EditorCategories value=""/>
+        <LocalOffset value="-0.750000,0.000000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubY0Dot45">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.450000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubY0Dot60">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.600000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubY0Dot70">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.700000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubY1Dot25">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-1.250000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorModel id="UnitDeathModel2D">
+        <Aliases value="_DeathModel"/>
+        <Macros value="DeadAnimationMacro"/>
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="CastShadows" value="1"/>
+        <Inherits index="CreepEngulfment" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <On Terms="ActorCreation" Send="RefClear ::Host"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,255,255 0.600000"/>
+        <On Terms="ActorCreation" Target="ModelPretargetGround" Send="Destroy"/>
+        <On Terms="ActorCreation" Target="GroundPreSelection" Send="Destroy"/>
+        <On Terms="Signal.*.ClearDeathModel" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTeamColor 255,255,255 255,255,255"/>
+        <Host Subject="::Creator"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="IgnoreWalkables" value="1"/>
+        <ModelFlags index="SuppressMissingAttachErrors" value="1"/>
+        <ModelFlags index="UpdateVisibility" value="0"/>
+        <ModelFlags index="UseSyncSeed" value="1"/>
+    </CActorModel>
+    <CActorUnit id="GameStaticCollision2x2" parent="2DCollisionUnitStandard" unitName="GameStaticCollision2x2"/>
+    <CActorUnit id="GameStaticCollisionOneWayDot5" parent="2DCollisionUnitStandard" unitName="GameStaticCollisionOneWayDot5">
+        <On Terms="ActorCreation; IsInEditor" Target="" Send="SetScale 1.000000,0.900000,0.900000"/>
+        <On Terms="ActorCreation" Target="" Send="SetOpacity 0.500000"/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOpSubZ0Dot10"/>
+        <Model value="InvisibleWalkablePlatformDot5xDot5"/>
+        <BuildModel value="InvisibleWalkablePlatformDot5xDot5"/>
+        <PlacementModel value="InvisibleWalkablePlatformDot5xDot5"/>
+    </CActorUnit>
+    <CActorModel id="GameStaticCollisionOneWayDot5Topper" parent="ModelAddition">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <EditorCategories value=""/>
+        <On Terms="UnitBirth.GameStaticCollisionOneWayDot5" Send="Create"/>
+        <On Terms="ActorCreation; IsInEditor" Send="SetTintColor 128,128,128"/>
+        <HostSiteOps Ops="SOpAddY0Dot125"/>
+        <Model value="InvisibleWalkablePlatformDot5xDot5"/>
+        <Scale value="1.000000,0.500000,1.000000"/>
+    </CActorModel>
+    <CActorUnit id="GameStaticCollision1x1" parent="2DCollisionUnitStandard" unitName="GameStaticCollision1x1">
+        <Model value="InvisibleWalkablePlatform1x1"/>
+        <BuildModel value="InvisibleWalkablePlatform1x1"/>
+        <PlacementModel value="InvisibleWalkablePlatform1x1"/>
+    </CActorUnit>
+    <CActorSiteOpLocalOffset id="SOpSubZ0Dot50">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,-0.500000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorEventMacroRunnable id="TurnRightStartRunnable">
+        <EditorCategories value=""/>
+        <Do Terms="IsStatus TurningRight 0" Send="HostSiteOpsSet ::Host SOp2DReverseFacing"/>
+        <Do Terms="IsStatus TurningRight 0" Send="HostSiteOpsAdd ::Host SOpTurnFaceRight Head"/>
+        <Do Terms="IsStatus TurningRight 0" Send="TimerSet 0.250000 TurnRight"/>
+        <Do Terms="IsStatus TurningRight 0" Send="StatusSet TurningRight 1"/>
+        <Do Send="StatusSet TurningLeft 0"/>
+    </CActorEventMacroRunnable>
+    <CActorSiteOpRotator id="SOpTurnFaceLeft">
+        <LocalAxis value="0.000000,1.000000,0.000000"/>
+        <Rate value="720.000000"/>
+    </CActorSiteOpRotator>
+    <CActorSiteOpRotationExplicit id="SOpPointLeft">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,1.000000,0.000000"/>
+        <Up value="-1.000000,0.000000,0.000000"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpPointRight">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,1.000000,0.000000"/>
+        <Up value="1.000000,0.000000,0.000000"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpPointTopLeft">
+        <EditorCategories value=""/>
+        <Forward value="1.000000,1.000000,0.000000"/>
+        <Up value="1.000000,0.000000,0.000000"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotator id="SOpTurnFaceRight">
+        <LocalAxis value="0.000000,1.000000,0.000000"/>
+        <Rate value="720.000000"/>
+    </CActorSiteOpRotator>
+    <CActorSiteOpRotationExplicit id="SOpPointTop">
+        <EditorCategories value=""/>
+        <Forward value="0.000000,0.000000,1.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOpOnSide">
+        <EditorCategories value=""/>
+        <Forward value="1.000000,0.000000,0.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpShadow id="SOp2DBaseDepth">
+        <EditorCategories value=""/>
+        <ShadowFlags index="NoLowerThanBaseHeight" value="1"/>
+    </CActorSiteOpShadow>
+    <CActorUnit id="GameStaticCollision4x4" parent="2DCollisionUnitStandard" unitName="GameStaticCollision4x4">
+        <Model value="InvisibleWalkablePlatform4x4"/>
+        <BuildModel value="InvisibleWalkablePlatform4x4"/>
+        <PlacementModel value="InvisibleWalkablePlatform4x4"/>
+    </CActorUnit>
+    <CActorEventMacro id="Unit2DAnimationMacro">
+        <EditorCategories value=""/>
+        <On Terms="StatusOn.*.Jumping" Send="AnimBracketStart Fall Spell,D,Start Spell,D Spell,D,End"/>
+        <On Terms="StatusOn.*.InAir; IsStatus Walking 1" Send="AnimClear Walk"/>
+        <On Terms="StatusOff.*.InAir; IsStatus Walking 1" Send="AnimPlay Walk Walk PlayForever"/>
+        <On Terms="StatusOn.*.Walking; !HasStatus InAir" Send="AnimPlay Walk Walk PlayForever"/>
+        <On Terms="StatusOff.*.Walking; !HasStatus InAir" Send="AnimClear Walk"/>
+        <On Terms="Behavior.UnitStateJumpingAnimation.On" Send="StatusSet Jumping 1"/>
+        <On Terms="Behavior.UnitStateJumpingAnimation.Off" Send="StatusSet Jumping 0"/>
+        <On Terms="Behavior.UnitStateWalkingAnimation.On" Send="StatusSet Walking 1"/>
+        <On Terms="Behavior.UnitStateWalkingAnimation.Off" Send="StatusSet Walking 0"/>
+        <On Terms="StatusOn.*.Jumping" Send="StatusIncrement InAir"/>
+        <On Terms="StatusOff.*.Jumping" Send="StatusDecrement InAir"/>
+        <On Terms="StatusOn.*.InAir; IsStatus Jumping 0" Send="TimerSet 0.187500 FallDelay"/>
+        <On Terms="StatusOff.*.InAir" Send="AnimBracketStop Fall 0 0.180000 AsDuration"/>
+        <On Terms="Behavior.UnitStateFallingAnimation.On" Send="StatusIncrement InAir"/>
+        <On Terms="Behavior.UnitStateFallingAnimation.Off" Send="StatusDecrement InAir"/>
+        <On Terms="TimerExpired; IsStatus Jumping 0; HasStatus InAir; TimerName FallDelay" Send="AnimBracketStart Fall {} Spell,D Spell,D,End OpeningPlayForever,Instant"/>
+        <On Terms="TimerExpired; TimerName TurnRight; HasStatus TurningRight" Send="EventMacroRun TurnRightStopRunnable"/>
+        <On Terms="TimerExpired; TimerName TurnLeft; HasStatus TurningLeft" Send="EventMacroRun TurnLeftStopRunnable"/>
+        <On Terms="Behavior.UnitStateDying.On" Send="StatusSet Dying 1"/>
+    </CActorEventMacro>
+    <CActorSiteOpRotationExplicit id="SOp2DFacing">
+        <EditorCategories value=""/>
+        <Forward value="1.000000,0.000000,0.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpRotationExplicit id="SOp2DReverseFacing">
+        <EditorCategories value=""/>
+        <Forward value="-1.000000,0.000000,0.000000"/>
+        <Up value="0.000000,1.000000,0.000000"/>
+        <IsLocal value="1"/>
+    </CActorSiteOpRotationExplicit>
+    <CActorSiteOpLocalOffset id="SOpAddY0Dot125">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.125000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorEventMacroRunnable id="TurnRightStopRunnable">
+        <EditorCategories value=""/>
+        <Do Terms="IsStatus TurningRight 1" Send="HostSiteOpsRemove ::Host SOpTurnFaceRight Head Immediate"/>
+        <Do Terms="IsStatus TurningRight 1" Send="HostSiteOpsSet ::Host SOp2DFacing"/>
+        <Do Terms="IsStatus TurningRight 1" Send="StatusSet TurningRight 0"/>
+    </CActorEventMacroRunnable>
+    <CActorEventMacroRunnable id="TurnLeftStopRunnable">
+        <EditorCategories value=""/>
+        <Do Terms="IsStatus TurningLeft 1" Send="HostSiteOpsRemove ::Host SOpTurnFaceLeft Head Immediate"/>
+        <Do Terms="IsStatus TurningLeft 1" Send="HostSiteOpsSet ::Host SOp2DReverseFacing"/>
+        <Do Terms="IsStatus TurningLeft 1" Send="StatusSet TurningLeft 0"/>
+    </CActorEventMacroRunnable>
+    <CActorSiteOpLocalOffset id="SOpSubY0Dot30">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.300000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubY0Dot125">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,-0.125000,0.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorSiteOpLocalOffset id="SOpSubZ0Dot10">
+        <EditorCategories value=""/>
+        <LocalOffset value="0.000000,0.000000,-0.100000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorEventMacroRunnable id="TurnLeftStartRunnable">
+        <EditorCategories value=""/>
+        <Do Terms="IsStatus TurningLeft 0" Send="HostSiteOpsSet ::Host SOp2DFacing"/>
+        <Do Terms="IsStatus TurningLeft 0" Send="HostSiteOpsAdd ::Host SOpTurnFaceLeft Head"/>
+        <Do Terms="IsStatus TurningLeft 0" Send="TimerSet 0.250000 TurnLeft"/>
+        <Do Terms="IsStatus TurningLeft 0" Send="StatusSet TurningLeft 1"/>
+        <Do Send="StatusSet TurningRight 0"/>
+    </CActorEventMacroRunnable>
+    <CActorForceSphere id="UnitDeathForce2D">
+        <EditorCategories value=""/>
+        <HostSiteOps Ops="SOp2DBaseDepth SOpSubZ0Dot50"/>
+        <Field value="Directional"/>
+        <Duration value="0.500000"/>
+        <Magnitude value="15.000000"/>
+        <ForceFlags index="FallOff" value="0"/>
+        <Radius value="2.500000"/>
+        <Receiver Subject="::Creator"/>
+    </CActorForceSphere>
+    <CUser id="StaticCollisionUnitData">
+        <Fields Id="Unit" Type="Unit" EditorColumn="1"/>
+        <Fields Id="Width" Type="Fixed" EditorColumn="2"/>
+        <Fields Id="Height" Type="Fixed" EditorColumn="3"/>
+        <Fields Id="One Way State" Type="Int" EditorColumn="4"/>
+        <Instances Id="[Default]">
+            <Fixed Fixed="1">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Height"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollision1x1">
+            <Fixed Fixed="1">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="1">
+                <Field Id="Width"/>
+            </Fixed>
+        </Instances>
+        <Instances Id="GameStaticCollision2x2">
+            <Fixed Fixed="2">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="2">
+                <Field Id="Width"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision2x2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollision4x4">
+            <Fixed Fixed="4">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="Height"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollision4x4">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWayDot5">
+            <Fixed Fixed="0.5">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWayDot5">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticColllsionOneWay1">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWay2">
+            <Fixed Fixed="2">
+                <Field Id="Width"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay2">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionOneWay4">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="4">
+                <Field Id="Width"/>
+            </Fixed>
+            <Int Int="1">
+                <Field Id="One Way State"/>
+            </Int>
+            <Unit Unit="GameStaticCollisionOneWay4">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameBreakableBlock1x1">
+            <Unit Unit="GameBreakableBlock1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameQuestionBlock1x1">
+            <Unit Unit="GameQuestionBlock1x1">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="GameStaticCollisionDot5xDot5">
+            <Fixed Fixed="0.5">
+                <Field Id="Height"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="Width"/>
+            </Fixed>
+            <Unit Unit="GameStaticCollisionDot5xDot5">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+    </CUser>
+    <CValidatorUnitCompareBehaviorCount id="DoesNotHaveWalkAnimationBehavior">
+        <Behavior value="UnitStateWalkingAnimation"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorCombine id="HasNegativeKineticYVelocity2">
+        <CombineArray value="HasDownDot01"/>
+        <CombineArray value="HasDownDot02"/>
+        <CombineArray value="HasDownDot03"/>
+        <CombineArray value="HasDownDot04"/>
+        <CombineArray value="HasDownDot05"/>
+        <CombineArray value="HasDownDot06"/>
+        <CombineArray value="HasDownDot07"/>
+        <CombineArray value="HasDownDot08"/>
+        <CombineArray value="HasDownDot09"/>
+        <CombineArray value="HasDownDot10"/>
+        <CombineArray value="HasDownDot20"/>
+        <CombineArray value="HasDownDot30"/>
+        <CombineArray value="HasDownDot40"/>
+        <CombineArray value="HasDownDot50"/>
+        <CombineArray value="HasDownDot60"/>
+        <CombineArray value="HasDownDot70"/>
+        <CombineArray value="HasDownDot80"/>
+        <CombineArray value="HasDownDot90"/>
+        <CombineArray value="HasDown01"/>
+        <CombineArray value="HasDown02"/>
+        <CombineArray value="HasDown03"/>
+        <CombineArray value="HasDown04"/>
+        <CombineArray value="HasDown05"/>
+        <CombineArray value="HasDown06"/>
+        <CombineArray value="HasDown07"/>
+        <CombineArray value="HasDown08"/>
+        <CombineArray value="HasDown09"/>
+    </CValidatorCombine>
+    <CValidatorUnitKinetic id="HasUpDot01">
+        <Value value="VelocityUpDot01"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot02">
+        <Value value="VelocityUpDot02"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot03">
+        <Value value="VelocityUpDot03"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot04">
+        <Value value="VelocityUpDot04"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot05">
+        <Value value="VelocityUpDot05"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot06">
+        <Value value="VelocityUpDot06"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot07">
+        <Value value="VelocityUpDot07"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot08">
+        <Value value="VelocityUpDot08"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot09">
+        <Value value="VelocityUpDot09"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot10">
+        <Value value="VelocityUpDot10"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot20">
+        <Value value="VelocityUpDot20"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot30">
+        <Value value="VelocityUpDot30"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot40">
+        <Value value="VelocityUpDot40"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot50">
+        <Value value="VelocityUpDot50"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot60">
+        <Value value="VelocityUpDot60"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot70">
+        <Value value="VelocityUpDot70"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot80">
+        <Value value="VelocityUpDot80"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUpDot90">
+        <Value value="VelocityUpDot90"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp01">
+        <Value value="VelocityUp01"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp02">
+        <Value value="VelocityUp02"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp03">
+        <Value value="VelocityUp03"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp04">
+        <Value value="VelocityUp04"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp05">
+        <Value value="VelocityUp05"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp06">
+        <Value value="VelocityUp06"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp07">
+        <Value value="VelocityUp07"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp08">
+        <Value value="VelocityUp08"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasUp09">
+        <Value value="VelocityUp09"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot01">
+        <Value value="VelocityDownDot01"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot02">
+        <Value value="VelocityDownDot02"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot03">
+        <Value value="VelocityDownDot03"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot04">
+        <Value value="VelocityDownDot04"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot05">
+        <Value value="VelocityDownDot05"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot06">
+        <Value value="VelocityDownDot06"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot07">
+        <Value value="VelocityDownDot07"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot08">
+        <Value value="VelocityDownDot08"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot09">
+        <Value value="VelocityDownDot09"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot10">
+        <Value value="VelocityDownDot10"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot20">
+        <Value value="VelocityDownDot20"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot30">
+        <Value value="VelocityDownDot30"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot40">
+        <Value value="VelocityDownDot40"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot50">
+        <Value value="VelocityDownDot50"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot60">
+        <Value value="VelocityDownDot60"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot70">
+        <Value value="VelocityDownDot70"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot80">
+        <Value value="VelocityDownDot80"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDownDot90">
+        <Value value="VelocityDownDot90"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown01">
+        <Value value="VelocityDown01"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown02">
+        <Value value="VelocityDown02"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown03">
+        <Value value="VelocityDown03"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown04">
+        <Value value="VelocityDown04"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown05">
+        <Value value="VelocityDown05"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown06">
+        <Value value="VelocityDown06"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown07">
+        <Value value="VelocityDown07"/>
+    </CValidatorUnitKinetic>
+    <CValidatorUnitKinetic id="HasDown08">
+        <Value value="VelocityDown08"/>
+    </CValidatorUnitKinetic>
+    <CValidatorCombine id="KineticYIsNegative">
+        <CombineArray value="HasDownDot01"/>
+        <CombineArray value="HasDownDot02"/>
+        <CombineArray value="HasDownDot03"/>
+        <CombineArray value="HasDownDot04"/>
+        <CombineArray value="HasDownDot05"/>
+        <CombineArray value="HasDownDot06"/>
+        <CombineArray value="HasDownDot07"/>
+        <CombineArray value="HasDownDot08"/>
+        <CombineArray value="HasDownDot09"/>
+        <CombineArray value="HasDownDot10"/>
+        <CombineArray value="HasDownDot20"/>
+        <CombineArray value="HasDownDot30"/>
+        <CombineArray value="HasDownDot40"/>
+        <CombineArray value="HasDownDot50"/>
+        <CombineArray value="HasDownDot60"/>
+        <CombineArray value="HasDownDot70"/>
+        <CombineArray value="HasDownDot80"/>
+        <CombineArray value="HasDownDot90"/>
+        <CombineArray value="HasDown01"/>
+        <CombineArray value="HasDown02"/>
+        <CombineArray value="HasDown03"/>
+        <CombineArray value="HasDown04"/>
+        <CombineArray value="HasDown05"/>
+        <CombineArray value="HasDown06"/>
+        <CombineArray value="HasDown07"/>
+        <CombineArray value="HasDown08"/>
+        <CombineArray value="HasDown09"/>
+    </CValidatorCombine>
+    <CValidatorUnitKinetic id="HasDown09">
+        <Value value="VelocityDown09"/>
+    </CValidatorUnitKinetic>
+    <CValidatorCombine id="KineticYIsNegativeorZero">
+        <Type value="And"/>
+        <CombineArray value="HasUpDot01"/>
+        <CombineArray value="HasUpDot02"/>
+        <CombineArray value="HasUpDot03"/>
+        <CombineArray value="HasUpDot04"/>
+        <CombineArray value="HasUpDot05"/>
+        <CombineArray value="HasUpDot06"/>
+        <CombineArray value="HasUpDot07"/>
+        <CombineArray value="HasUpDot08"/>
+        <CombineArray value="HasUpDot09"/>
+        <CombineArray value="HasUpDot10"/>
+        <CombineArray value="HasUpDot20"/>
+        <CombineArray value="HasUpDot30"/>
+        <CombineArray value="HasUpDot40"/>
+        <CombineArray value="HasUpDot50"/>
+        <CombineArray value="HasUpDot60"/>
+        <CombineArray value="HasUpDot70"/>
+        <CombineArray value="HasUpDot80"/>
+        <CombineArray value="HasUpDot90"/>
+        <CombineArray value="HasUp01"/>
+        <CombineArray value="HasUp02"/>
+        <CombineArray value="HasUp03"/>
+        <CombineArray value="HasUp04"/>
+        <CombineArray value="HasUp05"/>
+        <CombineArray value="HasUp06"/>
+        <CombineArray value="HasUp07"/>
+        <CombineArray value="HasUp08"/>
+        <CombineArray value="HasUp09"/>
+        <Negate value="1"/>
+    </CValidatorCombine>
+    <CTerrain id="Default2DGameTerrain">
+        <EditorCategories value="Climate:Urban"/>
+        <Lighting value="Default2DGameLighting"/>
+        <LoadingScreen value="Assets\Textures\UI_HotS_Loading_PlanetViewKorhal.dds"/>
+        <Ambience value="Ambience_Korhal"/>
+        <ReverbAmbient value="BetaVerb"/>
+        <BlendTextures value="KorhalCityEx2_1"/>
+        <BlendTextures value="KorhalCityEx2_2"/>
+        <BlendTextures value="KorhalCityEx2_3"/>
+        <BlendTextures value="KorhalCityEx2_4"/>
+        <BlendTextures value="KorhalCityEx2_5"/>
+        <BlendTextures value="KorhalCityEx2_6"/>
+        <BlendTextures value="KorhalCityEx2_7"/>
+        <BlendTextures value="KorhalCityEx2_8"/>
+        <HardTiles value="KorhalTile"/>
+        <CliffSets value="KorhalCityEx2"/>
+        <FixedSkyboxModel value="KorhalCitySkybox"/>
+        <FogEnabled value="1"/>
+        <FogColor value="255,119,215,247"/>
+        <FogDensity value="0.020000"/>
+        <FogFalloff value="0.200000"/>
+        <Gravity value="0.000000"/>
+        <WindAngleHorizontal value="0.000000"/>
+        <WindSpeed value="0.000000"/>
+        <WindTurbulencePower value="0.000000"/>
+        <WindTurbulenceSpeed value="0.000000"/>
+    </CTerrain>
+    <CKineticTranslate id="VelocityDown01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDown09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeft09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRight09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityDownDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="-0.9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityLeftDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="-0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUp09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="9"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot02">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.02"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot03">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.03"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot04">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.04"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot05">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.05"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot06">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.06"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot07">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.07"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot08">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.08"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot09">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.09"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityRightDot10">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <XOffset value="0.1"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot01">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.01"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot20">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.2"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot30">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.3"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot40">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.4"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot50">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.5"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot60">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.6"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot70">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.7"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot80">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.8"/>
+    </CKineticTranslate>
+    <CKineticTranslate id="VelocityUpDot90">
+        <Cycles value="1"/>
+        <Duration value="0.0625"/>
+        <YOffset value="0.9"/>
+    </CKineticTranslate>
+    <CLight id="Default2DGameLighting" parent="default">
+        <ToDInfoArray index="0">
+            <Id value="KorhalCityEx2"/>
+            <AmbientColor value="0.274510,0.313726,0.313726"/>
+            <Colorize value="1"/>
+            <UseSeparateDetailSSAO value="0"/>
+            <Param index="HDRExposure" value="1.450000"/>
+            <Param index="HDRWhitePoint" value="1.850000"/>
+            <Param index="HDRSpecMultiplier" value="0.200000"/>
+            <Param index="TerrainSpecularExp" value="11.210000"/>
+            <Param index="TerrainHDRSpecular" value="3.750000"/>
+            <Param index="CreepSpecularExp" value="30.000000"/>
+            <Param index="CreepHDRSpecMultiplier" value="3.000000"/>
+            <Param index="ColorizationBrightness" value="1.090000"/>
+            <Param index="ColorizationContrast" value="1.160000"/>
+            <Param index="ColorizationHue" value="-0.366000"/>
+            <Param index="ColorizationSaturation" value="0.172000"/>
+            <Param index="ColorizationLightness" value="0.300000"/>
+            <Param index="ColorizationBlend" value="0.250000"/>
+            <Param index="AOOcclusionRadius" value="0.600000"/>
+            <Param index="AONoOcclusion" value="0.600000"/>
+            <Param index="AOFullOcclusion" value="0.050000"/>
+            <Param index="AOOcclusionPower" value="2.000000"/>
+            <Param index="AODetailOcclusionRadius" value="0.020000"/>
+            <Param index="AODetailNoOcclusion" value="0.030000"/>
+            <Param index="AODetailOcclusionPower" value="16.000000"/>
+            <DirectionalLight index="Key">
+                <Color value="0.768628,0.694118,0.584314"/>
+                <ColorMultiplier value="1.100000"/>
+                <SpecColorMultiplier value="1.150000"/>
+                <Direction value="-0.011033,0.033109,-0.999391"/>
+            </DirectionalLight>
+            <DirectionalLight index="Fill" Color="0.239216,0.462745,0.647059" ColorMultiplier="1.500000" Direction="-0.463854,-0.769851,0.438371"/>
+            <DirectionalLight index="Back" Color="0.082353,0.121569,0.200000" ColorMultiplier="1.400000" Direction="-0.668793,-0.021251,0.743145"/>
+        </ToDInfoArray>
+        <EditorCategories value="LightGroup:Tilesets"/>
+    </CLight>
+    <CEffectEnumArea id="DebugCollisionSearchAreaDot5xDot52">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="0.5" RectangleHeight="0.5"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea2xDot5">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="2" RectangleHeight="0.5"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea4xDot5">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="4" RectangleHeight="0.5"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea2x2">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="2" RectangleHeight="2"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchAreaDot5xDot5">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="0.5" RectangleHeight="0.5"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea1x1">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="1" RectangleHeight="1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea1xDot5">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="1" RectangleHeight="0.5"/>
+    </CEffectEnumArea>
+    <CEffectApplyKinetic id="VelocityApplyDown01">
+        <Kinetic value="VelocityDown01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown02">
+        <Kinetic value="VelocityDown02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown03">
+        <Kinetic value="VelocityDown03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown04">
+        <Kinetic value="VelocityDown04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown05">
+        <Kinetic value="VelocityDown05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown06">
+        <Kinetic value="VelocityDown06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown07">
+        <Kinetic value="VelocityDown07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown08">
+        <Kinetic value="VelocityDown08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDown09">
+        <Kinetic value="VelocityDown09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot02">
+        <Kinetic value="VelocityDownDot02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot03">
+        <Kinetic value="VelocityDownDot03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot04">
+        <Kinetic value="VelocityDownDot04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft01">
+        <Kinetic value="VelocityLeft01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot05">
+        <Kinetic value="VelocityDownDot05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot06">
+        <Kinetic value="VelocityDownDot06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft02">
+        <Kinetic value="VelocityLeft02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft03">
+        <Kinetic value="VelocityLeft03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft04">
+        <Kinetic value="VelocityLeft04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft05">
+        <Kinetic value="VelocityLeft05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft06">
+        <Kinetic value="VelocityLeft06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft07">
+        <Kinetic value="VelocityLeft07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft08">
+        <Kinetic value="VelocityLeft08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeft09">
+        <Kinetic value="VelocityLeft09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot02">
+        <Kinetic value="VelocityLeftDot02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot03">
+        <Kinetic value="VelocityLeftDot03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot04">
+        <Kinetic value="VelocityLeftDot04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot05">
+        <Kinetic value="VelocityLeftDot05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot06">
+        <Kinetic value="VelocityLeftDot06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot07">
+        <Kinetic value="VelocityLeftDot07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot08">
+        <Kinetic value="VelocityLeftDot08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot09">
+        <Kinetic value="VelocityLeftDot09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot20">
+        <Kinetic value="VelocityLeftDot20"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot30">
+        <Kinetic value="VelocityLeftDot30"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot40">
+        <Kinetic value="VelocityLeftDot40"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot50">
+        <Kinetic value="VelocityLeftDot50"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot60">
+        <Kinetic value="VelocityLeftDot60"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot70">
+        <Kinetic value="VelocityLeftDot70"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot80">
+        <Kinetic value="VelocityLeftDot80"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot90">
+        <Kinetic value="VelocityLeftDot90"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight01">
+        <Kinetic value="VelocityRight01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot07">
+        <Kinetic value="VelocityDownDot07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot08">
+        <Kinetic value="VelocityDownDot08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight02">
+        <Kinetic value="VelocityRight02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight03">
+        <Kinetic value="VelocityRight03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight04">
+        <Kinetic value="VelocityRight04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight05">
+        <Kinetic value="VelocityRight05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight06">
+        <Kinetic value="VelocityRight06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight07">
+        <Kinetic value="VelocityRight07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight08">
+        <Kinetic value="VelocityRight08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRight09">
+        <Kinetic value="VelocityRight09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot02">
+        <Kinetic value="VelocityRightDot02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot03">
+        <Kinetic value="VelocityRightDot03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot04">
+        <Kinetic value="VelocityRightDot04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot05">
+        <Kinetic value="VelocityRightDot05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot06">
+        <Kinetic value="VelocityRightDot06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot07">
+        <Kinetic value="VelocityRightDot07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot08">
+        <Kinetic value="VelocityRightDot08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot09">
+        <Kinetic value="VelocityRightDot09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot20">
+        <Kinetic value="VelocityRightDot20"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot30">
+        <Kinetic value="VelocityRightDot30"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot40">
+        <Kinetic value="VelocityRightDot40"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot50">
+        <Kinetic value="VelocityRightDot50"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot60">
+        <Kinetic value="VelocityRightDot60"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot70">
+        <Kinetic value="VelocityRightDot70"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot80">
+        <Kinetic value="VelocityRightDot80"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot90">
+        <Kinetic value="VelocityRightDot90"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp01">
+        <Kinetic value="VelocityUp01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot09">
+        <Kinetic value="VelocityDownDot09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot10">
+        <Kinetic value="VelocityDownDot10"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp02">
+        <Kinetic value="VelocityUp02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp03">
+        <Kinetic value="VelocityUp03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp04">
+        <Kinetic value="VelocityUp04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp05">
+        <Kinetic value="VelocityUp05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp06">
+        <Kinetic value="VelocityUp06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp07">
+        <Kinetic value="VelocityUp07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp08">
+        <Kinetic value="VelocityUp08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUp09">
+        <Kinetic value="VelocityUp09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot02">
+        <Kinetic value="VelocityUpDot02"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot03">
+        <Kinetic value="VelocityUpDot03"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot04">
+        <Kinetic value="VelocityUpDot04"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot05">
+        <Kinetic value="VelocityUpDot05"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot06">
+        <Kinetic value="VelocityUpDot06"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot07">
+        <Kinetic value="VelocityUpDot07"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot08">
+        <Kinetic value="VelocityUpDot08"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot09">
+        <Kinetic value="VelocityUpDot09"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot20">
+        <Kinetic value="VelocityUpDot20"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot30">
+        <Kinetic value="VelocityUpDot30"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot40">
+        <Kinetic value="VelocityUpDot40"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot50">
+        <Kinetic value="VelocityUpDot50"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot60">
+        <Kinetic value="VelocityUpDot60"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot70">
+        <Kinetic value="VelocityUpDot70"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot80">
+        <Kinetic value="VelocityUpDot80"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot90">
+        <Kinetic value="VelocityUpDot90"/>
+    </CEffectApplyKinetic>
+    <CEffectEnumArea id="DebugPointCircle">
+        <EditorCategories value=""/>
+        <DebugTrace value="1"/>
+        <AreaArray Radius="0.1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugCollisionSearchArea4x4">
+        <EditorCategories value=""/>
+        <AreaArray RectangleWidth="4" RectangleHeight="4"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugPointRectangle">
+        <EditorCategories value=""/>
+        <DebugTrace value="1"/>
+        <AreaArray RectangleWidth="0.1" RectangleHeight="0.1"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="DebugPoint">
+        <EditorCategories value=""/>
+        <DebugTrace value="1"/>
+        <AreaArray Radius="0.1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="VelocityRemoveAllHorizontal">
+        <EditorCategories value=""/>
+        <EffectArray value="VelocityRemoveAllLeft"/>
+        <EffectArray value="VelocityRemoveAllRight"/>
+    </CEffectSet>
+    <CEffectSet id="VelocityRemoveAllVertical">
+        <EditorCategories value=""/>
+        <EffectArray value="VelocityRemoveAllDown"/>
+        <EffectArray value="VelocityRemoveAllUp"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="VelocityRemoveAllLeft">
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="27"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot01"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot02"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot03"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot04"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot05"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot06"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot07"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot08"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot09"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot10"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot20"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot30"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot40"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot50"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot60"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot70"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot80"/>
+        <PeriodicEffectArray value="VelocityRemoveLeftDot90"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft01"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft02"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft03"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft04"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft05"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft06"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft07"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft08"/>
+        <PeriodicEffectArray value="VelocityRemoveLeft09"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="VelocityRemoveAllRight">
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="27"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot01"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot02"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot03"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot04"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot05"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot06"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot07"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot08"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot09"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot10"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot20"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot30"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot40"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot50"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot60"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot70"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot80"/>
+        <PeriodicEffectArray value="VelocityRemoveRightDot90"/>
+        <PeriodicEffectArray value="VelocityRemoveRight01"/>
+        <PeriodicEffectArray value="VelocityRemoveRight02"/>
+        <PeriodicEffectArray value="VelocityRemoveRight03"/>
+        <PeriodicEffectArray value="VelocityRemoveRight04"/>
+        <PeriodicEffectArray value="VelocityRemoveRight05"/>
+        <PeriodicEffectArray value="VelocityRemoveRight06"/>
+        <PeriodicEffectArray value="VelocityRemoveRight07"/>
+        <PeriodicEffectArray value="VelocityRemoveRight08"/>
+        <PeriodicEffectArray value="VelocityRemoveRight09"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="VelocityRemoveAllUp">
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="27"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot01"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot02"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot03"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot04"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot05"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot06"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot07"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot08"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot09"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot10"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot20"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot30"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot40"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot50"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot60"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot70"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot80"/>
+        <PeriodicEffectArray value="VelocityRemoveUpDot90"/>
+        <PeriodicEffectArray value="VelocityRemoveUp01"/>
+        <PeriodicEffectArray value="VelocityRemoveUp02"/>
+        <PeriodicEffectArray value="VelocityRemoveUp03"/>
+        <PeriodicEffectArray value="VelocityRemoveUp04"/>
+        <PeriodicEffectArray value="VelocityRemoveUp05"/>
+        <PeriodicEffectArray value="VelocityRemoveUp06"/>
+        <PeriodicEffectArray value="VelocityRemoveUp07"/>
+        <PeriodicEffectArray value="VelocityRemoveUp08"/>
+        <PeriodicEffectArray value="VelocityRemoveUp09"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="VelocityRemoveAllDown">
+        <WhichLocation Value="TargetUnit"/>
+        <PeriodCount value="27"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot01"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot02"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot03"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot04"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot05"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot06"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot07"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot08"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot09"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot10"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot20"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot30"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot40"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot50"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot60"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot70"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot80"/>
+        <PeriodicEffectArray value="VelocityRemoveDownDot90"/>
+        <PeriodicEffectArray value="VelocityRemoveDown01"/>
+        <PeriodicEffectArray value="VelocityRemoveDown02"/>
+        <PeriodicEffectArray value="VelocityRemoveDown03"/>
+        <PeriodicEffectArray value="VelocityRemoveDown04"/>
+        <PeriodicEffectArray value="VelocityRemoveDown05"/>
+        <PeriodicEffectArray value="VelocityRemoveDown06"/>
+        <PeriodicEffectArray value="VelocityRemoveDown07"/>
+        <PeriodicEffectArray value="VelocityRemoveDown08"/>
+        <PeriodicEffectArray value="VelocityRemoveDown09"/>
+    </CEffectCreatePersistent>
+    <CEffectRemoveKinetic id="VelocityRemoveDown01">
+        <KineticLink value="VelocityDown01"/>
+    </CEffectRemoveKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot20">
+        <Kinetic value="VelocityDownDot20"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot30">
+        <Kinetic value="VelocityDownDot30"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot40">
+        <Kinetic value="VelocityDownDot40"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot50">
+        <Kinetic value="VelocityDownDot50"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot60">
+        <Kinetic value="VelocityDownDot60"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot70">
+        <Kinetic value="VelocityDownDot70"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot80">
+        <Kinetic value="VelocityDownDot80"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot90">
+        <Kinetic value="VelocityDownDot90"/>
+    </CEffectApplyKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft01">
+        <KineticLink value="VelocityLeft01"/>
+    </CEffectRemoveKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot10">
+        <Kinetic value="VelocityLeftDot10"/>
+    </CEffectApplyKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft02">
+        <KineticLink value="VelocityLeft02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft03">
+        <KineticLink value="VelocityLeft03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft04">
+        <KineticLink value="VelocityLeft04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft05">
+        <KineticLink value="VelocityLeft05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft06">
+        <KineticLink value="VelocityLeft06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft07">
+        <KineticLink value="VelocityLeft07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft08">
+        <KineticLink value="VelocityLeft08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeft09">
+        <KineticLink value="VelocityLeft09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot02">
+        <KineticLink value="VelocityLeftDot02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot03">
+        <KineticLink value="VelocityLeftDot03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot04">
+        <KineticLink value="VelocityLeftDot04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot05">
+        <KineticLink value="VelocityLeftDot05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot06">
+        <KineticLink value="VelocityLeftDot06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot07">
+        <KineticLink value="VelocityLeftDot07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot08">
+        <KineticLink value="VelocityLeftDot08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot09">
+        <KineticLink value="VelocityLeftDot09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot20">
+        <KineticLink value="VelocityLeftDot20"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot30">
+        <KineticLink value="VelocityLeftDot30"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot40">
+        <KineticLink value="VelocityLeftDot40"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot50">
+        <KineticLink value="VelocityLeftDot50"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot60">
+        <KineticLink value="VelocityLeftDot60"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot70">
+        <KineticLink value="VelocityLeftDot70"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot80">
+        <KineticLink value="VelocityLeftDot80"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot90">
+        <KineticLink value="VelocityLeftDot90"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight01">
+        <KineticLink value="VelocityRight01"/>
+    </CEffectRemoveKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot10">
+        <Kinetic value="VelocityRightDot10"/>
+    </CEffectApplyKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight02">
+        <KineticLink value="VelocityRight02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight03">
+        <KineticLink value="VelocityRight03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight04">
+        <KineticLink value="VelocityRight04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight05">
+        <KineticLink value="VelocityRight05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight06">
+        <KineticLink value="VelocityRight06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight07">
+        <KineticLink value="VelocityRight07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight08">
+        <KineticLink value="VelocityRight08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRight09">
+        <KineticLink value="VelocityRight09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot02">
+        <KineticLink value="VelocityRightDot02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot03">
+        <KineticLink value="VelocityRightDot03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot04">
+        <KineticLink value="VelocityRightDot04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot05">
+        <KineticLink value="VelocityRightDot05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot06">
+        <KineticLink value="VelocityRightDot06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot07">
+        <KineticLink value="VelocityRightDot07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot08">
+        <KineticLink value="VelocityRightDot08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot09">
+        <KineticLink value="VelocityRightDot09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot20">
+        <KineticLink value="VelocityRightDot20"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot30">
+        <KineticLink value="VelocityRightDot30"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot40">
+        <KineticLink value="VelocityRightDot40"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot50">
+        <KineticLink value="VelocityRightDot50"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot60">
+        <KineticLink value="VelocityRightDot60"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot70">
+        <KineticLink value="VelocityRightDot70"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot80">
+        <KineticLink value="VelocityRightDot80"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot90">
+        <KineticLink value="VelocityRightDot90"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp01">
+        <KineticLink value="VelocityUp01"/>
+    </CEffectRemoveKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot10">
+        <Kinetic value="VelocityUpDot10"/>
+    </CEffectApplyKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown02">
+        <KineticLink value="VelocityDown02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown03">
+        <KineticLink value="VelocityDown03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown04">
+        <KineticLink value="VelocityDown04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown05">
+        <KineticLink value="VelocityDown05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown06">
+        <KineticLink value="VelocityDown06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown07">
+        <KineticLink value="VelocityDown07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown08">
+        <KineticLink value="VelocityDown08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDown09">
+        <KineticLink value="VelocityDown09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot02">
+        <KineticLink value="VelocityDownDot02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot03">
+        <KineticLink value="VelocityDownDot03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot04">
+        <KineticLink value="VelocityDownDot04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot05">
+        <KineticLink value="VelocityDownDot05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot06">
+        <KineticLink value="VelocityDownDot06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot07">
+        <KineticLink value="VelocityDownDot07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot08">
+        <KineticLink value="VelocityDownDot08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot09">
+        <KineticLink value="VelocityDownDot09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot10">
+        <KineticLink value="VelocityDownDot10"/>
+    </CEffectRemoveKinetic>
+    <CEffectApplyKinetic id="VelocityApplyDownDot01">
+        <EditorCategories value=""/>
+        <Kinetic value="VelocityDownDot01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyLeftDot01">
+        <EditorCategories value=""/>
+        <Kinetic value="VelocityLeftDot01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyRightDot01">
+        <EditorCategories value=""/>
+        <Kinetic value="VelocityRightDot01"/>
+    </CEffectApplyKinetic>
+    <CEffectApplyKinetic id="VelocityApplyUpDot01">
+        <EditorCategories value=""/>
+        <Kinetic value="VelocityUpDot01"/>
+    </CEffectApplyKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot01">
+        <EditorCategories value=""/>
+        <KineticLink value="VelocityDownDot01"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot20">
+        <KineticLink value="VelocityDownDot20"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot30">
+        <KineticLink value="VelocityDownDot30"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot40">
+        <KineticLink value="VelocityDownDot40"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot50">
+        <KineticLink value="VelocityDownDot50"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot60">
+        <KineticLink value="VelocityDownDot60"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot70">
+        <KineticLink value="VelocityDownDot70"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot80">
+        <KineticLink value="VelocityDownDot80"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveDownDot90">
+        <KineticLink value="VelocityDownDot90"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot01">
+        <EditorCategories value=""/>
+        <KineticLink value="VelocityLeftDot01"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveLeftDot10">
+        <KineticLink value="VelocityLeftDot10"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot01">
+        <EditorCategories value=""/>
+        <KineticLink value="VelocityRightDot01"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveRightDot10">
+        <KineticLink value="VelocityRightDot10"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp02">
+        <KineticLink value="VelocityUp02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp03">
+        <KineticLink value="VelocityUp03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp04">
+        <KineticLink value="VelocityUp04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp05">
+        <KineticLink value="VelocityUp05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp06">
+        <KineticLink value="VelocityUp06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp07">
+        <KineticLink value="VelocityUp07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp08">
+        <KineticLink value="VelocityUp08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUp09">
+        <KineticLink value="VelocityUp09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot01">
+        <EditorCategories value=""/>
+        <KineticLink value="VelocityUpDot01"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot02">
+        <KineticLink value="VelocityUpDot02"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot03">
+        <KineticLink value="VelocityUpDot03"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot04">
+        <KineticLink value="VelocityUpDot04"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot05">
+        <KineticLink value="VelocityUpDot05"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot06">
+        <KineticLink value="VelocityUpDot06"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot07">
+        <KineticLink value="VelocityUpDot07"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot08">
+        <KineticLink value="VelocityUpDot08"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot09">
+        <KineticLink value="VelocityUpDot09"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot10">
+        <KineticLink value="VelocityUpDot10"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot20">
+        <KineticLink value="VelocityUpDot20"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot30">
+        <KineticLink value="VelocityUpDot30"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot40">
+        <KineticLink value="VelocityUpDot40"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot50">
+        <KineticLink value="VelocityUpDot50"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot60">
+        <KineticLink value="VelocityUpDot60"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot70">
+        <KineticLink value="VelocityUpDot70"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot80">
+        <KineticLink value="VelocityUpDot80"/>
+    </CEffectRemoveKinetic>
+    <CEffectRemoveKinetic id="VelocityRemoveUpDot90">
+        <KineticLink value="VelocityUpDot90"/>
+    </CEffectRemoveKinetic>
+    <CBehaviorBuff id="DebugCollisonSearchAreaDot5xDot5">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchAreaDot5xDot52"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea2xDot5">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea2xDot5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea2x2">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea2x2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea4xDot5">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea4xDot5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea4x42">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchAreaDot5xDot5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea1x1">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea1x1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea1xDot5">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea1xDot5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KineticGroupBehavior">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DebugCollisonSearchArea4x4">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.0625"/>
+        <PeriodicEffect value="DebugCollisionSearchArea4x4"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnitStateStunned">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.3125"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnitStateDying">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnitStateJumpingAnimation">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnitStateWalkingAnimation">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="2"/>
+        <Duration value="0.125"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnitStateFallingAnimation">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <Duration value="0.125"/>
+    </CBehaviorBuff>
+    <CFootprint id="FootprintDot5xDot5">
+        <Layers index="Check" Area="0,0,1,1">
+            <Rows value="x"/>
+        </Layers>
+        <Layers index="Place" Area="0,0,1,1">
+            <Rows value="x"/>
+        </Layers>
+        <Shape>
+            <Radius value="0.7072"/>
+            <Offsets value="-0.5,0;0.5,0;-0.5,0.5;0.5,0.5"/>
+            <Borders value="0,2,2;1,0,2;2,3,2;3,1,2"/>
+        </Shape>
+    </CFootprint>
+</Catalog>

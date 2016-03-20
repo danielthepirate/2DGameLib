@@ -1,0 +1,271 @@
+//==================================================================================================
+// 
+// Generated Map Script
+// 
+// Name:   Just Another StarCraft II Map
+// 
+//==================================================================================================
+include "TriggerLibs/NativeLib"
+include "LibPIRL"
+include "Lib2DGM"
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+void InitLibs () {
+    libNtve_InitLib();
+    libPIRL_InitLib();
+    lib2DGM_InitLib();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Global Function Declarations
+//--------------------------------------------------------------------------------------------------
+void gf_HideStaticCollisionUnitsAboveLevelHeight ();
+void gf_CreateUnitDeathFlareAtPoint (point lp_point);
+
+//--------------------------------------------------------------------------------------------------
+// Trigger Variables
+//--------------------------------------------------------------------------------------------------
+trigger gt_GameInitialization;
+trigger gt_HeroEntersUndergroundArea;
+trigger gt_HeroLeavesUndergroundArea;
+trigger gt_EntityEntersBottomlessPit;
+trigger gt__1;
+
+//--------------------------------------------------------------------------------------------------
+// Global Functions
+//--------------------------------------------------------------------------------------------------
+void gf_HideStaticCollisionUnitsAboveLevelHeight () {
+    // Implementation
+    UnitGroupLoopBegin(UnitGroup("GameStaticCollisionOneWay1", c_playerAny, RegionFromId(1), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        libNtve_gf_SendActorMessageToUnit(UnitGroupLoopCurrent(), "SetOpacity");
+        ActorSendTo(libNtve_gf_MainActorofUnit(UnitGroupLoopCurrent()), "_Snapshot", "SetVisibility");
+    }
+    UnitGroupLoopEnd();
+    UnitGroupLoopBegin(UnitGroup("GameStaticCollisionOneWay2", c_playerAny, RegionFromId(1), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        libNtve_gf_SendActorMessageToUnit(UnitGroupLoopCurrent(), "SetOpacity");
+        ActorSendTo(libNtve_gf_MainActorofUnit(UnitGroupLoopCurrent()), "_Snapshot", "SetVisibility");
+    }
+    UnitGroupLoopEnd();
+    UnitGroupLoopBegin(UnitGroup("GameStaticCollisionDot5xDot5", c_playerAny, RegionFromId(1), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        libNtve_gf_SendActorMessageToUnit(UnitGroupLoopCurrent(), "SetOpacity");
+    }
+    UnitGroupLoopEnd();
+    UnitGroupLoopBegin(UnitGroup("GameStaticCollision1x1", c_playerAny, RegionFromId(1), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        libNtve_gf_SendActorMessageToUnit(UnitGroupLoopCurrent(), "SetOpacity");
+    }
+    UnitGroupLoopEnd();
+    UnitGroupLoopBegin(UnitGroup("GameStaticCollision2x2", c_playerAny, RegionFromId(1), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        libNtve_gf_SendActorMessageToUnit(UnitGroupLoopCurrent(), "SetOpacity");
+    }
+    UnitGroupLoopEnd();
+}
+
+void gf_CreateUnitDeathFlareAtPoint (point lp_point) {
+    // Variable Declarations
+    fixed lv_unitDeathFlareCameraShakeRadius;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_unitDeathFlareCameraShakeRadius = 16.0;
+    libNtve_gf_CreateActorAtPoint("HeroDeathFlare", lp_point);
+    SoundPlayAtPointForPlayer(SoundLink("UIOffscreenDeathFlare", -1), c_maxPlayers, PlayerGroupAll(), lp_point, 0.0, 100.0, 0.0);
+    PlayerGroupLoopBegin(PlayerGroupActive());
+    for ( ; !PlayerGroupLoopDone() ; PlayerGroupLoopStep() ) {
+        libPIRL_gf_ShakeCameraForPlayer(PlayerGroupLoopCurrent(), "Heavy");
+    }
+    PlayerGroupLoopEnd();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Game Initialization
+//--------------------------------------------------------------------------------------------------
+bool gt_GameInitialization_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_testPlayer;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_testPlayer = 1;
+    UISetCursorVisible(PlayerGroupAll(), false);
+    lib2DGM_gf_Initialize2DGameLib();
+    CameraSetBounds(PlayerGroupAll(), RegionFromId(2), true);
+    CameraApplyInfo(lv_testPlayer, CameraInfoFromId(3), 0.0, -1, 10.0, true);
+    lib2DGM_gv_player[lv_testPlayer].lv_hero = UnitFromId(1);
+    lib2DGM_gv_player[lv_testPlayer].lv_respawnPoint = Point(12.0, 34.0);
+    CameraFollowUnitGroup(lv_testPlayer, libNtve_gf_ConvertUnitToUnitGroup(lib2DGM_gv_player[lv_testPlayer].lv_hero), true, false);
+    libNtve_gf_SetDialogItemUnit(lib2DGM_gv_uI.lv_heroStatus, lib2DGM_gv_player[lv_testPlayer].lv_hero, PlayerGroupSingle(lv_testPlayer));
+    gf_HideStaticCollisionUnitsAboveLevelHeight();
+    ActorSend(ActorFromDoodad(DoodadFromId(108)), "SetVisibility");
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_GameInitialization_Init () {
+    gt_GameInitialization = TriggerCreate("gt_GameInitialization_Func");
+    TriggerAddEventMapInit(gt_GameInitialization);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Enters Underground Area
+//--------------------------------------------------------------------------------------------------
+bool gt_HeroEntersUndergroundArea_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(EventUnit()) == "Hero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    ActorSend(ActorFromDoodad(DoodadFromId(108)), "SetVisibility 1");
+    lv_p = UnitGetOwner(EventUnit());
+    CameraSetBounds(PlayerGroupSingle(lv_p), RegionFromId(3), false);
+    CameraSetValue(lv_p, c_cameraValueDistance, 24.0, 0.0, -1, 10.0);
+    CameraFollowUnitGroup(lv_p, libNtve_gf_ConvertUnitToUnitGroup(lib2DGM_gv_player[lv_p].lv_hero), false, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_HeroEntersUndergroundArea_Init () {
+    gt_HeroEntersUndergroundArea = TriggerCreate("gt_HeroEntersUndergroundArea_Func");
+    TriggerAddEventUnitRegion(gt_HeroEntersUndergroundArea, null, RegionFromId(4), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hero Leaves Underground Area
+//--------------------------------------------------------------------------------------------------
+bool gt_HeroLeavesUndergroundArea_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_p;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitGetType(EventUnit()) == "Hero"))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    ActorSend(ActorFromDoodad(DoodadFromId(108)), "SetVisibility");
+    lv_p = UnitGetOwner(EventUnit());
+    CameraSetBounds(PlayerGroupSingle(lv_p), RegionFromId(2), false);
+    CameraSetValue(lv_p, c_cameraValueDistance, 42.0, 0.0, -1, 10.0);
+    libPIRL_gf_AddTimeToTimer(lib2DGM_gv_player[lv_p].lv_controlLoss, 1.0);
+    lib2DGM_gf_ModifyUnitCustomValue4(EventUnit(), 32, true);
+    UnitSetPosition(EventUnit(), PointFromId(51), false);
+    lib2DGM_gf_AddVerticalVelocity(EventUnit(), 0.8);
+    lib2DGM_gf_SetUnitHorizontalVelocity(EventUnit(), 0.0);
+    CameraFollowUnitGroup(lv_p, libNtve_gf_ConvertUnitToUnitGroup(lib2DGM_gv_player[lv_p].lv_hero), true, false);
+    Wait(1.0, c_timeGame);
+    lib2DGM_gf_ModifyUnitCustomValue4(EventUnit(), 32, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_HeroLeavesUndergroundArea_Init () {
+    gt_HeroLeavesUndergroundArea = TriggerCreate("gt_HeroLeavesUndergroundArea_Func");
+    TriggerAddEventUnitRegion(gt_HeroLeavesUndergroundArea, null, RegionFromId(5), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Entity Enters Bottomless Pit
+//--------------------------------------------------------------------------------------------------
+bool gt_EntityEntersBottomlessPit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv_p;
+    fixed lv_yofDeathRegionHeight;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((UnitIsAlive(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!((UnitFilterMatch(EventUnit(), 0, UnitFilter(0, (1 << (c_targetFilterMapBoss - 32)), 0, 0)) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_p = UnitGetOwner(EventUnit());
+    lv_yofDeathRegionHeight = (libNtve_gf_HeightOfRegion(RegionFromId(6)) + 5.0);
+    UnitKill(EventUnit());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt_EntityEntersBottomlessPit_Init () {
+    gt_EntityEntersBottomlessPit = TriggerCreate("gt_EntityEntersBottomlessPit_Func");
+    TriggerAddEventUnitRegion(gt_EntityEntersBottomlessPit, null, RegionFromId(6), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: 1
+//--------------------------------------------------------------------------------------------------
+bool gt__1_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv_testUnit;
+
+    // Variable Initialization
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void gt__1_Init () {
+    gt__1 = TriggerCreate("gt__1_Func");
+    TriggerAddEventKeyPressed(gt__1, c_playerAny, c_key1, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger Initialization
+//--------------------------------------------------------------------------------------------------
+void InitTriggers () {
+    gt_GameInitialization_Init();
+    gt_HeroEntersUndergroundArea_Init();
+    gt_HeroLeavesUndergroundArea_Init();
+    gt_EntityEntersBottomlessPit_Init();
+    gt__1_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Map Initialization
+//--------------------------------------------------------------------------------------------------
+void InitMap () {
+    InitLibs();
+    InitTriggers();
+}

@@ -1,0 +1,2452 @@
+include "TriggerLibs/NativeLib"
+include "LibPIRL_h"
+
+include "Lib2DGM_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 2D Platformer Game Mechanics
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib2DGM_InitLibraries () {
+    libNtve_InitVariables();
+    libPIRL_InitVariables();
+}
+
+// Variable Initialization
+bool lib2DGM_InitVariables_completed = false;
+
+void lib2DGM_InitVariables () {
+    int init_i;
+
+    if (lib2DGM_InitVariables_completed) {
+        return;
+    }
+
+    lib2DGM_InitVariables_completed = true;
+
+    lib2DGM_gv_uI.lv_heroStatus = c_invalidDialogControlId;
+    lib2DGM_gv_uI.lv_coinsCollected = c_invalidDialogControlId;
+    lib2DGM_gv_uI.lv_pointsCollected = c_invalidDialogControlId;
+    for (init_i = 0; init_i <= 16; init_i += 1) {
+        lib2DGM_gv_player[init_i].lv_controlLoss = TimerCreate();
+    }
+    lib2DGM_gv_game.lv_maxPlayers = 1;
+    lib2DGM_gv_game.lv_friction = 0.5;
+    lib2DGM_gv_game.lv_airResistance = 0.7;
+    lib2DGM_gv_game.lv_gravity = -0.12;
+    lib2DGM_gv_activePhysicsUnits = UnitGroupEmpty();
+    lib2DGM_gv_staticCollisionUnits = UnitGroupEmpty();
+}
+
+// Presets
+// Functions
+void lib2DGM_gf_SetUnitVerticalVelocity (unit lp_unit, fixed lp_velocityTarget) {
+    // Variable Declarations
+    fixed lv_newVelocity;
+    string lv_velocityKinetic;
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_newVelocity = libNtve_gf_ArithmeticRealClamp(lp_velocityTarget, (-1.0 * lib2DGM_gv_terminalVelocity), lib2DGM_gv_terminalVelocity);
+    if ((lv_newVelocity < lib2DGM_gv_trivialVelocity) && (lv_newVelocity > (-1.0 * lib2DGM_gv_trivialVelocity))) {
+        lv_newVelocity = 0.0;
+    }
+    if ((lv_newVelocity == 0.0)) {
+        lib2DGM_gf_UnitRemoveVerticalKinetics(lp_unit);
+    }
+    UnitSetCustomValue(lp_unit, (2), lv_newVelocity);
+    if ((lib2DGM_gf_UnitIsInMotion(lp_unit) == true)) {
+        UnitGroupAdd(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+    else {
+        UnitGroupRemove(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+}
+
+void lib2DGM_gf_SetUnitHorizontalVelocity (unit lp_unit, fixed lp_velocityTarget) {
+    // Variable Declarations
+    fixed lv_newVelocity;
+    string lv_velocityKinetic;
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_newVelocity = libNtve_gf_ArithmeticRealClamp(lp_velocityTarget, (-1.0 * lib2DGM_gv_terminalVelocity), lib2DGM_gv_terminalVelocity);
+    if ((lv_newVelocity < lib2DGM_gv_trivialVelocity) && (lv_newVelocity > (-1.0 * lib2DGM_gv_trivialVelocity))) {
+        lv_newVelocity = 0.0;
+    }
+    if ((lv_newVelocity == 0.0)) {
+        lib2DGM_gf_UnitRemoveHorizontalKinetics(lp_unit);
+    }
+    UnitSetCustomValue(lp_unit, (1), lv_newVelocity);
+    if ((lib2DGM_gf_UnitIsInMotion(lp_unit) == true)) {
+        UnitGroupAdd(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+    else {
+        UnitGroupRemove(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+}
+
+void lib2DGM_gf_AddVerticalVelocity (unit lp_unit, fixed lp_velocityAddition) {
+    // Variable Declarations
+    fixed lv_currentVelocity;
+    fixed lv_newVelocity;
+    string lv_velocityKinetic;
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_currentVelocity = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    lv_newVelocity = libNtve_gf_ArithmeticRealClamp((lv_currentVelocity + lp_velocityAddition), (-1.0 * lib2DGM_gv_terminalVelocity), lib2DGM_gv_terminalVelocity);
+    if ((lv_newVelocity < lib2DGM_gv_trivialVelocity) && (lv_newVelocity > (-1.0 * lib2DGM_gv_trivialVelocity))) {
+        lv_newVelocity = 0.0;
+    }
+    if ((lv_newVelocity == 0.0)) {
+        lib2DGM_gf_UnitRemoveVerticalKinetics(lp_unit);
+    }
+    UnitSetCustomValue(lp_unit, (2), lv_newVelocity);
+    if ((lib2DGM_gf_UnitIsInMotion(lp_unit) == true)) {
+        UnitGroupAdd(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+    else {
+        UnitGroupRemove(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+}
+
+void lib2DGM_gf_AddHorizontalVelocity (unit lp_unit, fixed lp_velocityAddition) {
+    // Variable Declarations
+    fixed lv_currentVelocity;
+    fixed lv_newVelocity;
+    string lv_velocityKinetic;
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_currentVelocity = lib2DGM_gf_PresetCustomValue(lp_unit);
+    lv_newVelocity = libNtve_gf_ArithmeticRealClamp((lv_currentVelocity + lp_velocityAddition), (-1.0 * lib2DGM_gv_terminalVelocity), lib2DGM_gv_terminalVelocity);
+    if ((lv_newVelocity < lib2DGM_gv_trivialVelocity) && (lv_newVelocity > (-1.0 * lib2DGM_gv_trivialVelocity))) {
+        lv_newVelocity = 0.0;
+    }
+    if ((lv_newVelocity == 0.0)) {
+        lib2DGM_gf_UnitRemoveHorizontalKinetics(lp_unit);
+    }
+    UnitSetCustomValue(lp_unit, (1), lv_newVelocity);
+    if ((lib2DGM_gf_UnitIsInMotion(lp_unit) == true)) {
+        UnitGroupAdd(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+    else {
+        UnitGroupRemove(lib2DGM_gv_activePhysicsUnits, lp_unit);
+    }
+}
+
+void lib2DGM_gf_UnitRemoveHorizontalKinetics (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_velocityX;
+    string lv_kineticDirection;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_velocityX = lib2DGM_gf_PresetCustomValue(lp_unit);
+    if ((lv_velocityX > 0.0)) {
+        lv_kineticDirection = "VelocityRemoveAllRight";
+    }
+    else {
+        lv_kineticDirection = "VelocityRemoveAllLeft";
+    }
+    lib2DGM_gf_RemoveKineticFromUnitAndHitboxUnits(lp_unit, lv_kineticDirection);
+    return ;
+}
+
+void lib2DGM_gf_UnitRemoveVerticalKinetics (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_velocityY;
+    string lv_kineticDirection;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_velocityY = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    if ((lv_velocityY > 0.0)) {
+        lv_kineticDirection = "VelocityRemoveAllUp";
+    }
+    else {
+        lv_kineticDirection = "VelocityRemoveAllDown";
+    }
+    lib2DGM_gf_RemoveKineticFromUnitAndHitboxUnits(lp_unit, lv_kineticDirection);
+    return ;
+}
+
+fixed lib2DGM_gf_PresetCustomValue (unit lp_unit) {
+    // Implementation
+    return UnitGetCustomValue(lp_unit, (1));
+}
+
+fixed lib2DGM_gf_PresetCustomValue2 (unit lp_unit) {
+    // Implementation
+    return UnitGetCustomValue(lp_unit, (2));
+}
+
+fixed lib2DGM_gf_UnitCalculatedLandingHorizontalVelocity (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_landingVelocity;
+    fixed lv_currentVelocity;
+    fixed lv_restitution;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_restitution = lib2DGM_gf_PresetCustomValue4(lp_unit, 11);
+    lv_currentVelocity = lib2DGM_gf_PresetCustomValue4(lp_unit, 1);
+    if ((lv_restitution == 0.0)) {
+        return (lv_currentVelocity * lib2DGM_gv_game.lv_friction);
+    }
+    lv_landingVelocity = ((lv_currentVelocity * lib2DGM_gv_game.lv_friction) + ((1.0 - lib2DGM_gv_game.lv_friction) * lv_currentVelocity * lv_restitution));
+    return lv_landingVelocity;
+}
+
+bool lib2DGM_gf_UnitIsInMotion (unit lp_unit) {
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == true) && (lib2DGM_gf_PresetCustomValue(lp_unit) == 0.0) && (lib2DGM_gf_PresetCustomValue2(lp_unit) == 0.0)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+unit lib2DGM_gf_GetCollisionUnitFromPoint (point lp_testPoint) {
+    int autoFC11DD74_ae;
+    int autoFC11DD74_ai;
+
+    // Variable Declarations
+    unit lv_collisionUnit;
+    int lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    autoFC11DD74_ae = lib2DGM_gv_staticCollisionArrayCount;
+    autoFC11DD74_ai = 1;
+    lv_i = 1;
+    for ( ; ( (autoFC11DD74_ai >= 0 && lv_i <= autoFC11DD74_ae) || (autoFC11DD74_ai <= 0 && lv_i >= autoFC11DD74_ae) ) ; lv_i += autoFC11DD74_ai ) {
+        if ((RegionContainsPoint(lib2DGM_gv_staticCollision[lv_i].lv_region, lp_testPoint) == true)) {
+            lv_collisionUnit = lib2DGM_gv_staticCollision[lv_i].lv_unit;
+            return lv_collisionUnit;
+        }
+    }
+    return null;
+}
+
+void lib2DGM_gf_TranslateUnit5 (unit lp_unit, fixed lp_verticalImpulse) {
+    int autoA5FF5C85_ae;
+    int autoA5FF5C85_ai;
+
+    // Variable Declarations
+    fixed lv_velocityY;
+    fixed lv_absVelocity;
+    int lv_i;
+    int lv_kineticDotHundred;
+    int lv_kineticDotTen;
+    int lv_kineticOne;
+    int lv_directionIndex;
+    string lv_hitboxIndex;
+    unitgroup lv_hitboxGroup;
+    int lv_hitboxCount;
+    unit lv_hitboxUnit;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv_velocityY = lp_verticalImpulse;
+    lv_absVelocity = AbsF(lv_velocityY);
+    if ((lv_velocityY == 0.0)) {
+        return ;
+    }
+    if ((lv_velocityY > 0.0)) {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Up;
+    }
+    else {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Down;
+    }
+    lv_kineticOne = TruncI(lv_absVelocity);
+    lv_kineticDotTen = TruncI(((lv_absVelocity * 10.0) - (lv_kineticOne * 10.0)));
+    lv_kineticDotHundred = (RoundI((lv_absVelocity * 100.0)) - ((lv_kineticDotTen * 10) + (lv_kineticOne * 100)));
+    if ((lv_kineticDotHundred == 10)) {
+        lv_kineticDotHundred = 0;
+        lv_kineticDotTen += 1;
+    }
+    if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        autoA5FF5C85_ae = lv_hitboxCount;
+        autoA5FF5C85_ai = 1;
+        lv_i = 1;
+        for ( ; ( (autoA5FF5C85_ai >= 0 && lv_i <= autoA5FF5C85_ae) || (autoA5FF5C85_ai <= 0 && lv_i >= autoA5FF5C85_ae) ) ; lv_i += autoA5FF5C85_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+        }
+    }
+}
+
+void lib2DGM_gf_TranslateUnit4 (unit lp_unit, fixed lp_horizontalImpulse) {
+    int auto487EA0B2_ae;
+    int auto487EA0B2_ai;
+
+    // Variable Declarations
+    fixed lv_velocityX;
+    fixed lv_absVelocity;
+    int lv_i;
+    int lv_kineticDotHundred;
+    int lv_kineticDotTen;
+    int lv_kineticOne;
+    int lv_directionIndex;
+    string lv_hitboxIndex;
+    unitgroup lv_hitboxGroup;
+    int lv_hitboxCount;
+    unit lv_hitboxUnit;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv_velocityX = lp_horizontalImpulse;
+    lv_absVelocity = AbsF(lv_velocityX);
+    if ((lv_velocityX == 0.0)) {
+        return ;
+    }
+    if ((lv_velocityX > 0.0)) {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Right;
+    }
+    else {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Left;
+    }
+    lv_kineticOne = TruncI(lv_absVelocity);
+    lv_kineticDotTen = TruncI(((lv_absVelocity * 10.0) - (lv_kineticOne * 10.0)));
+    lv_kineticDotHundred = (RoundI((lv_absVelocity * 100.0)) - ((lv_kineticDotTen * 10) + (lv_kineticOne * 100)));
+    if ((lv_kineticDotHundred == 10)) {
+        lv_kineticDotHundred = 0;
+        lv_kineticDotTen += 1;
+    }
+    if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        auto487EA0B2_ae = lv_hitboxCount;
+        auto487EA0B2_ai = 1;
+        lv_i = 1;
+        for ( ; ( (auto487EA0B2_ai >= 0 && lv_i <= auto487EA0B2_ae) || (auto487EA0B2_ai <= 0 && lv_i >= auto487EA0B2_ae) ) ; lv_i += auto487EA0B2_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+        }
+    }
+}
+
+point lib2DGM_gf_UnitGetCollisionTestPoint2 (unit lp_unit, int lp_hitTestPointType) {
+    // Variable Declarations
+    point lv_testPoint;
+    point lv_unitOrigin;
+    fixed lv_widthOffset;
+    fixed lv_heightOffset;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_unitOrigin = UnitGetPosition(lp_unit);
+    if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Origin)) {
+        lv_testPoint = lv_unitOrigin;
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_OriginRight)) {
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) + lv_widthOffset), PointGetY(lv_unitOrigin));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_OriginLeft)) {
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) - lv_widthOffset), PointGetY(lv_unitOrigin));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Top)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_testPoint = Point(PointGetX(lv_unitOrigin), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_TopRight)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) + lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_TopLeft)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) - lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftHigh)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 18);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) - lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftMid)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) - lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftLow)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 17);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) - lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightHigh)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 18);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) + lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightMid)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) + lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightLow)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 17);
+        lv_testPoint = Point((PointGetX(lv_unitOrigin) + lv_widthOffset), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Center)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point(PointGetX(lv_unitOrigin), (PointGetY(lv_unitOrigin) + lv_heightOffset));
+    }
+    return lv_testPoint;
+}
+
+point lib2DGM_gf_UnitGetPresetPointNext (unit lp_unit, int lp_hitTestPointType) {
+    // Variable Declarations
+    point lv_testPoint;
+    point lv_unitOriginNext;
+    fixed lv_widthOffset;
+    fixed lv_heightOffset;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_unitOriginNext = Point((PointGetX(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 1)), (PointGetY(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 2)));
+    if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Origin)) {
+        lv_testPoint = lv_unitOriginNext;
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_OriginRight)) {
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) + lv_widthOffset), PointGetY(lv_unitOriginNext));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_OriginLeft)) {
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) - lv_widthOffset), PointGetY(lv_unitOriginNext));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Top)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_testPoint = Point(PointGetX(lv_unitOriginNext), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_TopRight)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) + lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_TopLeft)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+        lv_widthOffset = (lib2DGM_gv_hitTestWidthFactor * lib2DGM_gf_PresetCustomValue4(lp_unit, 4));
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) - lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftHigh)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 18);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) - lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftMid)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) - lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_LeftLow)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 17);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) - lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightHigh)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 18);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) + lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightMid)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) + lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_RightLow)) {
+        lv_widthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 17);
+        lv_testPoint = Point((PointGetX(lv_unitOriginNext) + lv_widthOffset), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    else if ((lp_hitTestPointType == lib2DGM_ge_UnitCollisionTestPoint_Center)) {
+        lv_heightOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+        lv_testPoint = Point(PointGetX(lv_unitOriginNext), (PointGetY(lv_unitOriginNext) + lv_heightOffset));
+    }
+    return lv_testPoint;
+}
+
+unit lib2DGM_gf_UnitGetParent (unit lp_unit) {
+    // Variable Declarations
+    unit lv_parentUnit;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((UnitHasBehavior2(lp_unit, "KineticGroupBehavior") == true)) {
+        lv_parentUnit = UnitBehaviorEffectUnit(lp_unit, "KineticGroupBehavior", c_effectUnitCaster, 0);
+    }
+    else {
+        lv_parentUnit = lp_unit;
+    }
+    return lv_parentUnit;
+}
+
+bool lib2DGM_gf_HitboxIndexExists (string lp_hitboxIndex) {
+    // Implementation
+    return DataTableValueExists(true, lp_hitboxIndex);
+}
+
+string lib2DGM_gf_UnitGetHitboxGroupCode (unit lp_unit) {
+    // Variable Declarations
+    string lv_hitboxIndex;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+
+    // Implementation
+    lv_hitboxIndex = ("UnitHitbox" + IntToString(UnitGetTag(lp_unit)));
+    return lv_hitboxIndex;
+}
+
+void lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly (unit lp_unit, point lp_point) {
+    int autoC030DCB4_ae;
+    int autoC030DCB4_ai;
+
+    // Variable Declarations
+    string lv_hitboxIndex;
+    int lv_hitboxCount;
+    unitgroup lv_hitboxGroup;
+    unit lv_hitboxUnit;
+    fixed lv_hitboxNewX;
+    fixed lv_hitboxNewY;
+    int lv_i;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    UnitSetPosition(lp_unit, lp_point, true);
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        autoC030DCB4_ae = lv_hitboxCount;
+        autoC030DCB4_ai = 1;
+        lv_i = 1;
+        for ( ; ( (autoC030DCB4_ai >= 0 && lv_i <= autoC030DCB4_ae) || (autoC030DCB4_ai <= 0 && lv_i >= autoC030DCB4_ae) ) ; lv_i += autoC030DCB4_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            lv_hitboxNewX = (PointGetX(lp_point) + lib2DGM_gf_PresetCustomValue4(lv_hitboxUnit, 40));
+            lv_hitboxNewY = (PointGetY(lp_point) + lib2DGM_gf_PresetCustomValue4(lv_hitboxUnit, 41));
+            UnitSetPosition(lv_hitboxUnit, Point(lv_hitboxNewX, lv_hitboxNewY), false);
+        }
+    }
+}
+
+void lib2DGM_gf_RemoveKineticFromUnitAndHitboxUnits (unit lp_unit, string lp_effect) {
+    int auto4CB217B7_ae;
+    int auto4CB217B7_ai;
+
+    // Variable Declarations
+    string lv_hitboxIndex;
+    unitgroup lv_hitboxGroup;
+    int lv_hitboxCount;
+    unit lv_hitboxUnit;
+    int lv_i;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    PlayerCreateEffectUnit(0, lp_effect, lp_unit);
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        auto4CB217B7_ae = lv_hitboxCount;
+        auto4CB217B7_ai = 1;
+        lv_i = 1;
+        for ( ; ( (auto4CB217B7_ai >= 0 && lv_i <= auto4CB217B7_ae) || (auto4CB217B7_ai <= 0 && lv_i >= auto4CB217B7_ae) ) ; lv_i += auto4CB217B7_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            PlayerCreateEffectUnit(0, lp_effect, lv_hitboxUnit);
+        }
+    }
+}
+
+void lib2DGM_gf_UnitRemoveHitboxGroup (unit lp_unit) {
+    // Variable Declarations
+    unitgroup lv_hitboxUnits;
+    string lv_hitboxUnitCode;
+
+    // Variable Initialization
+    lv_hitboxUnits = UnitGroupEmpty();
+    lv_hitboxUnitCode = "";
+
+    // Implementation
+    lv_hitboxUnitCode = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    lv_hitboxUnits = DataTableGetUnitGroup(true, lv_hitboxUnitCode);
+    UnitGroupLoopBegin(lv_hitboxUnits);
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        lib2DGM_gv_totalFollowKinetics -= 1;
+        UnitRemove(UnitGroupLoopCurrent());
+    }
+    UnitGroupLoopEnd();
+    DataTableValueRemove(true, lv_hitboxUnitCode);
+}
+
+string lib2DGM_gf_UnitGetHitboxGroupCode2 (unit lp_attacker, unit lp_target) {
+    // Implementation
+    return ("Unit" + IntToString(UnitGetTag(lp_attacker)) + "AttackIndex" + IntToString(UnitGetTag(lp_target)));
+}
+
+bool lib2DGM_gf_UnitHasAttackImmunityFrames (unit lp_targetUnit, string lp_attackIndex) {
+    // Implementation
+    if ((UnitGetChargeUsed(lp_targetUnit, lp_attackIndex) == 0.0)) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+trigger auto_lib2DGM_gf_UnitAddAttackImmunityFrames_Trigger = null;
+unit auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_targetUnit;
+string auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_attackIndex;
+fixed auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_duration;
+
+void lib2DGM_gf_UnitAddAttackImmunityFrames (unit lp_targetUnit, string lp_attackIndex, fixed lp_duration) {
+    auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_targetUnit = lp_targetUnit;
+    auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_attackIndex = lp_attackIndex;
+    auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_duration = lp_duration;
+
+    if (auto_lib2DGM_gf_UnitAddAttackImmunityFrames_Trigger == null) {
+        auto_lib2DGM_gf_UnitAddAttackImmunityFrames_Trigger = TriggerCreate("auto_lib2DGM_gf_UnitAddAttackImmunityFrames_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DGM_gf_UnitAddAttackImmunityFrames_Trigger, false, false);
+}
+
+bool auto_lib2DGM_gf_UnitAddAttackImmunityFrames_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_targetUnit = auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_targetUnit;
+    string lp_attackIndex = auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_attackIndex;
+    fixed lp_duration = auto_lib2DGM_gf_UnitAddAttackImmunityFrames_lp_duration;
+
+    // Implementation
+    UnitAddChargeUsed(lp_targetUnit, lp_attackIndex, 1.0);
+    Wait(lp_duration, c_timeGame);
+    UnitAddChargeUsed(lp_targetUnit, lp_attackIndex, -1.0);
+    return true;
+}
+
+fixed lib2DGM_gf_XOfUnitLeft (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_x;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_x = (PointGetX(UnitGetPosition(lp_unit)) - lib2DGM_gf_PresetCustomValue4(lp_unit, 15));
+    return lv_x;
+}
+
+fixed lib2DGM_gf_XOfUnitRight (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_x;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_x = (PointGetX(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 15));
+    return lv_x;
+}
+
+fixed lib2DGM_gf_YOfUnitTop (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_y;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((UnitFilterMatch(lp_unit, 0, UnitFilter((1 << c_targetFilterWorker), 0, 0, 0)) == true)) {
+        lv_y = (PointGetY(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 16));
+    }
+    else {
+        lv_y = (PointGetY(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 3));
+    }
+    return lv_y;
+}
+
+fixed lib2DGM_gf_YOfUnitBottom (unit lp_unit) {
+    // Variable Declarations
+    fixed lv_y;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((UnitFilterMatch(lp_unit, 0, UnitFilter((1 << c_targetFilterWorker), 0, 0, 0)) == true)) {
+        lv_y = (PointGetY(UnitGetPosition(lp_unit)) - lib2DGM_gf_PresetCustomValue4(lp_unit, 16));
+    }
+    else {
+        lv_y = PointGetY(UnitGetPosition(lp_unit));
+    }
+    return lv_y;
+}
+
+bool lib2DGM_gf_CollisionDirectionIsDown (point lp_targetPoint, unit lp_collisionUnit) {
+    // Variable Declarations
+    point lv_collisionTestPoint;
+    fixed lv_collisionAngle;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_collisionTestPoint = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_collisionUnit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_collisionAngle = AngleBetweenPoints(lp_targetPoint, lv_collisionTestPoint);
+    if ((lv_collisionAngle >= -135.0) && (lv_collisionAngle <= -45.0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2DGM_gf_CollisionDirectionIsDown2 (point lp_targetPoint, unit lp_collisionUnit) {
+    // Variable Declarations
+    point lv_collisionTestPoint;
+    fixed lv_collisionAngle;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_collisionTestPoint = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_collisionUnit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_collisionAngle = AngleBetweenPoints(lp_targetPoint, lv_collisionTestPoint);
+    if ((lv_collisionAngle >= 45.0) && (lv_collisionAngle <= 135.0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2DGM_gf_CollisionDirectionIsDown3 (point lp_targetPoint, unit lp_collisionUnit) {
+    // Variable Declarations
+    point lv_collisionTestPoint;
+    fixed lv_collisionAngle;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_collisionTestPoint = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_collisionUnit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_collisionAngle = AngleBetweenPoints(lp_targetPoint, lv_collisionTestPoint);
+    if ((lv_collisionAngle >= -45.0) && (lv_collisionAngle <= 45.0)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2DGM_gf_CollisionDirectionIsDown4 (point lp_targetPoint, unit lp_collisionUnit) {
+    // Variable Declarations
+    point lv_collisionTestPoint;
+    fixed lv_collisionAngle;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_collisionTestPoint = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_collisionUnit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_collisionAngle = AngleBetweenPoints(lp_targetPoint, lv_collisionTestPoint);
+    if (((lv_collisionAngle >= 135.0) || (lv_collisionAngle <= -135.0))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+trigger auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_Trigger = null;
+unit auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_unit;
+fixed auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_delay;
+
+void lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer (unit lp_unit, fixed lp_delay) {
+    auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_unit = lp_unit;
+    auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_delay = lp_delay;
+
+    if (auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_Trigger == null) {
+        auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_Trigger = TriggerCreate("auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_Trigger, false, false);
+}
+
+bool auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_unit = auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_unit;
+    fixed lp_delay = auto_lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer_lp_delay;
+
+    // Implementation
+    Wait(lp_delay, c_timeGame);
+    if ((UnitIsAlive(lp_unit) == true)) {
+        if ((UnitHasBehavior2(lp_unit, "UnitStateFallingAnimation") == true) && (UnitHasBehavior2(lp_unit, "UnitStateJumpingAnimation") == false) && (lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == false)) {
+            lib2DGM_gf_ModifyUnitCustomValue(lp_unit, 10, -1.0);
+        }
+    }
+    return true;
+}
+
+void lib2DGM_gf_UnitSet2DFacing (unit lp_unit, int lp_facing) {
+    // Variable Declarations
+    unitgroup lv_hitboxUnits;
+    point lv_hitboxPositionReflected;
+
+    // Variable Initialization
+    lv_hitboxUnits = UnitGroupEmpty();
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue4(lp_unit, 14) != (lp_facing))) {
+        lv_hitboxUnits = DataTableGetUnitGroup(true, lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit));
+        lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 14, (lp_facing));
+        if ((lp_facing == lib2DGM_ge__2DUnitFacing_Right)) {
+            libNtve_gf_SendActorMessageToUnit(lp_unit, "EventMacroRun TurnRightStartRunnable");
+            UnitGroupLoopBegin(lv_hitboxUnits);
+            for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+                if ((lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 40) != 0.0)) {
+                    lv_hitboxPositionReflected = Point((PointGetX(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 40)), PointGetY(UnitGetPosition(UnitGroupLoopCurrent())));
+                    UnitSetPosition(UnitGroupLoopCurrent(), lv_hitboxPositionReflected, false);
+                }
+            }
+            UnitGroupLoopEnd();
+        }
+        else {
+            libNtve_gf_SendActorMessageToUnit(lp_unit, "EventMacroRun TurnLeftStartRunnable");
+            UnitGroupLoopBegin(lv_hitboxUnits);
+            for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+                if ((lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 40) != 0.0)) {
+                    lv_hitboxPositionReflected = Point((PointGetX(UnitGetPosition(lp_unit)) - lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 40)), PointGetY(UnitGetPosition(UnitGroupLoopCurrent())));
+                    UnitSetPosition(UnitGroupLoopCurrent(), lv_hitboxPositionReflected, false);
+                }
+            }
+            UnitGroupLoopEnd();
+        }
+    }
+}
+
+void lib2DGM_gf_SeparateTargetUnitFromKnockbackUnit (unit lp_targetUnit, unit lp_collisionUnit, fixed lp_hitDirection) {
+    // Variable Declarations
+    point lv_seperationPoint;
+
+    // Variable Initialization
+
+    // Implementation
+    lib2DGM_gf_SetUnitVerticalVelocity(lp_targetUnit, 0.0);
+    lib2DGM_gf_SetUnitHorizontalVelocity(lp_targetUnit, 0.0);
+    if ((lp_hitDirection == 1)) {
+        lv_seperationPoint = Point(((lib2DGM_gf_XOfUnitRight(lp_collisionUnit) + MaxF(0.0, lib2DGM_gf_PresetCustomValue(lp_collisionUnit))) + lib2DGM_gf_PresetCustomValue4(lp_targetUnit, 15)), PointGetY(UnitGetPosition(lp_targetUnit)));
+    }
+    else {
+        lv_seperationPoint = Point(((lib2DGM_gf_XOfUnitLeft(lp_collisionUnit) + MinF(0.0, lib2DGM_gf_PresetCustomValue(lp_collisionUnit))) + lib2DGM_gf_PresetCustomValue4(lp_collisionUnit, 15)), PointGetY(UnitGetPosition(lp_targetUnit)));
+    }
+    if ((RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lv_seperationPoint) == false)) {
+        lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly(lp_targetUnit, lv_seperationPoint);
+    }
+    else {
+        lib2DGM_gf_AddVerticalVelocity(lp_targetUnit, (lib2DGM_gf_PresetCustomValue4(lp_targetUnit, 3) * 0.25));
+    }
+}
+
+trigger auto_lib2DGM_gf_KnockbackXOverTime_Trigger = null;
+unit auto_lib2DGM_gf_KnockbackXOverTime_lp_unit;
+fixed auto_lib2DGM_gf_KnockbackXOverTime_lp_power;
+fixed auto_lib2DGM_gf_KnockbackXOverTime_lp_duration;
+
+void lib2DGM_gf_KnockbackXOverTime (unit lp_unit, fixed lp_power, fixed lp_duration) {
+    auto_lib2DGM_gf_KnockbackXOverTime_lp_unit = lp_unit;
+    auto_lib2DGM_gf_KnockbackXOverTime_lp_power = lp_power;
+    auto_lib2DGM_gf_KnockbackXOverTime_lp_duration = lp_duration;
+
+    if (auto_lib2DGM_gf_KnockbackXOverTime_Trigger == null) {
+        auto_lib2DGM_gf_KnockbackXOverTime_Trigger = TriggerCreate("auto_lib2DGM_gf_KnockbackXOverTime_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DGM_gf_KnockbackXOverTime_Trigger, false, false);
+}
+
+bool auto_lib2DGM_gf_KnockbackXOverTime_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_unit = auto_lib2DGM_gf_KnockbackXOverTime_lp_unit;
+    fixed lp_power = auto_lib2DGM_gf_KnockbackXOverTime_lp_power;
+    fixed lp_duration = auto_lib2DGM_gf_KnockbackXOverTime_lp_duration;
+
+    fixed auto9EF983F2_ae;
+    fixed auto9EF983F2_ai;
+
+    // Variable Declarations
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    auto9EF983F2_ae = lp_duration;
+    auto9EF983F2_ai = 0.0625;
+    lv_i = 0.0;
+    for ( ; ( (auto9EF983F2_ai >= 0 && lv_i <= auto9EF983F2_ae) || (auto9EF983F2_ai <= 0 && lv_i >= auto9EF983F2_ae) ) ; lv_i += auto9EF983F2_ai ) {
+        lib2DGM_gf_AddHorizontalVelocity(lp_unit, lp_power);
+        Wait(0.0625, c_timeGame);
+    }
+    return true;
+}
+
+trigger auto_lib2DGM_gf_KnockbackYOverTime_Trigger = null;
+unit auto_lib2DGM_gf_KnockbackYOverTime_lp_unit;
+fixed auto_lib2DGM_gf_KnockbackYOverTime_lp_power;
+fixed auto_lib2DGM_gf_KnockbackYOverTime_lp_duration;
+
+void lib2DGM_gf_KnockbackYOverTime (unit lp_unit, fixed lp_power, fixed lp_duration) {
+    auto_lib2DGM_gf_KnockbackYOverTime_lp_unit = lp_unit;
+    auto_lib2DGM_gf_KnockbackYOverTime_lp_power = lp_power;
+    auto_lib2DGM_gf_KnockbackYOverTime_lp_duration = lp_duration;
+
+    if (auto_lib2DGM_gf_KnockbackYOverTime_Trigger == null) {
+        auto_lib2DGM_gf_KnockbackYOverTime_Trigger = TriggerCreate("auto_lib2DGM_gf_KnockbackYOverTime_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DGM_gf_KnockbackYOverTime_Trigger, false, false);
+}
+
+bool auto_lib2DGM_gf_KnockbackYOverTime_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_unit = auto_lib2DGM_gf_KnockbackYOverTime_lp_unit;
+    fixed lp_power = auto_lib2DGM_gf_KnockbackYOverTime_lp_power;
+    fixed lp_duration = auto_lib2DGM_gf_KnockbackYOverTime_lp_duration;
+
+    fixed auto5FD6E58A_ae;
+    fixed auto5FD6E58A_ai;
+
+    // Variable Declarations
+    fixed lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    auto5FD6E58A_ae = lp_duration;
+    auto5FD6E58A_ai = 0.0625;
+    lv_i = 0.0;
+    for ( ; ( (auto5FD6E58A_ai >= 0 && lv_i <= auto5FD6E58A_ae) || (auto5FD6E58A_ai <= 0 && lv_i >= auto5FD6E58A_ae) ) ; lv_i += auto5FD6E58A_ai ) {
+        lib2DGM_gf_AddVerticalVelocity(lp_unit, lp_power);
+        Wait(0.0625, c_timeGame);
+    }
+    return true;
+}
+
+void lib2DGM_gf_HeroSetFacingFromInput (unit lp_targetUnit) {
+    // Variable Declarations
+    int lv_p;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_p = UnitGetOwner(lp_targetUnit);
+    if ((UnitIsAlive(lp_targetUnit) == false)) {
+        return ;
+    }
+    if ((lib2DGM_gv_player[lv_p].lv_input_KeyD_isPressed == true) && (lib2DGM_gv_player[lv_p].lv_input_KeyA_isPressed == true)) {
+        return ;
+    }
+    else if ((lib2DGM_gv_player[lv_p].lv_input_KeyD_isPressed == true)) {
+        lib2DGM_gf_UnitSet2DFacing(lp_targetUnit, lib2DGM_ge__2DUnitFacing_Right);
+        if ((lib2DGM_gf_PresetCustomValue5(lp_targetUnit, 30) == true)) {
+            libNtve_gf_SendActorMessageToUnit(lp_targetUnit, "Create HeroSuddenMovementRight");
+        }
+    }
+    else if ((lib2DGM_gv_player[lv_p].lv_input_KeyA_isPressed == true)) {
+        lib2DGM_gf_UnitSet2DFacing(lp_targetUnit, lib2DGM_ge__2DUnitFacing_Left);
+        if ((lib2DGM_gf_PresetCustomValue5(lp_targetUnit, 30) == true)) {
+            libNtve_gf_SendActorMessageToUnit(lp_targetUnit, "Create HeroSuddenMovementLeft");
+        }
+    }
+}
+
+void lib2DGM_gf_HeroRespawnForPlayer (point lp_point, int lp_p) {
+    // Variable Declarations
+    unit lv_oldHero;
+
+    // Variable Initialization
+
+    // Implementation
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hero", c_unitCreateIgnorePlacement, lp_p, lp_point);
+    lib2DGM_gv_player[lp_p].lv_hero = UnitLastCreated();
+    libNtve_gf_SetDialogItemUnit(lib2DGM_gv_uI.lv_heroStatus, lib2DGM_gv_player[lp_p].lv_hero, PlayerGroupSingle(lp_p));
+}
+
+void lib2DGM_gf_PlayerAddPoints (int lp_p, int lp_addedPoints) {
+    // Variable Declarations
+    int lv_maximumDisplayPoints;
+    unit lv_playerHero;
+
+    // Variable Initialization
+
+    // Implementation
+    lib2DGM_gv_player[lp_p].lv_points = (lib2DGM_gv_player[lp_p].lv_points + lp_addedPoints);
+    lv_maximumDisplayPoints = 99999;
+    lv_playerHero = lib2DGM_gv_player[lp_p].lv_hero;
+    if ((lib2DGM_gv_player[lp_p].lv_points > lv_maximumDisplayPoints)) {
+        lib2DGM_gv_player[lp_p].lv_points = ModI(lib2DGM_gv_player[lp_p].lv_points, 100000);
+    }
+    libNtve_gf_SetDialogItemText(lib2DGM_gv_uI.lv_pointsCollected, lib2DGM_gf_FormatPoints(lib2DGM_gv_player[lp_p].lv_points), PlayerGroupSingle(lp_p));
+}
+
+text lib2DGM_gf_FormatPoints (int lp_points) {
+    // Variable Declarations
+    text lv_formattedPoints;
+    text lv_paddingDigits;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lp_points < 10)) {
+        lv_paddingDigits = StringExternal("Param/Value/lib_2DGM_17DBE388");
+    }
+    else if ((lp_points < 100)) {
+        lv_paddingDigits = StringExternal("Param/Value/lib_2DGM_887AC6D3");
+    }
+    else if ((lp_points < 1000)) {
+        lv_paddingDigits = StringExternal("Param/Value/lib_2DGM_3D90F1E8");
+    }
+    else if ((lp_points < 10000)) {
+        lv_paddingDigits = StringExternal("Param/Value/lib_2DGM_BB9F77D4");
+    }
+    lv_formattedPoints = (StringExternal("Param/Value/lib_2DGM_AF48BA22") + lv_paddingDigits + IntToText(lp_points) + StringExternal("Param/Value/lib_2DGM_DFA89DE5"));
+    return lv_formattedPoints;
+}
+
+void lib2DGM_gf_Initialize2DGameLib () {
+    // Implementation
+    lib2DGM_gf_InitializeGameUI();
+    lib2DGM_gf_InitializeGameData();
+    lib2DGM_gf_InitializePlayerSettings();
+    lib2DGM_gf_InitializeEnvironment();
+    lib2DGM_gf_InitializeDebugSettings();
+    TriggerEnable(lib2DGM_gt_EachGameTick, true);
+}
+
+void lib2DGM_gf_InitializeGameUI () {
+    // Implementation
+    DialogControlHookupStandard(c_triggerControlTypeUnitStatus, "UIContainer/ConsoleUIContainer/2DGameUI/PlayerHUD/HeroStatus");
+    lib2DGM_gv_uI.lv_heroStatus = DialogControlLastCreated();
+    DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/ConsoleUIContainer/2DGameUI/PlayerHUD/CoinTotal");
+    lib2DGM_gv_uI.lv_coinsCollected = DialogControlLastCreated();
+    DialogControlHookupStandard(c_triggerControlTypeLabel, "UIContainer/ConsoleUIContainer/2DGameUI/PlayerHUD/PointTotal");
+    lib2DGM_gv_uI.lv_pointsCollected = DialogControlLastCreated();
+    libNtve_gf_SetDialogItemText(lib2DGM_gv_uI.lv_coinsCollected, StringExternal("Param/Value/lib_2DGM_A6B17F8D"), PlayerGroupAll());
+}
+
+void lib2DGM_gf_InitializeGameData () {
+    // Implementation
+    lib2DGM_gf_InitializeKineticArray();
+    lib2DGM_gf_InitializeGravity();
+}
+
+void lib2DGM_gf_InitializeEnvironment () {
+    // Implementation
+    lib2DGM_gf_InitializeGroundRegion();
+    lib2DGM_gf_InitializeGravity();
+}
+
+void lib2DGM_gf_InitializePlayerSettings () {
+    int auto5311B0FC_ae;
+    int auto5311B0FC_ai;
+
+    // Variable Declarations
+    int lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    libPIRL_gf_HideAllUIFramesForPlayers(PlayerGroupAll());
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeTextTag, true);
+    UISetDragSelectEnabled(PlayerGroupAll(), false);
+    PingSetPlayerPingsShown(PlayerGroupAll(), false);
+    SoundChannelMute(PlayerGroupAll(), c_soundCategoryAlert, true);
+    CameraSetData(PlayerGroupAll(), "BlizzardAllStars");
+    auto5311B0FC_ae = lib2DGM_gv_game.lv_maxPlayers;
+    auto5311B0FC_ai = 1;
+    lv_i = 1;
+    for ( ; ( (auto5311B0FC_ai >= 0 && lv_i <= auto5311B0FC_ae) || (auto5311B0FC_ai <= 0 && lv_i >= auto5311B0FC_ae) ) ; lv_i += auto5311B0FC_ai ) {
+        PlayerOptionOverride(lv_i, "camerafollow", "0");
+        CameraLockInput(lv_i, true);
+        VisRevealArea(lv_i, RegionEntireMap(), 0.0, false);
+        lib2DGM_gv_player[lv_i].lv_index = lv_i;
+    }
+}
+
+void lib2DGM_gf_InitializeDebugSettings () {
+    // Implementation
+    libPIRL_gf_HookupSupportPanel();
+    lib2DGM_gf_ConfigureDebugPanelforUnitPhysics(UnitFromId(1), PlayerGroupSingle(1));
+    libPIRL_gf_EnableDebugCategory(libPIRL_ge_DebugCategory_Global);
+}
+
+void lib2DGM_gf_InitializeGravity () {
+    fixed autoB4D66FE3_ae;
+    fixed autoB4D66FE3_ai;
+    fixed autoD1ED577C_ae;
+    fixed autoD1ED577C_ai;
+
+    // Variable Declarations
+    fixed lv_x;
+    fixed lv_y;
+
+    // Variable Initialization
+
+    // Implementation
+    autoB4D66FE3_ae = libNtve_gf_WidthOfRegion(RegionEntireMap());
+    autoB4D66FE3_ai = 5.0;
+    lv_x = 5.0;
+    for ( ; ( (autoB4D66FE3_ai >= 0 && lv_x <= autoB4D66FE3_ae) || (autoB4D66FE3_ai <= 0 && lv_x >= autoB4D66FE3_ae) ) ; lv_x += autoB4D66FE3_ai ) {
+        autoD1ED577C_ae = libNtve_gf_HeightOfRegion(RegionEntireMap());
+        autoD1ED577C_ai = 5.0;
+        lv_y = 5.0;
+        for ( ; ( (autoD1ED577C_ai >= 0 && lv_y <= autoD1ED577C_ae) || (autoD1ED577C_ai <= 0 && lv_y >= autoD1ED577C_ae) ) ; lv_y += autoD1ED577C_ai ) {
+            libNtve_gf_CreateActorAtPoint("Game2DGravity", Point(lv_x, lv_y));
+        }
+    }
+}
+
+void lib2DGM_gf_InitializeGroundRegion () {
+    int auto62F37180_ae;
+    int auto62F37180_ai;
+
+    // Variable Declarations
+    int lv_collisionIndex;
+    unitgroup lv_groundRegionUnits;
+    string lv_staticCollisionData;
+    string lv_staticCollisionInstance;
+    int lv_staticCollisionInstanceCount;
+    string lv_staticCollisionUnitType;
+    int lv_i;
+
+    // Variable Initialization
+    lv_groundRegionUnits = UnitGroupEmpty();
+
+    // Implementation
+    lib2DGM_gv_gameCollisionRegion = RegionCircle(Point(0.0, 0.0), 0.1);
+    lib2DGM_gv_gameCollisionRegionOneWay = RegionCircle(Point(0.0, 0.0), 0.1);
+    lv_staticCollisionData = "StaticCollisionUnitData";
+    lv_staticCollisionInstanceCount = UserDataInstanceCount(lv_staticCollisionData);
+    auto62F37180_ae = lv_staticCollisionInstanceCount;
+    auto62F37180_ai = 1;
+    lv_i = 1;
+    for ( ; ( (auto62F37180_ai >= 0 && lv_i <= auto62F37180_ae) || (auto62F37180_ai <= 0 && lv_i >= auto62F37180_ae) ) ; lv_i += auto62F37180_ai ) {
+        lv_staticCollisionInstance = UserDataInstance(lv_staticCollisionData, lv_i);
+        lv_staticCollisionUnitType = UserDataGetUnit(lv_staticCollisionData, lv_staticCollisionInstance, "Unit", 1);
+        UnitGroupAddUnitGroup(lv_groundRegionUnits, UnitGroup(lv_staticCollisionUnitType, c_playerAny, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+        lib2DGM_gf_SetCollisionVariablesFromInstance("StaticCollisionUnitData", lv_staticCollisionInstance);
+        UnitGroupLoopBegin(lv_groundRegionUnits);
+        for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+            UnitGroupAdd(lib2DGM_gv_staticCollisionUnits, UnitGroupLoopCurrent());
+            lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 3, UserDataGetFixed(lv_staticCollisionData, lv_staticCollisionInstance, "Height", 1));
+            lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 4, UserDataGetFixed(lv_staticCollisionData, lv_staticCollisionInstance, "Width", 1));
+            lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 15, (lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 4) * 0.5));
+            lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 16, (lib2DGM_gf_PresetCustomValue4(UnitGroupLoopCurrent(), 3) * 0.5));
+            lib2DGM_gv_staticCollisionArrayCount += 1;
+            lv_collisionIndex = lib2DGM_gv_staticCollisionArrayCount;
+            lib2DGM_gv_staticCollision[lv_collisionIndex].lv_unit = UnitGroupLoopCurrent();
+            lib2DGM_gv_staticCollision[lv_collisionIndex].lv_index = lv_collisionIndex;
+            lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region = RegionRect(lib2DGM_gf_XOfUnitLeft(UnitGroupLoopCurrent()), lib2DGM_gf_YOfUnitBottom(UnitGroupLoopCurrent()), lib2DGM_gf_XOfUnitRight(UnitGroupLoopCurrent()), lib2DGM_gf_YOfUnitTop(UnitGroupLoopCurrent()));
+            lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 40, IntToFixed(lv_collisionIndex));
+            if ((UserDataGetInt(lv_staticCollisionData, lv_staticCollisionInstance, "One Way State", 1) == 0)) {
+                RegionAddRegion(lib2DGM_gv_gameCollisionRegion, lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region);
+            }
+            else {
+                lib2DGM_gv_staticCollision[lv_collisionIndex].lv_oneWayState = true;
+                RegionAddRegion(lib2DGM_gv_gameCollisionRegionOneWay, lib2DGM_gv_staticCollision[lv_collisionIndex].lv_region);
+            }
+            UnitGroupRemove(lv_groundRegionUnits, UnitGroupLoopCurrent());
+        }
+        UnitGroupLoopEnd();
+    }
+    lib2DGM_gf_CalculateCollisionVariables();
+}
+
+void lib2DGM_gf_SetCollisionVariablesFromInstance (string lp_staticCollisionData, string lp_staticCollisionInstance) {
+    // Variable Declarations
+    fixed lv_collisionUnitRadius;
+    fixed lv_collisionWidth;
+    fixed lv_collisionHeight;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_collisionUnitRadius = SquareRoot((Pow((UserDataGetFixed(lp_staticCollisionData, lp_staticCollisionInstance, "Width", 1) / 2.0), 2.0) + Pow((UserDataGetFixed(lp_staticCollisionData, lp_staticCollisionInstance, "Height", 1) / 2.0), 2.0)));
+    if ((lv_collisionUnitRadius > lib2DGM_gv_maximumCollisionRadius)) {
+        lib2DGM_gv_maximumCollisionRadius = lv_collisionUnitRadius;
+    }
+    if ((lib2DGM_gv_minimumCollisionLength == 0.0)) {
+        lib2DGM_gv_minimumCollisionLength = UserDataGetFixed(lp_staticCollisionData, lp_staticCollisionInstance, "Height", 1);
+    }
+    if ((UserDataGetInt(lp_staticCollisionData, lp_staticCollisionInstance, "One Way State", 1) == 0)) {
+        lv_collisionWidth = UserDataGetFixed(lp_staticCollisionData, lp_staticCollisionInstance, "Width", 1);
+        lv_collisionHeight = UserDataGetFixed(lp_staticCollisionData, lp_staticCollisionInstance, "Height", 1);
+        if ((lv_collisionWidth < lib2DGM_gv_minimumCollisionLength)) {
+            lib2DGM_gv_minimumCollisionLength = lv_collisionWidth;
+        }
+        if ((lv_collisionHeight < lib2DGM_gv_minimumCollisionLength)) {
+            lib2DGM_gv_minimumCollisionLength = lv_collisionHeight;
+        }
+    }
+}
+
+void lib2DGM_gf_CalculateCollisionVariables () {
+    // Implementation
+    lib2DGM_gv_minimumHorizontalTest = (lib2DGM_gv_minimumCollisionLength / (lib2DGM_gv_hitTestHighFactor - lib2DGM_gv_hitTestLowFactor));
+    lib2DGM_gv_maximumHorizontalTest = (lib2DGM_gv_minimumHorizontalTest * 2.0);
+}
+
+void lib2DGM_gf_InitializeKineticArray () {
+    int init_i;
+
+    int autoFE2829D8_ae;
+    int autoFE2829D8_ai;
+    int auto5C216A0F_ae;
+    int auto5C216A0F_ai;
+
+    // Variable Declarations
+    int lv_i;
+    int lv_directionIndex;
+    string[5] lv_directionString;
+
+    // Variable Initialization
+    for (init_i = 0; init_i <= 4; init_i += 1) {
+        lv_directionString[init_i] = "";
+    }
+
+    // Implementation
+    lv_directionString[lib2DGM_ge_KineticArrayDirections_Up] = "Up";
+    lv_directionString[lib2DGM_ge_KineticArrayDirections_Down] = "Down";
+    lv_directionString[lib2DGM_ge_KineticArrayDirections_Left] = "Left";
+    lv_directionString[lib2DGM_ge_KineticArrayDirections_Right] = "Right";
+    autoFE2829D8_ae = 3;
+    autoFE2829D8_ai = 1;
+    lv_directionIndex = 0;
+    for ( ; ( (autoFE2829D8_ai >= 0 && lv_directionIndex <= autoFE2829D8_ae) || (autoFE2829D8_ai <= 0 && lv_directionIndex >= autoFE2829D8_ae) ) ; lv_directionIndex += autoFE2829D8_ai ) {
+        auto5C216A0F_ae = 9;
+        auto5C216A0F_ai = 1;
+        lv_i = 1;
+        for ( ; ( (auto5C216A0F_ai >= 0 && lv_i <= auto5C216A0F_ae) || (auto5C216A0F_ai <= 0 && lv_i >= auto5C216A0F_ae) ) ; lv_i += auto5C216A0F_ai ) {
+            lib2DGM_gv_kineticTranslateDotHundred[lv_directionIndex][lv_i] = (("VelocityApply" + lv_directionString[lv_directionIndex] + "Dot0" + IntToString(lv_i)));
+            lib2DGM_gv_kineticTranslateDotTen[lv_directionIndex][lv_i] = (("VelocityApply" + lv_directionString[lv_directionIndex] + "Dot" + IntToString(lv_i) + "0"));
+            lib2DGM_gv_kineticTranslateOne[lv_directionIndex][lv_i] = (("VelocityApply" + lv_directionString[lv_directionIndex] + "0" + IntToString(lv_i)));
+            lib2DGM_gv_kineticRemoveDotHundred[lv_directionIndex][lv_i] = (("VelocityRemove" + lv_directionString[lv_directionIndex] + "Dot0" + IntToString(lv_i)));
+            lib2DGM_gv_kineticRemoveDotTen[lv_directionIndex][lv_i] = (("VelocityRemove" + lv_directionString[lv_directionIndex] + "Dot" + IntToString(lv_i) + "0"));
+            lib2DGM_gv_kineticRemoveOne[lv_directionIndex][lv_i] = (("VelocityRemove" + lv_directionString[lv_directionIndex] + "0" + IntToString(lv_i)));
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticTranslateDotHundred[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_FA953679") + StringToText((lib2DGM_gv_kineticTranslateDotHundred[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_11ABD085")), true);
+            }
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticTranslateDotTen[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_035F8E1F") + StringToText((lib2DGM_gv_kineticTranslateDotTen[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_40A2D71D")), true);
+            }
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticTranslateOne[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_BA9A1AD2") + StringToText((lib2DGM_gv_kineticTranslateOne[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_8DFE3A25")), true);
+            }
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticRemoveDotHundred[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_41B28338") + StringToText((lib2DGM_gv_kineticRemoveDotHundred[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_8D9DFAD5")), true);
+            }
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticRemoveDotTen[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_C6EEC32B") + StringToText((lib2DGM_gv_kineticRemoveDotTen[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_0EF90062")), true);
+            }
+            if ((CatalogEntryIsValid(c_gameCatalogEffect, lib2DGM_gv_kineticRemoveOne[lv_directionIndex][lv_i]) == false)) {
+                TriggerDebugOutput(1, (StringExternal("Param/Value/lib_2DGM_AE4E7188") + StringToText((lib2DGM_gv_kineticRemoveOne[lv_directionIndex][lv_i])) + StringExternal("Param/Value/lib_2DGM_3B9D8AF4")), true);
+            }
+        }
+    }
+}
+
+void lib2DGM_gf_PlayerResolveInput (int lp_p) {
+    // Variable Declarations
+    unit lv_targetUnit;
+    fixed lv_accelerationMultiplier;
+    fixed lv_jumpLimitFactor;
+    fixed lv_platformDropDisplacement;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_targetUnit = lib2DGM_gv_player[lp_p].lv_hero;
+    if ((TimerGetRemaining(lib2DGM_gv_player[lp_p].lv_controlLoss) > 0.0)) {
+        return ;
+    }
+    if ((UnitIsAlive(lv_targetUnit) == false)) {
+        return ;
+    }
+    if ((lib2DGM_gv_player[lp_p].lv_input_KeyA_isPressed == true) && (lib2DGM_gv_player[lp_p].lv_input_KeyD_isPressed == false)) {
+        UnitBehaviorAdd(lv_targetUnit, "UnitStateWalkingAnimation", lv_targetUnit, 1);
+        lv_accelerationMultiplier = -1.0;
+        if ((lib2DGM_gf_PresetCustomValue(lv_targetUnit) > 0.0)) {
+            lv_accelerationMultiplier = (lv_accelerationMultiplier * 1.5);
+        }
+        if ((lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 30) == true)) {
+            lib2DGM_gf_AddHorizontalVelocity(lv_targetUnit, (lv_accelerationMultiplier * lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 5)));
+        }
+        else {
+            lib2DGM_gf_AddHorizontalVelocity(lv_targetUnit, (lv_accelerationMultiplier * lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 6)));
+        }
+    }
+    if ((lib2DGM_gv_player[lp_p].lv_input_KeyD_isPressed == true) && (lib2DGM_gv_player[lp_p].lv_input_KeyA_isPressed == false)) {
+        UnitBehaviorAdd(lv_targetUnit, "UnitStateWalkingAnimation", lv_targetUnit, 1);
+        lv_accelerationMultiplier = 1.0;
+        if ((lib2DGM_gf_PresetCustomValue(lv_targetUnit) < 0.0)) {
+            lv_accelerationMultiplier = (lv_accelerationMultiplier * 1.5);
+        }
+        if ((lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 30) == true)) {
+            lib2DGM_gf_AddHorizontalVelocity(lv_targetUnit, (lv_accelerationMultiplier * lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 5)));
+        }
+        else {
+            lib2DGM_gf_AddHorizontalVelocity(lv_targetUnit, (lv_accelerationMultiplier * lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 6)));
+        }
+    }
+    if ((lib2DGM_gv_player[lp_p].lv_input_KeyW_isHeld == false) && (lib2DGM_gv_player[lp_p].lv_input_KeyW_isPressed == true)) {
+        lib2DGM_gv_player[lp_p].lv_input_KeyW_isHeld = true;
+        if ((lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 10) > 0.0)) {
+            lib2DGM_gv_player[lp_p].lv_input_Jump_isLimited = false;
+            lib2DGM_gf_ModifyUnitCustomValue4(lv_targetUnit, 30, false);
+            UnitBehaviorRemove(lv_targetUnit, "UnitStateJumpingAnimation", 1);
+            UnitBehaviorRemove(lv_targetUnit, "UnitStateFallingAnimation", 1);
+            UnitBehaviorAdd(lv_targetUnit, "UnitStateJumpingAnimation", lv_targetUnit, 1);
+            if ((lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 10) == lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 9))) {
+                libNtve_gf_SendActorMessageToUnit(lv_targetUnit, "Create HeroJumpLaunch");
+                lib2DGM_gf_AddVerticalVelocity(lv_targetUnit, lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 7));
+            }
+            else {
+                libNtve_gf_SendActorMessageToUnit(lv_targetUnit, "Create HeroJumpImpact");
+                lib2DGM_gf_SetUnitVerticalVelocity(lv_targetUnit, 0.0);
+                lib2DGM_gf_AddVerticalVelocity(lv_targetUnit, lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 8));
+            }
+            lib2DGM_gf_ModifyUnitCustomValue(lv_targetUnit, 10, -1.0);
+        }
+    }
+    if ((lib2DGM_gv_player[lp_p].lv_input_KeyW_isHeld == true) && (lib2DGM_gv_player[lp_p].lv_input_KeyW_isPressed == false)) {
+        lib2DGM_gv_player[lp_p].lv_input_KeyW_isHeld = false;
+        if ((lib2DGM_gv_player[lp_p].lv_input_Jump_isLimited == false)) {
+            lib2DGM_gv_player[lp_p].lv_input_Jump_isLimited = true;
+            lv_jumpLimitFactor = 0.6;
+            if ((lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 10) == (lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 9) - 1.0)) && (lib2DGM_gf_PresetCustomValue2(lv_targetUnit) > (lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 7) * lv_jumpLimitFactor)) && (lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 30) == false) && (UnitHasBehavior2(lv_targetUnit, "UnitStateJumpingAnimation") == true)) {
+                lib2DGM_gf_AddVerticalVelocity(lv_targetUnit, (-1.0 * (lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 7) * (1.0 - lv_jumpLimitFactor))));
+            }
+            else if ((lib2DGM_gf_PresetCustomValue2(lv_targetUnit) > (lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 8) * lv_jumpLimitFactor)) && (lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 30) == false) && (UnitHasBehavior2(lv_targetUnit, "UnitStateJumpingAnimation") == true)) {
+                lib2DGM_gf_AddVerticalVelocity(lv_targetUnit, (-1.0 * (lib2DGM_gf_PresetCustomValue4(lv_targetUnit, 8) * (1.0 - lv_jumpLimitFactor))));
+            }
+        }
+    }
+    if (((lib2DGM_gv_player[lp_p].lv_input_KeyS_isHeld == true) || (lib2DGM_gv_player[lp_p].lv_input_KeyS_isPressed == true)) && (lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 31) == false)) {
+        lib2DGM_gf_ModifyUnitCustomValue4(lv_targetUnit, 31, true);
+        if ((lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 30) == true) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lib2DGM_gf_UnitGetCollisionTestPoint2(lv_targetUnit, lib2DGM_ge_UnitCollisionTestPoint_Origin)) == true)) {
+            lv_platformDropDisplacement = -0.6;
+            lib2DGM_gf_ModifyUnitCustomValue4(lv_targetUnit, 30, false);
+            lib2DGM_gf_AddVerticalVelocity(lv_targetUnit, lv_platformDropDisplacement);
+            UnitBehaviorAdd(lv_targetUnit, "UnitStateJumpingAnimation", lv_targetUnit, 1);
+        }
+    }
+    if ((lib2DGM_gv_player[lp_p].lv_input_KeyS_isHeld == false) && (lib2DGM_gv_player[lp_p].lv_input_KeyS_isPressed == false) && (lib2DGM_gf_PresetCustomValue5(lv_targetUnit, 31) == true)) {
+        lib2DGM_gf_ModifyUnitCustomValue4(lv_targetUnit, 31, false);
+    }
+}
+
+void lib2DGM_gf_UnitApplyFrictionAirResistance (unit lp_unit) {
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == true)) {
+        if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 34) == false)) {
+            lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, (lib2DGM_gf_PresetCustomValue(lp_unit) * lib2DGM_gv_game.lv_friction));
+        }
+    }
+    else {
+        if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 35) == false)) {
+            lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, (lib2DGM_gf_PresetCustomValue(lp_unit) * lib2DGM_gv_game.lv_airResistance));
+        }
+    }
+}
+
+void lib2DGM_gf_UnitResolveSpeculativeContact (unit lp_unit) {
+    fixed autoD6815EA8_ae;
+    fixed autoD6815EA8_ai;
+    fixed auto13B5FD2A_ae;
+    fixed auto13B5FD2A_ai;
+
+    // Variable Declarations
+    fixed lv_unitVelocityX;
+    fixed lv_unitVelocityY;
+    fixed lv_unitAdjustedXVelocity;
+    fixed lv_unitAdjustedYVelocity;
+    fixed lv_unitNormalVelocity;
+    point lv_unitCenter;
+    point lv_unitOrigin;
+    point lv_unitOriginSpeculative;
+    point lv_unitSpeculativeTestCenter;
+    fixed lv_unitSpeculativeTestX;
+    fixed lv_unitSpeculativeTestY;
+    point lv_unitSpeculativeTestLeft;
+    point lv_unitSpeculativeTestRight;
+    point lv_unitSpeculativeTestTop;
+    point lv_unitSpeculativeTestBottom;
+    region lv_collisionRegion;
+    region lv_collisionRegionOneWay;
+    unit lv_collisionUnit;
+    unit lv_closestSpeculativeCollisionUnit;
+    fixed lv_closestSpeculativeCollisionDistance;
+    fixed lv_speculativeStep;
+    fixed lv_speculativeAngle;
+    bool lv_collisionHasOccuredHorizontally;
+    bool lv_collisionHasOccuredVertically;
+    fixed lv_halfHeight;
+    fixed lv_halfWidth;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 32) == true)) {
+        return ;
+    }
+    lv_unitOrigin = UnitGetPosition(lp_unit);
+    lv_unitOriginSpeculative = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_unitNormalVelocity = DistanceBetweenPoints(lv_unitOrigin, lv_unitOriginSpeculative);
+    if ((lv_unitNormalVelocity <= lib2DGM_gv_speculativeStepIncrement)) {
+        return ;
+    }
+    lv_unitCenter = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Center);
+    lv_closestSpeculativeCollisionUnit = UnitGroupClosestToPoint(lib2DGM_gv_staticCollisionUnits, lv_unitCenter);
+    lv_closestSpeculativeCollisionDistance = DistanceBetweenPoints(lv_unitCenter, UnitGetPosition(lv_closestSpeculativeCollisionUnit));
+    lv_closestSpeculativeCollisionDistance = (lv_closestSpeculativeCollisionDistance - lib2DGM_gv_maximumCollisionRadius);
+    if ((lv_unitNormalVelocity < lv_closestSpeculativeCollisionDistance)) {
+        return ;
+    }
+    lv_closestSpeculativeCollisionDistance = MaxF(lv_closestSpeculativeCollisionDistance, 0.0);
+    lv_collisionRegion = lib2DGM_gv_gameCollisionRegion;
+    lv_collisionRegionOneWay = lib2DGM_gv_gameCollisionRegionOneWay;
+    lv_speculativeAngle = AngleBetweenPoints(lv_unitOrigin, lv_unitOriginSpeculative);
+    lv_halfHeight = lib2DGM_gf_PresetCustomValue4(lp_unit, 16);
+    lv_halfWidth = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+    lv_unitVelocityX = lib2DGM_gf_PresetCustomValue(lp_unit);
+    lv_unitVelocityY = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    autoD6815EA8_ae = lv_unitNormalVelocity;
+    autoD6815EA8_ai = lib2DGM_gv_speculativeStepIncrement;
+    lv_speculativeStep = lv_closestSpeculativeCollisionDistance;
+    for ( ; ( (autoD6815EA8_ai >= 0 && lv_speculativeStep <= autoD6815EA8_ae) || (autoD6815EA8_ai <= 0 && lv_speculativeStep >= autoD6815EA8_ae) ) ; lv_speculativeStep += autoD6815EA8_ai ) {
+        lv_unitSpeculativeTestCenter = PointWithOffsetPolar(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Center), lv_speculativeStep, lv_speculativeAngle);
+        lv_unitSpeculativeTestX = PointGetX(lv_unitSpeculativeTestCenter);
+        lv_unitSpeculativeTestY = PointGetY(lv_unitSpeculativeTestCenter);
+        if ((lv_unitVelocityX >= 0.0)) {
+            lv_unitSpeculativeTestRight = Point((lv_unitSpeculativeTestX + lv_halfWidth), lv_unitSpeculativeTestY);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestRight) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestRight);
+                if ((lib2DGM_gf_CollisionDirectionIsDown3(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedXVelocity = (lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lib2DGM_gf_XOfUnitRight(lp_unit));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 12, lv_unitVelocityX);
+                    lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lv_unitAdjustedXVelocity);
+                    lv_collisionHasOccuredHorizontally = true;
+                    break;
+                }
+            }
+        }
+        if ((lv_unitVelocityX <= 0.0)) {
+            lv_unitSpeculativeTestLeft = Point((lv_unitSpeculativeTestX - lv_halfWidth), lv_unitSpeculativeTestY);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestLeft) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestLeft);
+                if ((lib2DGM_gf_CollisionDirectionIsDown4(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedXVelocity = (lib2DGM_gf_XOfUnitRight(lv_collisionUnit) - lib2DGM_gf_XOfUnitLeft(lp_unit));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 12, lv_unitVelocityX);
+                    lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lv_unitAdjustedXVelocity);
+                    lv_collisionHasOccuredHorizontally = true;
+                    break;
+                }
+            }
+        }
+        if ((lv_unitVelocityY >= 0.0)) {
+            lv_unitSpeculativeTestTop = Point(lv_unitSpeculativeTestX, (lv_unitSpeculativeTestY + lv_halfHeight));
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestTop) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestTop);
+                if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedYVelocity = (lib2DGM_gf_YOfUnitBottom(lv_collisionUnit) - (PointGetY(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 3)));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lv_unitVelocityY);
+                    lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, lv_unitAdjustedYVelocity);
+                    lv_collisionHasOccuredVertically = true;
+                    break;
+                }
+            }
+        }
+        if ((lv_unitVelocityY <= 0.0) && (lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == false)) {
+            lv_unitSpeculativeTestBottom = Point(lv_unitSpeculativeTestX, (lv_unitSpeculativeTestY - lv_halfHeight));
+            if (((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestBottom) == true) || ((RegionContainsPoint(lv_collisionRegionOneWay, lv_unitSpeculativeTestBottom) == true) && (lib2DGM_gf_PresetCustomValue5(lp_unit, 31) == false)))) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestBottom);
+                if ((PointGetY(lv_unitOrigin) >= lib2DGM_gf_YOfUnitTop(lv_collisionUnit)) && (lib2DGM_gf_CollisionDirectionIsDown(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedYVelocity = (lib2DGM_gf_YOfUnitTop(lv_collisionUnit) - PointGetY(UnitGetPosition(lp_unit)));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lv_unitVelocityY);
+                    lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, lv_unitAdjustedYVelocity);
+                    lv_collisionHasOccuredVertically = true;
+                    break;
+                }
+            }
+        }
+    }
+    if ((lv_collisionHasOccuredHorizontally == false) && (lv_collisionHasOccuredVertically == false)) {
+        return ;
+    }
+    lv_unitOriginSpeculative = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    lv_speculativeAngle = AngleBetweenPoints(lv_unitOrigin, lv_unitOriginSpeculative);
+    lv_unitNormalVelocity = DistanceBetweenPoints(lv_unitOrigin, lv_unitOriginSpeculative);
+    lv_unitVelocityX = lib2DGM_gf_PresetCustomValue(lp_unit);
+    lv_unitVelocityY = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    auto13B5FD2A_ae = lv_unitNormalVelocity;
+    auto13B5FD2A_ai = lib2DGM_gv_speculativeStepIncrement;
+    lv_speculativeStep = lv_closestSpeculativeCollisionDistance;
+    for ( ; ( (auto13B5FD2A_ai >= 0 && lv_speculativeStep <= auto13B5FD2A_ae) || (auto13B5FD2A_ai <= 0 && lv_speculativeStep >= auto13B5FD2A_ae) ) ; lv_speculativeStep += auto13B5FD2A_ai ) {
+        lv_unitSpeculativeTestCenter = PointWithOffsetPolar(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Center), lv_speculativeStep, lv_speculativeAngle);
+        lv_unitSpeculativeTestX = PointGetX(lv_unitSpeculativeTestCenter);
+        lv_unitSpeculativeTestY = PointGetY(lv_unitSpeculativeTestCenter);
+        if ((lv_unitVelocityX >= 0.0) && (lv_collisionHasOccuredHorizontally == false)) {
+            lv_unitSpeculativeTestRight = Point((lv_unitSpeculativeTestX + lv_halfWidth), lv_unitSpeculativeTestY);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestRight) == true) && (RegionContainsPoint(lv_collisionRegionOneWay, lv_unitSpeculativeTestRight) == false)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestRight);
+                if ((lib2DGM_gf_CollisionDirectionIsDown3(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedXVelocity = (lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lib2DGM_gf_XOfUnitRight(lp_unit));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 12, lv_unitVelocityX);
+                    lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lv_unitAdjustedXVelocity);
+                    lv_collisionHasOccuredHorizontally = true;
+                    return ;
+                }
+            }
+        }
+        if ((lv_unitVelocityX <= 0.0) && (lv_collisionHasOccuredHorizontally == false)) {
+            lv_unitSpeculativeTestLeft = Point((lv_unitSpeculativeTestX - lv_halfWidth), lv_unitSpeculativeTestY);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestLeft) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestLeft);
+                if ((lib2DGM_gf_CollisionDirectionIsDown4(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedXVelocity = (lib2DGM_gf_XOfUnitRight(lv_collisionUnit) - lib2DGM_gf_XOfUnitLeft(lp_unit));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 12, lv_unitVelocityX);
+                    lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lv_unitAdjustedXVelocity);
+                    lv_collisionHasOccuredHorizontally = true;
+                    return ;
+                }
+            }
+        }
+        if ((lv_unitVelocityY >= 0.0) && (lv_collisionHasOccuredVertically == false)) {
+            lv_unitSpeculativeTestTop = Point(lv_unitSpeculativeTestX, (lv_unitSpeculativeTestY + lv_halfHeight));
+            if ((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestTop) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestTop);
+                if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedYVelocity = (lib2DGM_gf_YOfUnitBottom(lv_collisionUnit) - (PointGetY(UnitGetPosition(lp_unit)) + lib2DGM_gf_PresetCustomValue4(lp_unit, 3)));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lv_unitVelocityY);
+                    lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, lv_unitAdjustedYVelocity);
+                    lv_collisionHasOccuredVertically = true;
+                    return ;
+                }
+            }
+        }
+        if ((lv_unitVelocityY <= 0.0) && (lv_collisionHasOccuredVertically == false) && (lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == false)) {
+            lv_unitSpeculativeTestBottom = Point(lv_unitSpeculativeTestX, (lv_unitSpeculativeTestY - lv_halfHeight));
+            if (((RegionContainsPoint(lv_collisionRegion, lv_unitSpeculativeTestBottom) == true) || (RegionContainsPoint(lv_collisionRegionOneWay, lv_unitSpeculativeTestBottom) == true))) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_unitSpeculativeTestBottom);
+                if ((lib2DGM_gf_CollisionDirectionIsDown(lv_unitSpeculativeTestCenter, lv_collisionUnit) == true)) {
+                    lv_unitAdjustedYVelocity = (lib2DGM_gf_YOfUnitTop(lv_collisionUnit) - PointGetY(UnitGetPosition(lp_unit)));
+                    lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lv_unitVelocityY);
+                    lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, lv_unitAdjustedYVelocity);
+                    lv_collisionHasOccuredVertically = true;
+                    return ;
+                }
+            }
+        }
+    }
+}
+
+void lib2DGM_gf_UnitResolveHorizontalCollision (unit lp_unit) {
+    fixed autoBF58513E_ae;
+    fixed autoBF58513E_ai;
+    fixed auto518CE3C1_ae;
+    fixed auto518CE3C1_ai;
+
+    // Variable Declarations
+    region lv_collisionRegion;
+    point lv_collisionTestLeftHigh;
+    point lv_collisionTestLeftIntermediate;
+    point lv_collisionTestLeftLow;
+    point lv_collisionTestRightHigh;
+    point lv_collisionTestRightIntermediate;
+    point lv_collisionTestRightLow;
+    point lv_collisionTestCenter;
+    fixed lv_unitWidthOffset;
+    unit lv_collisionUnit;
+    point lv_resolvedPosition;
+    fixed lv_unitStoredVelocity;
+    fixed lv_unitHeight;
+    fixed lv_intermediateHeightTest;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 32) == true)) {
+        return ;
+    }
+    if ((lib2DGM_gf_PresetCustomValue(lp_unit) == 0.0)) {
+        return ;
+    }
+    lv_collisionRegion = lib2DGM_gv_gameCollisionRegion;
+    lv_unitWidthOffset = lib2DGM_gf_PresetCustomValue4(lp_unit, 15);
+    lv_unitHeight = lib2DGM_gf_PresetCustomValue4(lp_unit, 3);
+    lv_collisionTestCenter = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Center);
+    if ((lib2DGM_gf_PresetCustomValue(lp_unit) > 0.0)) {
+        lv_collisionTestRightLow = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightLow);
+        if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestRightLow) == true)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestRightLow);
+            if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestRightLow, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestRightLow, lv_collisionUnit) == false)) {
+                lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+            }
+        }
+        lv_collisionTestRightHigh = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightHigh);
+        if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestRightHigh) == true)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestRightHigh);
+            if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestRightHigh, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestRightHigh, lv_collisionUnit) == false)) {
+                lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+            }
+        }
+        if ((lv_resolvedPosition == null) && (lv_unitHeight > lib2DGM_gv_minimumHorizontalTest) && (lv_unitHeight < lib2DGM_gv_maximumHorizontalTest)) {
+            lv_collisionTestRightIntermediate = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightMid);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestRightIntermediate) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestRightIntermediate);
+                if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestRightIntermediate, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestRightIntermediate, lv_collisionUnit) == false)) {
+                    lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+                }
+            }
+        }
+        else if ((lv_resolvedPosition == null) && (lv_unitHeight >= lib2DGM_gv_minimumHorizontalTest)) {
+            auto518CE3C1_ae = (lib2DGM_gf_PresetCustomValue4(lp_unit, 18) - lib2DGM_gv_minimumCollisionLength);
+            auto518CE3C1_ai = lib2DGM_gv_minimumCollisionLength;
+            lv_intermediateHeightTest = (lib2DGM_gf_PresetCustomValue4(lp_unit, 17) + lib2DGM_gv_minimumCollisionLength);
+            for ( ; ( (auto518CE3C1_ai >= 0 && lv_intermediateHeightTest <= auto518CE3C1_ae) || (auto518CE3C1_ai <= 0 && lv_intermediateHeightTest >= auto518CE3C1_ae) ) ; lv_intermediateHeightTest += auto518CE3C1_ai ) {
+                lv_collisionTestRightIntermediate = Point(PointGetX(lv_collisionTestRightLow), (PointGetY(UnitGetPosition(lp_unit)) + lv_intermediateHeightTest));
+                if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestRightIntermediate) == true)) {
+                    lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestRightIntermediate);
+                    if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestRightIntermediate, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestRightIntermediate, lv_collisionUnit) == false)) {
+                        lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitLeft(lv_collisionUnit) - lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+                    }
+                }
+            }
+        }
+    }
+    else {
+        lv_collisionTestLeftLow = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftLow);
+        if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestLeftLow) == true)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestLeftLow);
+            if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestLeftLow, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestLeftLow, lv_collisionUnit) == false)) {
+                lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitRight(lv_collisionUnit) + lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+            }
+        }
+        lv_collisionTestLeftHigh = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftHigh);
+        if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestLeftHigh) == true)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestLeftHigh);
+            if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestLeftHigh, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestLeftHigh, lv_collisionUnit) == false)) {
+                lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitRight(lv_collisionUnit) + lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+            }
+        }
+        if ((lv_resolvedPosition == null) && (lv_unitHeight > lib2DGM_gv_minimumHorizontalTest) && (lv_unitHeight < lib2DGM_gv_maximumHorizontalTest)) {
+            lv_collisionTestLeftIntermediate = lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftMid);
+            if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestLeftIntermediate) == true)) {
+                lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestLeftIntermediate);
+                if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestLeftIntermediate, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestLeftIntermediate, lv_collisionUnit) == false)) {
+                    lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitRight(lv_collisionUnit) + lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+                }
+            }
+        }
+        else if ((lv_resolvedPosition == null) && (lv_unitHeight >= lib2DGM_gv_maximumHorizontalTest)) {
+            autoBF58513E_ae = (lib2DGM_gf_PresetCustomValue4(lp_unit, 18) - lib2DGM_gv_minimumCollisionLength);
+            autoBF58513E_ai = lib2DGM_gv_minimumCollisionLength;
+            lv_intermediateHeightTest = (lib2DGM_gf_PresetCustomValue4(lp_unit, 17) + lib2DGM_gv_minimumCollisionLength);
+            for ( ; ( (autoBF58513E_ai >= 0 && lv_intermediateHeightTest <= autoBF58513E_ae) || (autoBF58513E_ai <= 0 && lv_intermediateHeightTest >= autoBF58513E_ae) ) ; lv_intermediateHeightTest += autoBF58513E_ai ) {
+                lv_collisionTestLeftIntermediate = Point(PointGetX(lv_collisionTestLeftLow), (PointGetY(UnitGetPosition(lp_unit)) + lv_intermediateHeightTest));
+                if ((lv_resolvedPosition == null) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestLeftIntermediate) == true)) {
+                    lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestLeftIntermediate);
+                    if ((lib2DGM_gf_CollisionDirectionIsDown2(lv_collisionTestLeftIntermediate, lv_collisionUnit) == false) && (lib2DGM_gf_CollisionDirectionIsDown(lv_collisionTestLeftIntermediate, lv_collisionUnit) == false)) {
+                        lv_resolvedPosition = Point((lib2DGM_gf_XOfUnitRight(lv_collisionUnit) + lv_unitWidthOffset), PointGetY(UnitGetPosition(lp_unit)));
+                    }
+                }
+            }
+        }
+    }
+    if ((lv_resolvedPosition != null)) {
+        if ((lib2DGM_gf_PresetCustomValue4(lp_unit, 12) == 0.0)) {
+            lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 12, lib2DGM_gf_PresetCustomValue(lp_unit));
+        }
+        lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly(lp_unit, lv_resolvedPosition);
+        lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, 0.0);
+    }
+}
+
+void lib2DGM_gf_UnitResolveVerticalCollision (unit lp_unit) {
+    // Variable Declarations
+    region lv_collisionRegion;
+    point lv_collisionTestOrigin;
+    point lv_collisionTestTop;
+    point lv_collisionTestTopLeft;
+    point lv_collisionTestTopRight;
+    unit lv_collisionUnit;
+    point lv_resolvedPosition;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 32) == true)) {
+        return ;
+    }
+    lv_collisionRegion = lib2DGM_gv_gameCollisionRegion;
+    lv_collisionTestTop = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Top);
+    lv_collisionTestOrigin = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Origin);
+    if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestTop) == true) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestOrigin) == true)) {
+        lv_resolvedPosition = Point((PointGetX(UnitGetPosition(lp_unit)) - lib2DGM_gf_PresetCustomValue(lp_unit)), (PointGetY(UnitGetPosition(lp_unit)) - lib2DGM_gf_PresetCustomValue2(lp_unit)));
+        lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly(lp_unit, lv_resolvedPosition);
+        lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, 0.0);
+        lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, 0.0);
+        return ;
+    }
+    if ((lib2DGM_gf_PresetCustomValue2(lp_unit) == 0.0)) {
+        return ;
+    }
+    if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestTop) == false) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestOrigin) == true) && (lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == false)) {
+        return ;
+    }
+    lv_collisionTestTopLeft = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_TopLeft);
+    lv_collisionTestTopRight = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_TopRight);
+    if ((lib2DGM_gf_PresetCustomValue2(lp_unit) > 0.0)) {
+        if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestTopLeft) == true) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestOrigin) == false)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestTopLeft);
+        }
+        if ((RegionContainsPoint(lv_collisionRegion, lv_collisionTestTopRight) == true) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestOrigin) == false)) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestTopRight);
+        }
+        if ((lv_collisionUnit != null)) {
+            lv_resolvedPosition = Point(PointGetX(UnitGetPosition(lp_unit)), (lib2DGM_gf_YOfUnitBottom(lv_collisionUnit) - lib2DGM_gf_PresetCustomValue4(lp_unit, 3)));
+            if ((lib2DGM_gf_PresetCustomValue4(lp_unit, 13) == 0.0)) {
+                lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lib2DGM_gf_PresetCustomValue2(lp_unit));
+            }
+            lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly(lp_unit, lv_resolvedPosition);
+            lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, 0.0);
+            DataTableSetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_TriggeringUnit), lp_unit);
+            DataTableSetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_StaticCollisionBottom, lib2DGM_ge_GenericEventParameter_CollidingUnit), lv_collisionUnit);
+            lib2DGM_gf_SendGenericEventPreset(lib2DGM_ge_GenericEvent_StaticCollisionBottom);
+        }
+    }
+    else {
+    }
+}
+
+void lib2DGM_gf_ResolveGravityForUnit2 (unit lp_unit) {
+    // Variable Declarations
+    region lv_collisionRegion;
+    region lv_collisionRegionOneWay;
+    point lv_collisionTestOriginLeft;
+    point lv_collisionTestOriginRight;
+    point lv_collisionTestSuccess;
+    point lv_collisionTestTop;
+    unit lv_collisionUnit;
+    point lv_resolvedPosition;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 33) == true)) {
+        return ;
+    }
+    lv_collisionRegion = lib2DGM_gv_gameCollisionRegion;
+    lv_collisionRegionOneWay = lib2DGM_gv_gameCollisionRegionOneWay;
+    lv_collisionTestOriginLeft = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_OriginLeft);
+    lv_collisionTestOriginRight = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_OriginRight);
+    lv_collisionTestTop = lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Top);
+    lv_p = UnitGetOwner(lp_unit);
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == true) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lv_collisionTestOriginLeft) == false) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lv_collisionTestOriginRight) == false) && ((RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginLeft) == false) || (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginRight) == false) || ((lib2DGM_gf_PresetCustomValue5(lp_unit, 31) == true) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginLeft) == true) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginRight) == true)))) {
+        lib2DGM_gf_ModifyUnitCustomValue4(lp_unit, 30, false);
+    }
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == false)) {
+        if ((lib2DGM_gf_PresetCustomValue2(lp_unit) <= 0.0) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestTop) == false) && ((RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lv_collisionTestOriginLeft) == true) || ((lib2DGM_gf_PresetCustomValue5(lp_unit, 31) == false) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginLeft) == true)))) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestOriginLeft);
+        }
+        if ((lib2DGM_gf_PresetCustomValue2(lp_unit) <= 0.0) && (RegionContainsPoint(lv_collisionRegion, lv_collisionTestTop) == false) && ((RegionContainsPoint(lib2DGM_gv_gameCollisionRegion, lv_collisionTestOriginRight) == true) || ((lib2DGM_gf_PresetCustomValue5(lp_unit, 31) == false) && (RegionContainsPoint(lib2DGM_gv_gameCollisionRegionOneWay, lv_collisionTestOriginRight) == true)))) {
+            lv_collisionUnit = lib2DGM_gf_GetCollisionUnitFromPoint(lv_collisionTestOriginRight);
+        }
+        if ((lv_collisionUnit != null)) {
+            UnitBehaviorRemove(lp_unit, "UnitStateJumpingAnimation", 1);
+            UnitBehaviorRemove(lp_unit, "UnitStateFallingAnimation", 1);
+            lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 10, lib2DGM_gf_PresetCustomValue4(lp_unit, 9));
+            lib2DGM_gf_ModifyUnitCustomValue4(lp_unit, 30, true);
+            lv_resolvedPosition = Point(PointGetX(UnitGetPosition(lp_unit)), lib2DGM_gf_YOfUnitTop(lv_collisionUnit));
+            if ((lib2DGM_gf_PresetCustomValue4(lp_unit, 13) == 0.0)) {
+                lib2DGM_gf_ModifyUnitCustomValue3(lp_unit, 13, lib2DGM_gf_PresetCustomValue2(lp_unit));
+            }
+            lib2DGM_gf_MoveUnitAndHitboxUnitsInstantly(lp_unit, lv_resolvedPosition);
+            lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, 0.0);
+            lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lib2DGM_gf_UnitCalculatedLandingHorizontalVelocity(lp_unit));
+        }
+        else {
+            lib2DGM_gf_AddVerticalVelocity(lp_unit, lib2DGM_gv_game.lv_gravity);
+            if ((UnitHasBehavior2(lp_unit, "UnitStateFallingAnimation") == false) && (UnitHasBehavior2(lp_unit, "UnitStateJumpingAnimation") == false)) {
+                lib2DGM_gf_UnitRemoveJumpChargeAfterBuffer(lp_unit, 0.25);
+            }
+            UnitBehaviorAdd(lp_unit, "UnitStateFallingAnimation", lp_unit, 1);
+        }
+    }
+}
+
+trigger auto_lib2DGM_gf_ResolveRestitutionForUnit_Trigger = null;
+unit auto_lib2DGM_gf_ResolveRestitutionForUnit_lp_unit;
+
+void lib2DGM_gf_ResolveRestitutionForUnit (unit lp_unit) {
+    auto_lib2DGM_gf_ResolveRestitutionForUnit_lp_unit = lp_unit;
+
+    if (auto_lib2DGM_gf_ResolveRestitutionForUnit_Trigger == null) {
+        auto_lib2DGM_gf_ResolveRestitutionForUnit_Trigger = TriggerCreate("auto_lib2DGM_gf_ResolveRestitutionForUnit_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib2DGM_gf_ResolveRestitutionForUnit_Trigger, false, false);
+}
+
+bool auto_lib2DGM_gf_ResolveRestitutionForUnit_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_unit = auto_lib2DGM_gf_ResolveRestitutionForUnit_lp_unit;
+
+    // Variable Declarations
+    fixed lv_unitStoredXVelocity;
+    fixed lv_unitStoredYVelocity;
+    fixed lv_unitRestitution;
+    fixed lv_inputBlockDuration;
+    fixed lv_inputBlockDurationMinimum;
+    fixed lv_inputBlockFactor;
+    int lv_p;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue4(lp_unit, 11) <= 0.0)) {
+        return true;
+    }
+    Wait(0.0, c_timeGame);
+    lv_inputBlockDurationMinimum = 0.25;
+    lv_inputBlockFactor = 0.0625;
+    lv_unitStoredXVelocity = lib2DGM_gf_PresetCustomValue4(lp_unit, 12);
+    lv_unitStoredYVelocity = lib2DGM_gf_PresetCustomValue4(lp_unit, 13);
+    lv_unitRestitution = lib2DGM_gf_PresetCustomValue4(lp_unit, 11);
+    lv_p = UnitGetOwner(lp_unit);
+    if ((lv_unitStoredXVelocity != 0.0)) {
+        lv_unitStoredXVelocity = ((-1.0 * lv_unitRestitution) * lv_unitStoredXVelocity);
+        lib2DGM_gf_SetUnitHorizontalVelocity(lp_unit, lv_unitStoredXVelocity);
+        if ((lib2DGM_gf_PresetCustomValue(lp_unit) != 0.0) && (UnitGetType(lp_unit) == "Hero")) {
+            lv_inputBlockDuration = MaxF(AbsF((lv_unitStoredXVelocity * lv_inputBlockFactor)), lv_inputBlockDurationMinimum);
+            libPIRL_gf_AddTimeToTimer(lib2DGM_gv_player[lv_p].lv_controlLoss, lv_inputBlockDuration);
+        }
+    }
+    if ((lv_unitStoredYVelocity != 0.0) && (AbsF(lv_unitStoredYVelocity) > (lib2DGM_gf_PresetCustomValue4(lp_unit, 16) * lv_unitRestitution))) {
+        lv_unitStoredYVelocity = ((-1.0 * lv_unitRestitution) * lv_unitStoredYVelocity);
+        lib2DGM_gf_SetUnitVerticalVelocity(lp_unit, lv_unitStoredYVelocity);
+        if ((lib2DGM_gf_PresetCustomValue2(lp_unit) != 0.0) && (UnitGetType(lp_unit) == "Hero")) {
+            lv_inputBlockDuration = MaxF(AbsF((lv_unitStoredYVelocity * lv_inputBlockFactor)), lv_inputBlockDurationMinimum);
+            libPIRL_gf_AddTimeToTimer(lib2DGM_gv_player[lv_p].lv_controlLoss, lv_inputBlockDuration);
+        }
+    }
+    return true;
+}
+
+void lib2DGM_gf_TranslateUnit (unit lp_unit) {
+    // Implementation
+    DataTableSetUnit(false, lib2DGM_gf_PresetGenericEvent2(lib2DGM_ge_GenericEvent_UnitTranslated, lib2DGM_ge_GenericEventParameter_TriggeringUnit), lp_unit);
+    lib2DGM_gf_SendGenericEventPreset(lib2DGM_ge_GenericEvent_UnitTranslated);
+    lib2DGM_gf_TranslateUnit3(lp_unit);
+    lib2DGM_gf_TranslateUnit2(lp_unit);
+}
+
+void lib2DGM_gf_TranslateUnit2 (unit lp_unit) {
+    int autoAA597617_ae;
+    int autoAA597617_ai;
+
+    // Variable Declarations
+    fixed lv_velocityY;
+    fixed lv_absVelocity;
+    int lv_i;
+    int lv_kineticDotHundred;
+    int lv_kineticDotTen;
+    int lv_kineticOne;
+    int lv_directionIndex;
+    string lv_hitboxIndex;
+    unitgroup lv_hitboxGroup;
+    int lv_hitboxCount;
+    unit lv_hitboxUnit;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv_velocityY = lib2DGM_gf_PresetCustomValue2(lp_unit);
+    lv_absVelocity = AbsF(lv_velocityY);
+    if ((lv_velocityY == 0.0)) {
+        return ;
+    }
+    if ((lv_velocityY > 0.0)) {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Up;
+    }
+    else {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Down;
+    }
+    lv_kineticOne = TruncI(lv_absVelocity);
+    lv_kineticDotTen = TruncI(((lv_absVelocity * 10.0) - (lv_kineticOne * 10.0)));
+    lv_kineticDotHundred = (RoundI((lv_absVelocity * 100.0)) - ((lv_kineticDotTen * 10) + (lv_kineticOne * 100)));
+    if ((lv_kineticDotHundred == 10)) {
+        lv_kineticDotHundred = 0;
+        lv_kineticDotTen += 1;
+    }
+    if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        autoAA597617_ae = lv_hitboxCount;
+        autoAA597617_ai = 1;
+        lv_i = 1;
+        for ( ; ( (autoAA597617_ai >= 0 && lv_i <= autoAA597617_ae) || (autoAA597617_ai <= 0 && lv_i >= autoAA597617_ae) ) ; lv_i += autoAA597617_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+        }
+    }
+}
+
+void lib2DGM_gf_TranslateUnit3 (unit lp_unit) {
+    int autoD99DA685_ae;
+    int autoD99DA685_ai;
+
+    // Variable Declarations
+    fixed lv_velocityX;
+    fixed lv_absVelocity;
+    int lv_i;
+    int lv_kineticDotHundred;
+    int lv_kineticDotTen;
+    int lv_kineticOne;
+    int lv_directionIndex;
+    string lv_hitboxIndex;
+    unitgroup lv_hitboxGroup;
+    int lv_hitboxCount;
+    unit lv_hitboxUnit;
+
+    // Variable Initialization
+    lv_hitboxIndex = "";
+    lv_hitboxGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv_velocityX = lib2DGM_gf_PresetCustomValue(lp_unit);
+    lv_absVelocity = AbsF(lv_velocityX);
+    if ((lv_velocityX == 0.0)) {
+        return ;
+    }
+    if ((lv_velocityX > 0.0)) {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Right;
+    }
+    else {
+        lv_directionIndex = lib2DGM_ge_KineticArrayDirections_Left;
+    }
+    lv_kineticOne = TruncI(lv_absVelocity);
+    lv_kineticDotTen = TruncI(((lv_absVelocity * 10.0) - (lv_kineticOne * 10.0)));
+    lv_kineticDotHundred = (RoundI((lv_absVelocity * 100.0)) - ((lv_kineticDotTen * 10) + (lv_kineticOne * 100)));
+    if ((lv_kineticDotHundred == 10)) {
+        lv_kineticDotHundred = 0;
+        lv_kineticDotTen += 1;
+    }
+    if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+        PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lp_unit);
+        lib2DGM_gv_totalTranslateKinetics += 1;
+    }
+    lv_hitboxIndex = lib2DGM_gf_UnitGetHitboxGroupCode(lp_unit);
+    if ((DataTableValueExists(true, lv_hitboxIndex) == true)) {
+        lv_hitboxGroup = DataTableGetUnitGroup(true, lv_hitboxIndex);
+        lv_hitboxCount = UnitGroupCount(lv_hitboxGroup, c_unitCountAll);
+        autoD99DA685_ae = lv_hitboxCount;
+        autoD99DA685_ai = 1;
+        lv_i = 1;
+        for ( ; ( (autoD99DA685_ai >= 0 && lv_i <= autoD99DA685_ae) || (autoD99DA685_ai <= 0 && lv_i >= autoD99DA685_ae) ) ; lv_i += autoD99DA685_ai ) {
+            lv_hitboxUnit = UnitGroupUnit(lv_hitboxGroup, lv_i);
+            if (((lv_kineticOne >= 1) && (lv_kineticOne <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateOne[(lv_directionIndex)][lv_kineticOne], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotTen >= 1) && (lv_kineticDotTen <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotTen[(lv_directionIndex)][lv_kineticDotTen], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+            if (((lv_kineticDotHundred >= 1) && (lv_kineticDotHundred <= 9))) {
+                PlayerCreateEffectUnit(0, lib2DGM_gv_kineticTranslateDotHundred[(lv_directionIndex)][lv_kineticDotHundred], lv_hitboxUnit);
+                lib2DGM_gv_totalTranslateKinetics += 1;
+            }
+        }
+    }
+}
+
+string lib2DGM_gf_PresetGenericEvent (int lp_event) {
+    // Implementation
+    return IntToString((lp_event));
+}
+
+string lib2DGM_gf_PresetGenericEvent2 (int lp_event, int lp_parameter) {
+    // Implementation
+    return TriggerEventParamName(IntToString((lp_event)), IntToString((lp_parameter)));
+}
+
+void lib2DGM_gf_SendGenericEventPreset (int lp_event) {
+    // Implementation
+    TriggerSendEvent(IntToString((lp_event)));
+}
+
+void lib2DGM_gf_SetStaticCollisionVisibility (bool lp_show) {
+    // Implementation
+    if ((lp_show == true)) {
+        libNtve_gf_SetUpgradeLevelForPlayer(0, "DebugStaticCollisionAreaOff", 0);
+        libNtve_gf_SetUpgradeLevelForPlayer(0, "DebugStaticCollisionAreaOn", 1);
+    }
+    else {
+        libNtve_gf_SetUpgradeLevelForPlayer(0, "DebugStaticCollisionAreaOn", 0);
+        libNtve_gf_SetUpgradeLevelForPlayer(0, "DebugStaticCollisionAreaOff", 1);
+    }
+}
+
+void lib2DGM_gf_DebugUnitCollisionTestsNext (unit lp_unit) {
+    // Implementation
+    if ((libPIRL_gf_PrintCategoryIsEnabled(libPIRL_ge_DebugCategory_Global) == true)) {
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Origin));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftHigh));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftLow));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightHigh));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightLow));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetPresetPointNext(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Top));
+    }
+}
+
+void lib2DGM_gf_DebugUnitCollisionTests (unit lp_unit) {
+    // Implementation
+    if ((libPIRL_gf_PrintCategoryIsEnabled(libPIRL_ge_DebugCategory_Global) == true)) {
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Origin));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftLow));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_LeftHigh));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightLow));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_RightHigh));
+        libPIRL_gf_DebugPoint(lib2DGM_gf_UnitGetCollisionTestPoint2(lp_unit, lib2DGM_ge_UnitCollisionTestPoint_Top));
+    }
+}
+
+void lib2DGM_gf_ConfigureDebugPanelforUnitPhysics (unit lp_unit, playergroup lp_targetPlayers) {
+    int auto26A5A59E_ae;
+    int auto26A5A59E_ai;
+    int auto9023EA04_ae;
+    int auto9023EA04_ai;
+
+    // Variable Declarations
+    int lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_header, StringExternal("Param/Value/lib_2DGM_5021E729"), lp_targetPlayers);
+    auto26A5A59E_ae = libPIRL_gv_supportPanel.lv_maxEntryCount;
+    auto26A5A59E_ai = 1;
+    lv_i = 1;
+    for ( ; ( (auto26A5A59E_ai >= 0 && lv_i <= auto26A5A59E_ae) || (auto26A5A59E_ai <= 0 && lv_i >= auto26A5A59E_ae) ) ; lv_i += auto26A5A59E_ai ) {
+        libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[(lv_i - 1)], StringToText(""), lp_targetPlayers);
+        libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[(lv_i - 1)], StringToText(""), lp_targetPlayers);
+    }
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[0], StringExternal("Param/Value/lib_2DGM_CD703EA7"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[1], StringExternal("Param/Value/lib_2DGM_461B021D"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[2], StringExternal("Param/Value/lib_2DGM_546C844A"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[3], StringExternal("Param/Value/lib_2DGM_A6F030F5"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[4], StringExternal("Param/Value/lib_2DGM_AA9F10B3"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[5], StringExternal("Param/Value/lib_2DGM_F099248B"), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_field[6], StringExternal("Param/Value/lib_2DGM_B17EF191"), lp_targetPlayers);
+    auto9023EA04_ae = libPIRL_gv_supportPanel.lv_maxEntryCount;
+    auto9023EA04_ai = 1;
+    lv_i = 8;
+    for ( ; ( (auto9023EA04_ai >= 0 && lv_i <= auto9023EA04_ae) || (auto9023EA04_ai <= 0 && lv_i >= auto9023EA04_ae) ) ; lv_i += auto9023EA04_ai ) {
+        DialogControlSetVisible(libPIRL_gv_supportPanel.lv_entry[(lv_i - 1)], PlayerGroupAll(), false);
+    }
+}
+
+void lib2DGM_gf_ConfigureDebugPanelforUnitPhysics2 (unit lp_unit, playergroup lp_targetPlayers) {
+    // Variable Declarations
+    int lv_i;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((UnitIsAlive(lp_unit) == false)) {
+        return ;
+    }
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[0], StringToText((FixedToString(PointGetX(UnitGetPosition(lp_unit)), c_fixedPrecisionAny) + ", " + FixedToString(PointGetY(UnitGetPosition(lp_unit)), c_fixedPrecisionAny))), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[1], StringToText(lib2DGM_gf_ConvertUnitVelocityToString(lp_unit)), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[2], StringToText(lib2DGM_gf_ConvertUnitPhysicsStateToString(lp_unit)), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[3], StringToText(lib2DGM_gf_ConvertUnitGroundedStateToString(lp_unit)), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[4], StringToText(FixedToString(lib2DGM_gf_PresetCustomValue4(lp_unit, 10), 0)), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[5], StringToText(IntToString((lib2DGM_gv_totalFollowKinetics + lib2DGM_gv_totalTranslateKinetics))), lp_targetPlayers);
+    libNtve_gf_SetDialogItemText(libPIRL_gv_supportPanel.lv_value[6], StringToText(IntToString(UnitGroupCount(lib2DGM_gv_activePhysicsUnits, c_unitCountAll))), lp_targetPlayers);
+}
+
+string lib2DGM_gf_ConvertUnitVelocityToString (unit lp_unit) {
+    // Variable Declarations
+    string lv_velocityString;
+
+    // Variable Initialization
+    lv_velocityString = "";
+
+    // Implementation
+    lv_velocityString = (FixedToString(lib2DGM_gf_PresetCustomValue4(lp_unit, 1), c_fixedPrecisionAny) + ", " + FixedToString(lib2DGM_gf_PresetCustomValue4(lp_unit, 2), c_fixedPrecisionAny));
+    return lv_velocityString;
+}
+
+string lib2DGM_gf_ConvertUnitPhysicsStateToString (unit lp_unit) {
+    // Variable Declarations
+    string lv_stateString;
+
+    // Variable Initialization
+    lv_stateString = "";
+
+    // Implementation
+    if ((UnitGroupHasUnit(lib2DGM_gv_activePhysicsUnits, lp_unit) == true)) {
+        lv_stateString = "Active";
+    }
+    else {
+        lv_stateString = "Stationary";
+    }
+    return lv_stateString;
+}
+
+string lib2DGM_gf_ConvertUnitGroundedStateToString (unit lp_unit) {
+    // Variable Declarations
+    string lv_stateString;
+
+    // Variable Initialization
+    lv_stateString = "";
+
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue5(lp_unit, 30) == true)) {
+        lv_stateString = "Grounded";
+    }
+    else {
+        lv_stateString = "Aerial";
+    }
+    return lv_stateString;
+}
+
+void lib2DGM_gf_ModifyUnitCustomValue (unit lp_unit, int lp_customValuePreset, fixed lp_customValueModification) {
+    // Variable Declarations
+    fixed lv_customValueCurrent;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_customValueCurrent = UnitGetCustomValue(lp_unit, lp_customValuePreset);
+    lv_customValueCurrent += lp_customValueModification;
+    UnitSetCustomValue(lp_unit, lp_customValuePreset, lv_customValueCurrent);
+}
+
+void lib2DGM_gf_ModifyUnitCustomValue3 (unit lp_unit, int lp_customValuePreset, fixed lp_customValueNew) {
+    // Variable Declarations
+    fixed lv_customValueCurrent;
+
+    // Variable Initialization
+
+    // Implementation
+    lv_customValueCurrent = UnitGetCustomValue(lp_unit, lp_customValuePreset);
+    UnitSetCustomValue(lp_unit, lp_customValuePreset, lp_customValueNew);
+}
+
+void lib2DGM_gf_ModifyUnitCustomValue4 (unit lp_unit, int lp_customValuePreset, bool lp_customValueNew) {
+    // Variable Declarations
+    fixed lv_customValueCurrent;
+
+    // Variable Initialization
+
+    // Implementation
+    UnitSetCustomValue(lp_unit, lp_customValuePreset, libPIRL_gf_ConvertBooleanToReal(lp_customValueNew));
+}
+
+fixed lib2DGM_gf_PresetCustomValue4 (unit lp_unit, int lp_customValuePreset) {
+    // Implementation
+    return UnitGetCustomValue(lp_unit, lp_customValuePreset);
+}
+
+bool lib2DGM_gf_PresetCustomValue5 (unit lp_unit, int lp_customValuePreset) {
+    // Implementation
+    if ((lib2DGM_gf_PresetCustomValue4(lp_unit, lp_customValuePreset) == libPIRL_gf_ConvertBooleanToReal(true))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Each Game Tick
+//--------------------------------------------------------------------------------------------------
+bool lib2DGM_gt_EachGameTick_Func (bool testConds, bool runActions) {
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib2DGM_gv_totalTranslateKinetics = 0;
+    PlayerGroupLoopBegin(PlayerGroupActive());
+    for ( ; !PlayerGroupLoopDone() ; PlayerGroupLoopStep() ) {
+        lib2DGM_gf_PlayerResolveInput(PlayerGroupLoopCurrent());
+    }
+    PlayerGroupLoopEnd();
+    UnitGroupLoopBegin(lib2DGM_gv_activePhysicsUnits);
+    for ( ; !UnitGroupLoopDone() ; UnitGroupLoopStep() ) {
+        lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 12, 0.0);
+        lib2DGM_gf_ModifyUnitCustomValue3(UnitGroupLoopCurrent(), 13, 0.0);
+        if ((lib2DGM_gf_UnitIsInMotion(UnitGroupLoopCurrent()) == true)) {
+            lib2DGM_gf_UnitApplyFrictionAirResistance(UnitGroupLoopCurrent());
+            lib2DGM_gf_UnitResolveSpeculativeContact(UnitGroupLoopCurrent());
+            lib2DGM_gf_TranslateUnit(UnitGroupLoopCurrent());
+            lib2DGM_gf_UnitResolveHorizontalCollision(UnitGroupLoopCurrent());
+            lib2DGM_gf_UnitResolveVerticalCollision(UnitGroupLoopCurrent());
+            lib2DGM_gf_ResolveGravityForUnit2(UnitGroupLoopCurrent());
+            lib2DGM_gf_ResolveRestitutionForUnit(UnitGroupLoopCurrent());
+        }
+    }
+    UnitGroupLoopEnd();
+    lib2DGM_gf_ConfigureDebugPanelforUnitPhysics2(lib2DGM_gv_player[1].lv_hero, PlayerGroupSingle(1));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DGM_gt_EachGameTick_Init () {
+    lib2DGM_gt_EachGameTick = TriggerCreate("lib2DGM_gt_EachGameTick_Func");
+    TriggerEnable(lib2DGM_gt_EachGameTick, false);
+    TriggerAddEventTimePeriodic(lib2DGM_gt_EachGameTick, 0.0625, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Player Input Key Down
+//--------------------------------------------------------------------------------------------------
+bool lib2DGM_gt_PlayerInputKeyDown_Func (bool testConds, bool runActions) {
+    int autoAE7D50C4_val;
+
+    // Variable Declarations
+    int lv_p;
+    unit lv_targetUnit;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_p = EventPlayer();
+    lv_targetUnit = lib2DGM_gv_player[lv_p].lv_hero;
+    autoAE7D50C4_val = EventKeyPressed();
+    if (autoAE7D50C4_val == c_keyW) {
+        lib2DGM_gv_player[lv_p].lv_input_KeyW_isPressed = true;
+    }
+    else if (autoAE7D50C4_val == c_keyS) {
+        if ((lib2DGM_gv_player[lv_p].lv_input_KeyS_isPressed == false)) {
+            lib2DGM_gv_player[lv_p].lv_input_KeyS_isPressed = true;
+            lib2DGM_gv_player[lv_p].lv_input_KeyS_isHeld = true;
+            Wait(0.25, c_timeGame);
+            lib2DGM_gv_player[lv_p].lv_input_KeyS_isHeld = false;
+        }
+    }
+    else if (autoAE7D50C4_val == c_keyA) {
+        if ((lib2DGM_gv_player[lv_p].lv_input_KeyA_isPressed == false)) {
+            lib2DGM_gv_player[lv_p].lv_input_KeyA_isPressed = true;
+            lib2DGM_gf_HeroSetFacingFromInput(lv_targetUnit);
+        }
+    }
+    else if (autoAE7D50C4_val == c_keyD) {
+        if ((lib2DGM_gv_player[lv_p].lv_input_KeyD_isPressed == false)) {
+            lib2DGM_gv_player[lv_p].lv_input_KeyD_isPressed = true;
+            lib2DGM_gf_HeroSetFacingFromInput(lv_targetUnit);
+        }
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DGM_gt_PlayerInputKeyDown_Init () {
+    lib2DGM_gt_PlayerInputKeyDown = TriggerCreate("lib2DGM_gt_PlayerInputKeyDown_Func");
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyDown, c_playerAny, c_keyW, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyDown, c_playerAny, c_keyA, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyDown, c_playerAny, c_keyS, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyDown, c_playerAny, c_keyD, true, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Player Input Key Up
+//--------------------------------------------------------------------------------------------------
+bool lib2DGM_gt_PlayerInputKeyUp_Func (bool testConds, bool runActions) {
+    int autoF129697B_val;
+
+    // Variable Declarations
+    int lv_p;
+    unit lv_targetUnit;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_p = EventPlayer();
+    lv_targetUnit = lib2DGM_gv_player[lv_p].lv_hero;
+    autoF129697B_val = EventKeyPressed();
+    if (autoF129697B_val == c_keyW) {
+        lib2DGM_gv_player[lv_p].lv_input_KeyW_isPressed = false;
+    }
+    else if (autoF129697B_val == c_keyS) {
+        lib2DGM_gv_player[lv_p].lv_input_KeyS_isPressed = false;
+    }
+    else if (autoF129697B_val == c_keyA) {
+        lib2DGM_gv_player[lv_p].lv_input_KeyA_isPressed = false;
+        UnitBehaviorRemove(lv_targetUnit, "UnitStateWalkingAnimation", 1);
+        lib2DGM_gf_HeroSetFacingFromInput(lv_targetUnit);
+    }
+    else if (autoF129697B_val == c_keyD) {
+        lib2DGM_gv_player[lv_p].lv_input_KeyD_isPressed = false;
+        UnitBehaviorRemove(lv_targetUnit, "UnitStateWalkingAnimation", 1);
+        lib2DGM_gf_HeroSetFacingFromInput(lv_targetUnit);
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2DGM_gt_PlayerInputKeyUp_Init () {
+    lib2DGM_gt_PlayerInputKeyUp = TriggerCreate("lib2DGM_gt_PlayerInputKeyUp_Func");
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyUp, c_playerAny, c_keyW, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyUp, c_playerAny, c_keyA, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyUp, c_playerAny, c_keyS, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+    TriggerAddEventKeyPressed(lib2DGM_gt_PlayerInputKeyUp, c_playerAny, c_keyD, false, c_keyModifierStateIgnore, c_keyModifierStateIgnore, c_keyModifierStateIgnore);
+}
+
+void lib2DGM_InitTriggers () {
+    lib2DGM_gt_EachGameTick_Init();
+    lib2DGM_gt_PlayerInputKeyDown_Init();
+    lib2DGM_gt_PlayerInputKeyUp_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib2DGM_InitLib_completed = false;
+
+void lib2DGM_InitLib () {
+    if (lib2DGM_InitLib_completed) {
+        return;
+    }
+
+    lib2DGM_InitLib_completed = true;
+
+    lib2DGM_InitLibraries();
+    lib2DGM_InitVariables();
+    lib2DGM_InitTriggers();
+}
+
+include "LibPIRL"
+

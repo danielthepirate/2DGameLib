@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CEffectEnumArea id="HeroStompHurtboxAreaDebug">
+        <EditorCategories value=""/>
+        <AreaArray Radius="0.1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="HeroStompHurtboxDebugSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HeroStompHurtboxArea"/>
+        <EffectArray value="HeroStompHurtboxAreaDebug"/>
+    </CEffectSet>
+</Catalog>

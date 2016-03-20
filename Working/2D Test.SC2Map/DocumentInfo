@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocInfo>
+    <ModType>
+        <Value>Interface</Value>
+    </ModType>
+    <Dependencies>
+        <Value>file:Mods\2DGL\Working\2D Platformer Game Mechanics.SC2Mod</Value>
+        <Value>file:Mods\2DGL\Working\2D Platformer Unit Data.SC2Mod</Value>
+    </Dependencies>
+</DocInfo>

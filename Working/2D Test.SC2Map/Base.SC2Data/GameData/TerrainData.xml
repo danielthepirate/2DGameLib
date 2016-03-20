@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<Catalog>
+    <CTerrain id="Default2DGameTerrain">
+        <FixedSkyboxModel value="Void_Skybox"/>
+        <NonFixedSkyboxModel value="Void_Skybox_Parallax"/>
+    </CTerrain>
+</Catalog>
